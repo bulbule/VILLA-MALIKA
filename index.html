@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Villa Malika - Modern Private Booking</title>
   
+  <!-- Favicon Logo di Tab Browser -->
+  <link rel="icon" type="image/x-icon" href="logo villa.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="logo villa.ico">
+
+  <!-- Open Graph Meta Tags (Thumbnail saat Link Dibagikan di WA/Sosmed) -->
+  <meta property="og:title" content="Villa Malika - Private Villa Collection">
+  <meta property="og:description" content="Sewa Villa Mewah di Cisarua, Bogor. Fasilitas Private Pool, Meja Biliar, Kamar Mandi Air Hangat, & Halaman Luas.">
+  <meta property="og:image" content="https://bulbule.github.io/VILLA-MALIKA/logo%20villa.jpg">
+  <meta property="og:url" content="https://bulbule.github.io/VILLA-MALIKA/">
+  <meta property="og:type" content="website">
+
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +34,6 @@
       --text-muted: #64748b;
       --gold-accent: #d4af37;
       --gold-light: #fef08a;
-      --btn-gold: #eab308;
       --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
       --border-light: #e2e8f0;
     }
@@ -41,12 +51,10 @@
       padding-bottom: 90px;
     }
 
-    /* 1. HERO SECTION (SAMPUL DEPAN MEWAH) */
+    /* 1. HERO SLIDESHOW SECTION */
     .hero {
       position: relative;
       min-height: 75vh;
-      background: linear-gradient(to bottom, rgba(11, 19, 41, 0.3), var(--navy-dark)), 
-                  url('bgweb.webp') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -54,6 +62,44 @@
       color: #ffffff;
       border-bottom-left-radius: 32px;
       border-bottom-right-radius: 32px;
+      overflow: hidden;
+    }
+
+    /* BACKGROUND SLIDES */
+    .hero-slides {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    /* OVERLAY DARK GRADIENT */
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, rgba(11, 19, 41, 0.2), var(--navy-dark));
+      z-index: 2;
+    }
+
+    /* HERO TEXT CONTENT */
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .hero-badge {
@@ -67,7 +113,6 @@
       letter-spacing: 1px;
       color: var(--gold-light);
       margin-bottom: 12px;
-      width: fit-content;
     }
 
     .hero-title {
@@ -82,6 +127,26 @@
       color: #cbd5e1;
       max-width: 500px;
       margin-bottom: 25px;
+    }
+
+    /* SLIDE DOTS INDICATOR */
+    .slide-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--gold-accent);
+      width: 25px;
+      border-radius: 10px;
     }
 
     /* 2. TABS SELECTOR (CATEGORY CHIPS) */
@@ -208,7 +273,7 @@
       margin-bottom: 25px;
     }
 
-    /* FACILITIES LIST (REPLACING ITINERARY) */
+    /* FACILITIES LIST */
     .facilities-title {
       font-size: 1.1rem;
       font-weight: 700;
@@ -396,11 +461,28 @@
 </head>
 <body>
 
-  <!-- SAMPUL DEPAN (HERO SECTION) -->
+  <!-- HERO SLIDESHOW SECTION -->
   <section class="hero">
-    <div class="hero-badge"><i class="fa-solid fa-crown"></i> PRIVATE VILLA COLLECTION</div>
-    <h1 class="hero-title">Villa Malika</h1>
-    <p class="hero-desc">Nikmati pengalaman menginap eksklusif dengan fasilitas mewah, udara segar Cisarua, dan pemandangan alam memukau.</p>
+    <div class="hero-slides">
+      <div class="slide active" style="background-image: url('Vila Modern di Tengah Hutan Saat Senja.webp');"></div>
+      <div class="slide" style="background-image: url('WhatsApp Image 2026-10-14 at 11.04.21.webp');"></div>
+      <div class="slide" style="background-image: url('bgweb.webp');"></div>
+    </div>
+    
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fa-solid fa-crown"></i> PRIVATE VILLA COLLECTION</div>
+      <h1 class="hero-title">Villa Malika</h1>
+      <p class="hero-desc">Nikmati pengalaman menginap eksklusif dengan fasilitas mewah, udara segar Cisarua, dan pemandangan alam memukau.</p>
+      
+      <!-- Slide Indicator Dots -->
+      <div class="slide-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
   </section>
 
   <div class="main-container">
@@ -430,7 +512,7 @@
           <div class="villa-name">Villa Malika 1</div>
           <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.9 (Eksklusif)</div>
         </div>
-        <p class="villa-intro">Suasana asri dengan pemandangan pegunungan dan halaman rumput membentang luas. Ideal untuk acara keluarga besar atau *gathering* perusahaan.</p>
+        <p class="villa-intro">Suasana asri dengan pemandangan pegunungan dan halaman rumput membentang luas. Ideal untuk acara keluarga besar atau gathering perusahaan.</p>
 
         <!-- FASILITAS UTAMA -->
         <div class="facilities-title">Fasilitas Utama</div>
@@ -538,7 +620,7 @@
           <div class="villa-name">Villa Malika 3</div>
           <div class="rating-tag"><i class="fa-solid fa-star"></i> 5.0 (Luxury)</div>
         </div>
-        <p class="villa-intro">Bangunan 2 tingkat bergaya arsitektur ultra-mewah dengan *kitchen island*, area ruang tamu luas berlantai marmer, dan balkon pemandangan indah.</p>
+        <p class="villa-intro">Bangunan 2 tingkat bergaya arsitektur ultra-mewah dengan kitchen island, area ruang tamu luas berlantai marmer, dan balkon pemandangan indah.</p>
 
         <!-- FASILITAS UTAMA -->
         <div class="facilities-title">Fasilitas Utama</div>
@@ -619,6 +701,25 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
+    // AUTOMATIC HERO SLIDESHOW LOGIC
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = (currentSlide + 1) % slides.length;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    // Ganti slide otomatis setiap 4 detik
+    setInterval(nextSlide, 4000);
+
+    // TAB SWITCHING LOGIC
     let currentVillaName = 'Villa Malika 1';
 
     function switchVilla(villaId, startingPrice) {
@@ -628,15 +729,14 @@
       document.getElementById(villaId).classList.add('active');
       event.currentTarget.classList.add('active');
 
-      // Update harga di bottom bar
       document.getElementById('displayPrice').innerText = startingPrice;
 
-      // Update nama villa aktif
       if(villaId === 'villa1') currentVillaName = 'Villa Malika 1';
       if(villaId === 'villa2') currentVillaName = 'Villa Malika 2';
       if(villaId === 'villa3') currentVillaName = 'Villa Malika 3';
     }
 
+    // MODAL WHATSAPP LOGIC
     function openContactModal() {
       const msg = `Halo, saya tertarik untuk melakukan booking ${currentVillaName}. Mohon informasi ketersediaan tanggal dan prosedurnya. Terima kasih!`;
       const encodedMsg = encodeURIComponent(msg);
@@ -655,21 +755,6 @@
       const modal = document.getElementById('contactModal');
       if (event.target === modal) closeContactModal();
     }
-    <!-- Favicon (Icon Tab Browser) -->
-  <link rel="icon" type="image/jpeg" href="logo villa.jpg">
-  <link rel="apple-touch-icon" href="logo villa.jpg">
-
-  <!-- Open Graph Meta Tags (Thumbnail saat Link Dibagikan di WhatsApp / Sosmed) -->
-  <meta property="og:title" content="Villa Malika - Private Villa Collection">
-  <meta property="og:description" content="Sewa Villa Mewah di Cisarua, Bogor. Fasilitas Private Pool, Meja Biliar, Kamar Mandi Air Hangat, & Halaman Luas.">
-  <meta property="og:image" content="https://bulbule.github.io/VILLA-MALIKA/logo%20villa.png">
-  <meta property="og:url" content="https://bulbule.github.io/VILLA-MALIKA/">
-  <meta property="og:type" content="website">
-      }
-    <!-- Favicon Logo di Tab Browser -->
-  <link rel="icon" type="image/x-icon" href="logo villa.ico">
-  <link rel="shortcut icon" type="image/x-icon" href="logo villa.ico">
-      }
   </script>
 </body>
 </html>
