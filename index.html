@@ -65,7 +65,6 @@
       overflow: hidden;
     }
 
-    /* BACKGROUND SLIDES */
     .hero-slides {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -81,11 +80,8 @@
       transition: opacity 1.2s ease-in-out;
     }
 
-    .slide.active {
-      opacity: 1;
-    }
+    .slide.active { opacity: 1; }
 
-    /* OVERLAY DARK GRADIENT */
     .hero-overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -93,7 +89,6 @@
       z-index: 2;
     }
 
-    /* HERO TEXT CONTENT */
     .hero-content {
       position: relative;
       z-index: 3;
@@ -129,7 +124,6 @@
       margin-bottom: 25px;
     }
 
-    /* SLIDE DOTS INDICATOR */
     .slide-dots {
       display: flex;
       gap: 8px;
@@ -149,16 +143,14 @@
       border-radius: 10px;
     }
 
-    /* 2. TABS SELECTOR (CATEGORY CHIPS) */
+    /* 2. TABS SELECTOR */
     .main-container {
       max-width: 1000px;
       margin: 0 auto;
       padding: 0 20px;
     }
 
-    .section-header {
-      margin: 30px 0 15px;
-    }
+    .section-header { margin: 30px 0 15px; }
 
     .section-header h2 {
       font-size: 1.4rem;
@@ -197,7 +189,7 @@
       box-shadow: 0 4px 15px rgba(11, 19, 41, 0.2);
     }
 
-    /* 3. VILLA CONTENT CARD (WHITE THEME) */
+    /* 3. VILLA CONTENT CARD */
     .villa-content {
       display: none;
       animation: fadeIn 0.4s ease forwards;
@@ -209,7 +201,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* GALLERY GRID */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -232,7 +223,6 @@
     }
     .gallery-item:hover img { transform: scale(1.05); }
 
-    /* CARD DETAILS */
     .details-card {
       background: var(--card-white);
       border-radius: 24px;
@@ -273,7 +263,6 @@
       margin-bottom: 25px;
     }
 
-    /* FACILITIES LIST */
     .facilities-title {
       font-size: 1.1rem;
       font-weight: 700;
@@ -316,7 +305,6 @@
       color: var(--text-main);
     }
 
-    /* RATES SECTION */
     .rates-card {
       background: #f8fafc;
       border-radius: 18px;
@@ -342,7 +330,6 @@
     .rate-label { color: var(--text-muted); }
     .rate-price { font-weight: 700; color: var(--navy-dark); }
 
-    /* MAPS SECTION */
     .maps-card {
       background: var(--card-white);
       border-radius: 24px;
@@ -378,6 +365,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
     }
 
     .price-tag span {
@@ -387,19 +375,24 @@
     }
 
     .price-tag strong {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 800;
       color: var(--navy-dark);
+    }
+
+    .bottom-action-group {
+      display: flex;
+      gap: 8px;
     }
 
     .btn-book {
       background: var(--navy-dark);
       color: #ffffff;
       border: none;
-      padding: 12px 28px;
+      padding: 12px 22px;
       border-radius: 20px;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -407,7 +400,24 @@
       box-shadow: 0 4px 15px rgba(11, 19, 41, 0.2);
     }
 
-    /* 5. POPUP WHATSAPP MODAL */
+    .btn-share {
+      background: #ffffff;
+      color: var(--navy-dark);
+      border: 1px solid var(--border-light);
+      padding: 12px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: all 0.2s ease;
+    }
+    .btn-share:hover { background: #f1f5f9; }
+
+    /* 5. MODAL POPUPS */
     .modal {
       display: none;
       position: fixed;
@@ -453,9 +463,48 @@
       color: var(--text-main);
       font-weight: 600;
     }
-    .contact-btn:hover {
+    .contact-btn:hover { background: #f1f5f9; }
+
+    /* BROCHURE PREVIEW MODAL */
+    .brochure-img-preview {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin: 12px 0;
+      border: 1px solid var(--border-light);
+    }
+
+    .share-action-btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-share-action {
+      flex: 1;
+      padding: 12px;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn-copy-link {
+      background: var(--navy-dark);
+      color: #ffffff;
+    }
+
+    .btn-download-img {
       background: #f1f5f9;
-      border-color: #cbd5e1;
+      color: var(--text-main);
+      border: 1px solid var(--border-light);
     }
   </style>
 </head>
@@ -474,9 +523,8 @@
     <div class="hero-content">
       <div class="hero-badge"><i class="fa-solid fa-crown"></i> PRIVATE VILLA COLLECTION</div>
       <h1 class="hero-title">Villa Malika</h1>
-      <p class="hero-desc">Nikmati pengalaman menginap klusif dengan fasilitas mewah, udara segar Cisarua, dan pemandangan alam memukau.</p>
+      <p class="hero-desc">Nikmati pengalaman menginap eksklusif dengan fasilitas mewah, udara segar Cisarua, dan pemandangan alam memukau.</p>
       
-      <!-- Slide Indicator Dots -->
       <div class="slide-dots">
         <div class="dot active"></div>
         <div class="dot"></div>
@@ -669,14 +717,17 @@
 
   </div>
 
-  <!-- FIXED BOTTOM BOOKING BAR -->
+  <!-- FIXED BOTTOM BOOKING & SHARE BAR -->
   <div class="bottom-bar">
     <div class="bottom-bar-inner">
       <div class="price-tag">
         <span>Mulai Dari</span>
         <strong id="displayPrice">Rp3.000.000 / malam</strong>
       </div>
-      <button class="btn-book" onclick="openContactModal()"><i class="fa-brands fa-whatsapp"></i> Book Now</button>
+      <div class="bottom-action-group">
+        <button class="btn-share" onclick="shareBrochure()"><i class="fa-solid fa-share-nodes"></i> Bagikan</button>
+        <button class="btn-book" onclick="openContactModal()"><i class="fa-brands fa-whatsapp"></i> Book Now</button>
+      </div>
     </div>
   </div>
 
@@ -699,9 +750,28 @@
     </div>
   </div>
 
+  <!-- POPUP PREVIEW BROSUR & SHARE MODAL -->
+  <div id="shareModal" class="modal">
+    <div class="modal-box">
+      <span class="close-modal" onclick="closeShareModal()">&times;</span>
+      <h3 style="font-size: 1.1rem; color: var(--navy-dark);">Brosur Villa Malika</h3>
+      
+      <img src="web vila.webp" alt="Brosur Villa Malika" class="brochure-img-preview">
+      
+      <div class="share-action-btns">
+        <button class="btn-share-action btn-copy-link" onclick="copyWebLink()">
+          <i class="fa-regular fa-copy"></i> Salin Link
+        </button>
+        <a href="web vila.webp" download="Brosur-Villa-Malika.webp" class="btn-share-action btn-download-img">
+          <i class="fa-solid fa-download"></i> Unduh Foto
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // AUTOMATIC HERO SLIDESHOW LOGIC
+    // 1. AUTOMATIC HERO SLIDESHOW LOGIC
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -709,17 +779,13 @@
     function nextSlide() {
       slides[currentSlide].classList.remove('active');
       dots[currentSlide].classList.remove('active');
-      
       currentSlide = (currentSlide + 1) % slides.length;
-      
       slides[currentSlide].classList.add('active');
       dots[currentSlide].classList.add('active');
     }
-
-    // Ganti slide otomatis setiap 4 detik
     setInterval(nextSlide, 4000);
 
-    // TAB SWITCHING LOGIC
+    // 2. TAB SWITCHING LOGIC
     let currentVillaName = 'Villa Malika 1';
 
     function switchVilla(villaId, startingPrice) {
@@ -736,7 +802,7 @@
       if(villaId === 'villa3') currentVillaName = 'Villa Malika 3';
     }
 
-    // MODAL WHATSAPP LOGIC
+    // 3. WHATSAPP MODAL LOGIC
     function openContactModal() {
       const msg = `Halo, saya tertarik untuk melakukan booking ${currentVillaName}. Mohon informasi ketersediaan tanggal dan prosedurnya. Terima kasih!`;
       const encodedMsg = encodeURIComponent(msg);
@@ -751,9 +817,50 @@
       document.getElementById('contactModal').classList.remove('show');
     }
 
+    // 4. BROCHURE & LINK SHARE LOGIC
+    async function shareBrochure() {
+      const shareData = {
+        title: 'Villa Malika - Private Villa Collection',
+        text: 'Dapatkan penawaran dan brosur sewa Villa Malika Cisarua, Bogor:',
+        url: window.location.href
+      };
+
+      if (navigator.canShare && navigator.canShare({ files: [new File([], '')] })) {
+        try {
+          const response = await fetch('web vila.webp');
+          const blob = await response.blob();
+          const file = new File([blob], 'Brosur-Villa-Malika.webp', { type: blob.type });
+
+          await navigator.share({
+            title: shareData.title,
+            text: shareData.text,
+            url: shareData.url,
+            files: [file]
+          });
+          return;
+        } catch (err) {
+          console.log('Fallback to share modal:', err);
+        }
+      }
+
+      document.getElementById('shareModal').classList.add('show');
+    }
+
+    function copyWebLink() {
+      navigator.clipboard.writeText(window.location.href);
+      alert('Link website berhasil disalin!');
+    }
+
+    function closeShareModal() {
+      document.getElementById('shareModal').classList.remove('show');
+    }
+
+    // CLOSE MODAL WHEN CLICKING OUTSIDE
     window.onclick = function(event) {
-      const modal = document.getElementById('contactModal');
-      if (event.target === modal) closeContactModal();
+      const contactModal = document.getElementById('contactModal');
+      const shareModal = document.getElementById('shareModal');
+      if (event.target === contactModal) closeContactModal();
+      if (event.target === shareModal) closeShareModal();
     }
   </script>
 </body>
