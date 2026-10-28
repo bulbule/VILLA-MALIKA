@@ -74,7 +74,7 @@ input:focus,textarea:focus{outline:2px solid #e3b64f;border-color:transparent}
 <!-- FORM LOGIN ADMIN -->
 <div id="loginScreen">
   <h2>🔒 Admin Villa Malika</h2>
-  <form onsubmit="event.preventDefault(); checkLogin();">
+  <form id="loginForm">
     <div class="login-field">
       <label for="adminUser">Username</label>
       <input type="text" id="adminUser" placeholder="Masukkan Username" autocomplete="username">
@@ -91,79 +91,96 @@ input:focus,textarea:focus{outline:2px solid #e3b64f;border-color:transparent}
 <div id="mainApp">
   <header class="topbar">
     <h1>▤ Generator Invoice Villa Malika</h1>
-    <button class="logout" type="button" onclick="doLogout()">🚪 Logout Admin</button>
+    <button class="logout" type="button" id="logoutBtn">🚪 Logout Admin</button>
   </header>
   <main class="app">
-  <section class="editor">
-  <h2>Input Data Invoice</h2>
-  <div class="field"><label for="invNo">No. Invoice</label><input id="invNo" value="VM-01234"></div>
-  <div class="field"><label for="customer">Nama Pemesan</label><input id="customer" value="Cahaya Dewi"></div>
-  <div class="grid2">
-  <div class="field"><label for="invDate">Tanggal Invoice</label><input id="invDate" value="25 Agustus 2026"></div>
-  <div class="field"><label for="dueDate">Jatuh Tempo (opsional)</label><input id="dueDate" value=""></div>
-  </div>
-  <div class="grid2">
-  <div class="field"><label for="unit">Unit Villa</label><input id="unit" value="Villa 1"></div>
-  <div class="field"><label for="duration">Waktu Sewa</label><input id="duration" value="Hari 2"></div>
-  </div>
-  <div class="grid2">
-  <div class="field"><label for="checkin">Tanggal Check-in</label><input id="checkin" value="Minggu, 2 Juni 2026"></div>
-  <div class="field"><label for="checkout">Tanggal Check-out (opsional)</label><input id="checkout" value=""></div>
-  </div>
-  <h3>Rincian Item</h3>
-  <div class="items-head"><span>Deskripsi</span><span>Qty</span><span>Harga (Rp)</span><span></span></div>
-  <div id="items">
-  <div class="item-row"><input aria-label="Deskripsi" value="Villa 1 (Hari 2)" class="desc"><input aria-label="Qty" type="number" min="0" value="1" class="qty"><input aria-label="Harga" type="number" min="0" value="3300000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
-  <div class="item-row"><input aria-label="Deskripsi" value="Extra Bed" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="250000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
-  <div class="item-row"><input aria-label="Deskripsi" value="Catering" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="75000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
-  <div class="item-row"><input aria-label="Deskripsi" value="Lain-lain" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="0" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
-  </div>
-  <button class="btn add" id="addItem" type="button">＋ Tambah Item</button>
-  <div class="field"><label for="dp">DP Terbayar (Rp)</label><input id="dp" type="number" min="0" value="1650000"></div>
-  <h3>Informasi Tetap Villa Malika</h3>
-  <div style="border:1px solid #3c4b61;border-radius:10px;padding:14px;color:#dce6f3;font-size:13px;line-height:1.7">
-  <strong>Rekening:</strong> BANK BCA · 1080792880 · A/n Nursilfiah<br>
-  <strong>Alamat:</strong> Jl. Pasir Tugu No.17, Cibeureum, Kec. Cisarua, Kabupaten Bogor, Jawa Barat 16750<br>
-  <strong>Telepon:</strong> +62 813-1526-5266<br>
-  <strong>Ketentuan booking:</strong> DP minimal 50%; pelunasan H-1; reschedule maksimal H-7; first pay first book; transfer antarbank real-time online/BI Fast.<br>
-  <strong>Penanggung jawab:</strong> Miss Nova
-  </div>
-  <button class="btn print" type="button" onclick="window.print()">▣ Download PDF / Cetak Invoice</button>
-  <p style="color:#9fb0c6;font-size:12px;line-height:1.5">Tips: pilih “Save as PDF” pada dialog cetak untuk menyimpan invoice sebagai PDF. Pastikan nilai DP sesuai pembayaran aktual.</p>
-  </section>
+    <section class="editor">
+      <h2>Input Data Invoice</h2>
+      <div class="field"><label for="invNo">No. Invoice</label><input id="invNo" value="VM-01234"></div>
+      <div class="field"><label for="customer">Nama Pemesan</label><input id="customer" value="Cahaya Dewi"></div>
+      <div class="grid2">
+        <div class="field"><label for="invDate">Tanggal Invoice</label><input id="invDate" value="25 Agustus 2026"></div>
+        <div class="field"><label for="dueDate">Jatuh Tempo (opsional)</label><input id="dueDate" value=""></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label for="unit">Unit Villa</label><input id="unit" value="Villa 1"></div>
+        <div class="field"><label for="duration">Waktu Sewa</label><input id="duration" value="Hari 2"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label for="checkin">Tanggal Check-in</label><input id="checkin" value="Minggu, 2 Juni 2026"></div>
+        <div class="field"><label for="checkout">Tanggal Check-out (opsional)</label><input id="checkout" value=""></div>
+      </div>
+      <h3>Rincian Item</h3>
+      <div class="items-head"><span>Deskripsi</span><span>Qty</span><span>Harga (Rp)</span><span></span></div>
+      <div id="items">
+        <div class="item-row"><input aria-label="Deskripsi" value="Villa 1 (Hari 2)" class="desc"><input aria-label="Qty" type="number" min="0" value="1" class="qty"><input aria-label="Harga" type="number" min="0" value="3300000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
+        <div class="item-row"><input aria-label="Deskripsi" value="Extra Bed" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="250000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
+        <div class="item-row"><input aria-label="Deskripsi" value="Catering" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="75000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
+        <div class="item-row"><input aria-label="Deskripsi" value="Lain-lain" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="0" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
+      </div>
+      <button class="btn add" id="addItem" type="button">＋ Tambah Item</button>
+      <div class="field"><label for="dp">DP Terbayar (Rp)</label><input id="dp" type="number" min="0" value="1650000"></div>
+      <h3>Informasi Tetap Villa Malika</h3>
+      <div style="border:1px solid #3c4b61;border-radius:10px;padding:14px;color:#dce6f3;font-size:13px;line-height:1.7">
+        <strong>Rekening:</strong> BANK BCA · 1080792880 · A/n Nursilfiah<br>
+        <strong>Alamat:</strong> Jl. Pasir Tugu No.17, Cibeureum, Kec. Cisarua, Kabupaten Bogor, Jawa Barat 16750<br>
+        <strong>Telepon:</strong> +62 813-1526-5266<br>
+        <strong>Ketentuan booking:</strong> DP minimal 50%; pelunasan H-1; reschedule maksimal H-7; first pay first book; transfer antarbank real-time online/BI Fast.<br>
+        <strong>Penanggung jawab:</strong> Miss Nova
+      </div>
+      <button class="btn print" type="button" onclick="window.print()">▣ Download PDF / Cetak Invoice</button>
+      <p style="color:#9fb0c6;font-size:12px;line-height:1.5">Tips: pilih “Save as PDF” pada dialog cetak untuk menyimpan invoice sebagai PDF. Pastikan nilai DP sesuai pembayaran aktual.</p>
+    </section>
 
-  <section class="preview-wrap">
-  <article class="invoice" id="invoice">
-  <div class="invoice-header" id="invoiceHeader">
-  <div class="brand-overlay"><div class="brand">VILLA MALIKA</div><div class="sub">VILLA &amp; RESORT</div></div>
-  </div>
-  <div class="paper">
-  <h1 class="invoice-title">INVOICE</h1><div class="title-sub">— VILLA MALIKA</div>
-  <div class="meta">
-  <div><strong>NOTA PEMBAYARAN</strong><br>No. Invoice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvNo">VM-01234</span><br>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvDate">25 Agustus 2026</span><br><span id="dueLine" style="display:none">Jatuh Tempo&nbsp;&nbsp;: <span id="pDue"></span><br></span><span id="checkoutLine" style="display:none">Check-out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckout"></span></span></div>
-  <div class="customer"><strong>NAMA PEMESAN</strong><br><span id="pCustomer">Cahaya Dewi</span></div>
-  </div>
-  <table class="detail-table"><thead><tr><th style="width:8%">NO</th><th>DESKRIPSI</th><th style="width:10%">QTY</th><th style="width:20%">HARGA SATUAN</th><th style="width:20%">TOTAL</th></tr></thead><tbody id="pItems"></tbody></table>
-  <div class="summary">
-  <div class="sumrow total"><span>TOTAL PEMBAYARAN</span><strong id="pTotal">Rp3.300.000</strong></div>
-  <div class="sumrow"><span><b>DP</b> (Minimal 50%)</span><strong id="pDP">Rp1.650.000</strong></div>
-  <div class="sumrow"><span><b>SISA PEMBAYARAN</b></span><strong id="pBalance">Rp1.650.000</strong></div>
-  </div>
-  <div class="lower">
-  <div>
-  <div class="bank"><h3>Rekening Pembayaran</h3><div class="bank-content"><div class="bca" id="pBankName">BCA</div><div style="border-left:1px solid #bbb;padding-left:12px"><div class="bank-no" id="pAccount">1080792880</div><div class="bank-name">A/n <span id="pAccountName">Nursilfiah</span></div></div></div></div>
-  <div class="terms"><h3>● &nbsp; KETENTUAN BOOKING &nbsp; ●</h3><ol id="pTerms"></ol></div>
-  </div>
-  <div class="sign"><div class="sign-note">Saya telah setuju dengan syarat dan ketentuan yang berlaku.<br>Terima kasih telah menginap dan berkunjung di villa kami.</div><img class="signature-img" alt="Tanda tangan Miss Nova" src="data:image/png;base64,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HbbV2wD+8JkR47+W76I/19l6ePqL9nO0+1qS+1n+pms3W/e3b/1iI/0h9y3lCff39l4nO8/P6mJjV+23yL7RvbP3n082l2xN3aK/9GZ/r69HtvjJ52S7i8z9R0723f5bX2s3e9f+/u3Fp3jP/s+3+F1Wk+1L+j3+93d/33v1e888nvu1e/21oTXq1s1iQxg2L7b0f2vevuOiOfrvKj+bW/X4/P+3oLHj/+r02Pf/5mK/55d/rvaN6c6uJtNfN9Xq8S2n1174/vP8jvvtrd734P4e022/b/62N3s5Ww82+2r5XefyT/re+/3JjROXm7kdbdrXre1t1z3b1l+38r++70/q7z37Xj/Z9vf3T/n567/GzL/ve5m+/yqYl9L311V+N5/t9P/sIrfb2p0zM/63e1/g3u/mH2nU8n8d5y2eDwr0bV2lMjcBwZwWrfidS+/a3oM0u66Xk8n4N97p7i98Zp/q3sD3/XvG6c64G2856wGg90XfN/+f/b653m8/V9X2Vl5+7/eP9uO77fH915U+d2X/d3W47O/aP7eqrT30lW27m2Uvd/O+T6f2r+q45m7v5V9f/t/z++XfP/7p64pWjLzKGsN78sJ9rW7uNn2P/t9z+/3Z/z+d3f/2d8T83+x/W+w7W/1+27mXq8mff+/S9xZ+8Xp9l/qj/+3/c4v3Xb2t5+3+d9q+v0m5/1+0ed3e08P47872t/d/v0f//kP2e4rO9n31xP8vdXJ0t3b3X6v/o7/aOjv3O+273+/93a/u2Xh5303z+v9t+Tvb0d36z3L55T3X8s3d9n9/eLp/++2v93XJjSu1lrf73V/lF35rU/y/Sndh06P+9rP/+3eTjR9/jY0ftf7n8f+/N5637zVfW2d0u10t/u0+r7d70/x++5q64Xf9+v2c78R/98v+kH1t9t+9q7uXvX9/T+rveb0W7X2x1y92+/c9v/n+a4fH+H7/yvK/6f9/m019K7d59837a/2+0y+l/vbf17q9/utjvZ9m9R/r7fV76r83g2N0073tqP++5w0v/6X+L+72WqfQy2N9v+X+b/s00m2Xv7Zrf+9v/yN0/V9f0v8/y6u2/tq85jF+j/fN0287y0h4u9N/b3oX8313t/X4m/s+33T7+1u/zO2v3//+/2y8b6630fzn/22n+u1+X2779pud/+/85n/d/+1+D388Tf2u8n992j3/0zS5w711zffs7/8e7e+W1n7Wz61274r92j5+3d919mpt3R1f5/X/7/b13f38f1+3+1v9/3//+3f/v/v/3e9r//u0f1+v8/8f+7v//fv9/ffz+vX/f/t5/+/t7/v///X/+d7v///e7//+/X+//X7+/x+vv3931v/d5+//7///33+/d7u///v93f+/5/l8/Xn+t8/r0e/+6/+/15v5b0d02/P/e4//ff1X82d334/7/j9+v/n8+16P3+f0+5+/r+/5v5z//+36/+f5728+/7+/x86dOnTq1X/sfxj104Q==` font-size:12px;
-}
+    <section class="preview-wrap">
+      <article class="invoice" id="invoice">
+        <div class="invoice-header" id="invoiceHeader">
+          <div class="brand-overlay"><div class="brand">VILLA MALIKA</div><div class="sub">VILLA &amp; RESORT</div></div>
+        </div>
+        <div class="paper">
+          <h1 class="invoice-title">INVOICE</h1><div class="title-sub">— VILLA MALIKA</div>
+          <div class="meta">
+            <div><strong>NOTA PEMBAYARAN</strong><br>No. Invoice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvNo">VM-01234</span><br>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvDate">25 Agustus 2026</span><br><span id="dueLine" style="display:none">Jatuh Tempo&nbsp;&nbsp;: <span id="pDue"></span><br></span><span id="checkoutLine" style="display:none">Check-out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckout"></span></span></div>
+            <div class="customer"><strong>NAMA PEMESAN</strong><br><span id="pCustomer">Cahaya Dewi</span></div>
+          </div>
+          <table class="detail-table"><thead><tr><th style="width:8%">NO</th><th>DESKRIPSI</th><th style="width:10%">QTY</th><th style="width:20%">HARGA SATUAN</th><th style="width:20%">TOTAL</th></tr></thead><tbody id="pItems"></tbody></table>
+          <div class="summary">
+            <div class="sumrow total"><span>TOTAL PEMBAYARAN</span><strong id="pTotal">Rp3.300.000</strong></div>
+            <div class="sumrow"><span><b>DP</b> (Minimal 50%)</span><strong id="pDP">Rp1.650.000</strong></div>
+            <div class="sumrow"><span><b>SISA PEMBAYARAN</b></span><strong id="pBalance">Rp1.650.000</strong></div>
+          </div>
+          <div class="lower">
+            <div>
+              <div class="bank"><h3>Rekening Pembayaran</h3><div class="bank-content"><div class="bca" id="pBankName">BCA</div><div style="border-left:1px solid #bbb;padding-left:12px"><div class="bank-no" id="pAccount">1080792880</div><div class="bank-name">A/n <span id="pAccountName">Nursilfiah</span></div></div></div></div>
+              <div class="terms"><h3>● &nbsp; KETENTUAN BOOKING &nbsp; ●</h3><ol id="pTerms"></ol></div>
+            </div>
+            <div class="sign">
+              <div class="sign-note">Saya telah setuju dengan syarat dan ketentuan yang berlaku.<br>Terima kasih telah menginap dan berkunjung di villa kami.</div>
+              <!-- Taruh file gambar tanda tangan bernama tanda-tangan.png di folder yang sama dengan index.html -->
+              <img class="signature-img" alt="Tanda tangan Miss Nova" src="tanda-tangan.png" onerror="this.style.visibility='hidden'">
+              <div class="sign-line"></div>
+              <div class="sign-name">Miss Nova</div>
+              <div class="sign-brand">VILLA MALIKA</div>
+            </div>
+          </div>
+          <div class="footer-note" id="pContact"></div>
+        </div>
+      </article>
+    </section>
+  </main>
+</div>
 
-/* JAVASCRIPT LOGIC */
+<script>
+/* HELPER (harus dideklarasikan paling awal) */
+const $ = id => document.getElementById(id);
+const money = n => 'Rp' + Math.round(Number(n) || 0).toLocaleString('id-ID');
+
+/* LOGIN LOGIC */
 function checkLogin() {
-  const u = document.getElementById('adminUser').value.trim();
-  const p = document.getElementById('adminPass').value.trim();
-  
+  const u = $('adminUser').value.trim();
+  const p = $('adminPass').value.trim();
   if (u === 'admin' && p === 'villamalika123') {
-    localStorage.setItem('vm_admin_logged', 'true');
+    try { localStorage.setItem('vm_admin_logged', 'true'); } catch (e) {}
     openMainApp();
   } else {
     alert('Username atau Password yang kamu masukkan salah!');
@@ -171,65 +188,111 @@ function checkLogin() {
 }
 
 function doLogout() {
-  localStorage.removeItem('vm_admin_logged');
+  try { localStorage.removeItem('vm_admin_logged'); } catch (e) {}
   location.reload();
 }
 
 function openMainApp() {
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('mainApp').style.display = 'block';
+  $('loginScreen').style.display = 'none';
+  $('mainApp').style.display = 'block';
   render();
 }
 
-// Cek status login saat halaman dibuka
-if (localStorage.getItem('vm_admin_logged') === 'true') {
-  openMainApp();
-}
+/* RENDER INVOICE */
+function render() {
+  $('pInvNo').textContent = $('invNo').value;
+  $('pCustomer').textContent = $('customer').value;
+  $('pInvDate').textContent = $('invDate').value;
+  $('pDue').textContent = $('dueDate').value;
+  $('dueLine').style.display = $('dueDate').value.trim() ? 'inline' : 'none';
+  $('pCheckout').textContent = $('checkout').value;
+  $('checkoutLine').style.display = $('checkout').value.trim() ? 'inline' : 'none';
+  $('pBankName').textContent = 'BCA';
+  $('pAccount').textContent = '1080792880';
+  $('pAccountName').textContent = 'Nursilfiah';
 
-const $=id=>document.getElementById(id);
-const money=n=>'Rp'+Math.round(Number(n)||0).toLocaleString('id-ID');
-
-function render(){
-  $('pInvNo').textContent=$('invNo').value;
-  $('pCustomer').textContent=$('customer').value;
-  $('pInvDate').textContent=$('invDate').value;
-  $('pDue').textContent=$('dueDate').value;
-  $('dueLine').style.display=$('dueDate').value.trim()?'inline':'none';
-  $('pCheckout').textContent=$('checkout').value;
-  $('checkoutLine').style.display=$('checkout').value.trim()?'inline':'none';
-  $('pBankName').textContent='BCA';
-  $('pAccount').textContent='1080792880';
-  $('pAccountName').textContent='Nursilfiah';
-  const tbody=$('pItems');tbody.innerHTML='';
-  let total=0;
-  [...document.querySelectorAll('.item-row')].forEach((row,i)=>{
-    const desc=row.querySelector('.desc').value;
-    const qty=Math.max(0,Number(row.querySelector('.qty').value)||0);
-    const price=Math.max(0,Number(row.querySelector('.price').value)||0);
-    const sub=qty*price;total+=sub;
-    const tr=document.createElement('tr');
-    const values=[String(i+1),desc,qty?qty:'-',price?money(price):'-',sub?money(sub):'-'];
-    values.forEach((v,j)=>{const td=document.createElement('td');td.textContent=v;if(j===1&&desc.toLowerCase().includes('villa')){const small=document.createElement('span');small.className='subtext';small.textContent='Check-in: '+$('checkin').value;td.appendChild(small)}tr.appendChild(td)});
+  const tbody = $('pItems');
+  tbody.innerHTML = '';
+  let total = 0;
+  [...document.querySelectorAll('.item-row')].forEach((row, i) => {
+    const desc = row.querySelector('.desc').value;
+    const qty = Math.max(0, Number(row.querySelector('.qty').value) || 0);
+    const price = Math.max(0, Number(row.querySelector('.price').value) || 0);
+    const sub = qty * price;
+    total += sub;
+    const tr = document.createElement('tr');
+    const values = [String(i + 1), desc, qty ? qty : '-', price ? money(price) : '-', sub ? money(sub) : '-'];
+    values.forEach((v, j) => {
+      const td = document.createElement('td');
+      td.textContent = v;
+      if (j === 1 && desc.toLowerCase().includes('villa')) {
+        const small = document.createElement('span');
+        small.className = 'subtext';
+        small.textContent = 'Check-in: ' + $('checkin').value;
+        td.appendChild(small);
+      }
+      tr.appendChild(td);
+    });
     tbody.appendChild(tr);
   });
-  const dp=Math.max(0,Number($('dp').value)||0);
-  $('pTotal').textContent=money(total);$('pDP').textContent=money(dp);$('pBalance').textContent=money(Math.max(0,total-dp));
-  const ol=$('pTerms');ol.innerHTML='';
-  ['DP Minimal 50%',
-   'Pelunasan H-1 (Jika H-1 belum pelunasan, bookingan otomatis tercancel & DP dianggap hangus)',
-   'Mengajukan Reschedule maksimal 7 hari sebelum hari H. Jika melebihi H-7, DP hangus dengan alasan apa pun',
-   'First pay first book (tidak bisa block tanggal kalau belum DP)',
-   'Hanya menerima pembayaran melalui sistem transfer antar bank (real time online / BI Fast)'
-  ].forEach(t=>{const li=document.createElement('li');li.textContent=t;ol.appendChild(li)});
-  $('pContact').textContent='Jl. Pasir Tugu No.17, Cibeureum, Kec. Cisarua, Kabupaten Bogor, Jawa Barat 16750  |  +62 813-1526-5266';
+
+  const dp = Math.max(0, Number($('dp').value) || 0);
+  $('pTotal').textContent = money(total);
+  $('pDP').textContent = money(dp);
+  $('pBalance').textContent = money(Math.max(0, total - dp));
+
+  const ol = $('pTerms');
+  ol.innerHTML = '';
+  [
+    'DP Minimal 50%',
+    'Pelunasan H-1 (Jika H-1 belum pelunasan, bookingan otomatis tercancel & DP dianggap hangus)',
+    'Mengajukan Reschedule maksimal 7 hari sebelum hari H. Jika melebihi H-7, DP hangus dengan alasan apa pun',
+    'First pay first book (tidak bisa block tanggal kalau belum DP)',
+    'Hanya menerima pembayaran melalui sistem transfer antar bank (real time online / BI Fast)'
+  ].forEach(t => {
+    const li = document.createElement('li');
+    li.textContent = t;
+    ol.appendChild(li);
+  });
+
+  $('pContact').textContent = 'Jl. Pasir Tugu No.17, Cibeureum, Kec. Cisarua, Kabupaten Bogor, Jawa Barat 16750  |  +62 813-1526-5266';
 }
 
-document.querySelectorAll('.editor input,.editor textarea').forEach(el=>el.addEventListener('input',render));
-function setPrintTitle(){const name=($('customer').value||'PEMESAN').trim().replace(/[\\\\/:*?\"<>|]/g,' ').replace(/\s+/g,' ');document.title='Invoice Villa Malika '+name;}
-window.addEventListener('beforeprint',setPrintTitle);
-function wireRemove(){document.querySelectorAll('.remove').forEach(btn=>btn.onclick=()=>{btn.closest('.item-row').remove();render()})}
-$('addItem').addEventListener('click',()=>{const row=document.createElement('div');row.className='item-row';row.innerHTML='<input aria-label="Deskripsi" value="Item baru" class="desc"><input aria-label="Qty" type="number" min="0" value="1" class="qty"><input aria-label="Harga" type="number" min="0" value="0" class="price"><button class="remove" type="button" title="Hapus item">×</button>';$('items').appendChild(row);row.querySelectorAll('input').forEach(el=>el.addEventListener('input',render));wireRemove();render()});
-wireRemove();render();
+/* EVENTS */
+$('loginForm').addEventListener('submit', e => { e.preventDefault(); checkLogin(); });
+$('logoutBtn').addEventListener('click', doLogout);
+
+document.querySelectorAll('.editor input, .editor textarea').forEach(el => el.addEventListener('input', render));
+
+function setPrintTitle() {
+  const name = ($('customer').value || 'PEMESAN').trim().replace(/[\\/:*?"<>|]/g, ' ').replace(/\s+/g, ' ');
+  document.title = 'Invoice Villa Malika ' + name;
+}
+window.addEventListener('beforeprint', setPrintTitle);
+
+function wireRemove() {
+  document.querySelectorAll('.remove').forEach(btn => {
+    btn.onclick = () => { btn.closest('.item-row').remove(); render(); };
+  });
+}
+
+$('addItem').addEventListener('click', () => {
+  const row = document.createElement('div');
+  row.className = 'item-row';
+  row.innerHTML = '<input aria-label="Deskripsi" value="Item baru" class="desc"><input aria-label="Qty" type="number" min="0" value="1" class="qty"><input aria-label="Harga" type="number" min="0" value="0" class="price"><button class="remove" type="button" title="Hapus item">×</button>';
+  $('items').appendChild(row);
+  row.querySelectorAll('input').forEach(el => el.addEventListener('input', render));
+  wireRemove();
+  render();
+});
+
+wireRemove();
+render();
+
+/* Cek status login saat halaman dibuka (di akhir, setelah semua fungsi siap) */
+try {
+  if (localStorage.getItem('vm_admin_logged') === 'true') openMainApp();
+} catch (e) {}
 </script>
 </body>
 </html>
