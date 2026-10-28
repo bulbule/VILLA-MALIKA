@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
 <title>Invoice Villa Malika</title>
 <style>
 :root{--navy:#101827;--panel:#202c40;--gold:#d5a43c;--cream:#fffaf0;--ink:#171717;--muted:#718096;--line:#d6d6d6}
@@ -51,16 +52,17 @@ input:focus,textarea:focus{outline:2px solid #e3b64f;border-color:transparent}
 .detail-table td:nth-child(1),.detail-table td:nth-child(3){text-align:center}
 .detail-table td:nth-child(4),.detail-table td:nth-child(5){text-align:right;white-space:nowrap}
 .subtext{display:block;color:#555;font-size:11px;margin-top:4px}
-.summary{margin:8px 0 22px auto;width:55%;min-width:260px;background:#fff5df;border-radius:6px;overflow:hidden;font-size:13px}
+.payrow{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;margin:8px 0 22px}.summary{margin:0;width:auto;min-width:0;background:#fff5df;border-radius:6px;overflow:hidden;font-size:13px}
 .sumrow{display:flex;justify-content:space-between;gap:12px;padding:10px 13px;border-bottom:2px solid white}
 .sumrow:last-child{border-bottom:0}.sumrow.total{background:#f4dca9;font-weight:800;font-size:15px}.sumrow strong{white-space:nowrap}
 .lower{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
-.bank{border:1px solid #d8a640;border-radius:12px;padding:13px 15px;color:#142d67}
+.bank{border:1px solid #d8a640;border-radius:12px;padding:13px 15px;color:#142d67;display:flex;flex-direction:column;justify-content:center}
 .bank h3{font-size:13px;color:#222;margin:0 0 12px}.bank-content{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .bca{font-size:30px;font-weight:900;font-style:italic;color:#1550a4;letter-spacing:-2px}.bank-no{font-size:17px;font-weight:800}.bank-name{font-size:12px;margin-top:4px}
-.terms{margin-top:18px}.terms h3{font-size:13px;margin:0 0 12px}.terms ol{padding-left:22px;margin:0;font-size:11px;line-height:1.5}.terms li{margin-bottom:8px}
-.sign{border-left:1px solid #eed9a6;padding:14px 0 0 18px;font-size:11px;line-height:1.5;min-height:220px}.sign-note{margin-bottom:8px}.signature-img{display:block;width:120px;height:150px;object-fit:contain;object-position:center;margin:-25px auto -32px}.sign-line{border-bottom:1px solid #555;margin-top:0}.sign-name{text-align:center;font-size:12px;margin-top:7px}.sign-brand{text-align:center;font-size:9px;letter-spacing:3px;color:#777;margin-top:4px}
+.terms{margin-top:0}.terms h3{font-size:13px;margin:0 0 12px}.terms ol{padding-left:22px;margin:0;font-size:11px;line-height:1.5}.terms li{margin-bottom:8px}
+.sign{border-left:1px solid #eed9a6;padding:14px 0 0 18px;font-size:11px;line-height:1.5;min-height:200px}.sign-note{margin-bottom:8px}.signature-img{display:block;width:120px;height:150px;object-fit:contain;object-position:center;margin:-25px auto -32px}.sign-line{border-bottom:1px solid #555;margin-top:0}.sign-name{text-align:center;font-size:12px;margin-top:7px}.sign-brand{text-align:center;font-size:9px;letter-spacing:3px;color:#777;margin-top:4px}
 .footer-note{font-size:9px;color:#777;text-align:center;margin-top:20px}
+a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important;font:inherit!important}
 #pdfLoading{position:fixed;inset:0;z-index:9999;background:rgba(8,12,22,.88);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#fff;text-align:center;padding:20px}
 #pdfLoading.show{display:flex}
 .spinner{width:56px;height:56px;border:5px solid #344155;border-top-color:#f2c34f;border-radius:50%;animation:spin .9s linear infinite}
@@ -69,7 +71,7 @@ input:focus,textarea:focus{outline:2px solid #e3b64f;border-color:transparent}
 #pdfLoading small{color:#a9bfd8;font-size:13px}
 .print:disabled{opacity:.6;cursor:wait}
 @media(max-width:1000px){.app{grid-template-columns:1fr}.preview-wrap{padding:12px}.invoice{max-width:794px}}
-@media(max-width:560px){.app{padding:14px 10px;gap:14px}.editor{padding:16px}.grid2{grid-template-columns:1fr}.items-head,.item-row{grid-template-columns:minmax(85px,1.4fr) 42px minmax(72px,1fr) 28px;gap:5px}.preview-wrap{padding:6px}.paper{padding:18px 13px;margin-left:2%;margin-right:2%;border-radius:20px}.meta{font-size:11px}.detail-table{font-size:10px}.detail-table th{font-size:9px;padding:8px 3px}.detail-table td{padding:7px 4px}.summary{width:100%;min-width:0}.lower{grid-template-columns:1fr}.sign{border-left:0;border-top:1px solid #eed9a6;padding:16px 0}.invoice-header{height:190px}}
+@media(max-width:560px){.app{padding:14px 10px;gap:14px}.editor{padding:16px}.grid2{grid-template-columns:1fr}.items-head,.item-row{grid-template-columns:minmax(85px,1.4fr) 42px minmax(72px,1fr) 28px;gap:5px}.preview-wrap{padding:6px}.paper{padding:18px 13px;margin-left:2%;margin-right:2%;border-radius:20px}.meta{font-size:11px}.detail-table{font-size:10px}.detail-table th{font-size:9px;padding:8px 3px}.detail-table td{padding:7px 4px}.summary{width:100%;min-width:0}.payrow{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.sign{border-left:0;border-top:1px solid #eed9a6;padding:16px 0}.invoice-header{height:190px}}
 @page{size:A4;margin:0}
 @media print{
  body{background:white;color:black}.topbar,#loginScreen,.editor{display:none!important}.app{display:block;padding:0}.preview-wrap{padding:0;background:white;border-radius:0;overflow:visible}.invoice{width:210mm;min-height:297mm;max-width:none;margin:0;box-shadow:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}.invoice-header{height:65mm}.paper{margin:-10mm 7mm 6mm;padding:7mm 7mm 8mm;border-width:1mm;border-radius:8mm}.invoice-title{font-size:48pt}.title-sub{margin-bottom:7mm}.meta{font-size:9pt;margin-bottom:7mm}.detail-table{font-size:8pt}.detail-table th{font-size:7.5pt}.detail-table td{padding:2.5mm 2mm}.summary{font-size:9pt;margin-bottom:6mm}.sumrow{padding:2.5mm 3mm}.sumrow.total{font-size:10pt}.bank{padding:3mm}.terms ol{font-size:7.5pt}.terms h3,.bank h3{font-size:9pt}.sign{font-size:8pt}.bca{font-size:22pt}.bank-no{font-size:13pt}.footer-note{font-size:7pt}
@@ -151,20 +153,22 @@ input:focus,textarea:focus{outline:2px solid #e3b64f;border-color:transparent}
             <div class="customer"><strong>NAMA PEMESAN</strong><br><span id="pCustomer">Cahaya Dewi</span></div>
           </div>
           <table class="detail-table"><thead><tr><th style="width:8%">NO</th><th>DESKRIPSI</th><th style="width:10%">QTY</th><th style="width:20%">HARGA SATUAN</th><th style="width:20%">TOTAL</th></tr></thead><tbody id="pItems"></tbody></table>
+          <div class="payrow">
+            <div class="bank"><h3>Rekening Pembayaran</h3><div class="bank-content"><div class="bca" id="pBankName">BCA</div><div style="border-left:1px solid #bbb;padding-left:12px"><div class="bank-no" id="pAccount">1080792880</div><div class="bank-name">A/n <span id="pAccountName">Nursilfiah</span></div></div></div></div>
           <div class="summary">
             <div class="sumrow total"><span>TOTAL PEMBAYARAN</span><strong id="pTotal">Rp3.300.000</strong></div>
             <div class="sumrow"><span><b>DP</b> (Minimal 50%)</span><strong id="pDP">Rp1.650.000</strong></div>
             <div class="sumrow"><span><b>SISA PEMBAYARAN</b></span><strong id="pBalance">Rp1.650.000</strong></div>
           </div>
+          </div>
           <div class="lower">
             <div>
-              <div class="bank"><h3>Rekening Pembayaran</h3><div class="bank-content"><div class="bca" id="pBankName">BCA</div><div style="border-left:1px solid #bbb;padding-left:12px"><div class="bank-no" id="pAccount">1080792880</div><div class="bank-name">A/n <span id="pAccountName">Nursilfiah</span></div></div></div></div>
               <div class="terms"><h3>● &nbsp; KETENTUAN BOOKING &nbsp; ●</h3><ol id="pTerms"></ol></div>
             </div>
             <div class="sign">
               <div class="sign-note">Saya telah setuju dengan syarat dan ketentuan yang berlaku.<br>Terima kasih telah menginap dan berkunjung di villa kami.</div>
-              <!-- Tanda tangan: file TTD_NOVA.png di folder yang sama dengan index.html -->
-              <img class="signature-img" alt="Tanda tangan Miss Nova" src="TTD_NOVA.png" onerror="this.style.visibility='hidden'">
+              <!-- Tanda tangan: file 'TTD NOVA.png' di folder yang sama dengan index.html -->
+              <img class="signature-img" alt="Tanda tangan Miss Nova" src="TTD%20NOVA.png" onerror="this.style.visibility='hidden'">
               <div class="sign-line"></div>
               <div class="sign-name">Miss Nova</div>
               <div class="sign-brand">VILLA MALIKA</div>
@@ -328,11 +332,11 @@ async function downloadPdf() {
   try {
     render();
     await tick(60);
-    await Promise.all([preload('villa-header.jpg'), preload('TTD_NOVA.png')]);
+    await Promise.all([preload('villa-header.jpg'), preload('TTD%20NOVA.png')]);
 
     // Render invoice di iframe lebar tetap 794px supaya hasil PDF selalu sama (desktop maupun HP)
     const css = document.querySelector('style').textContent;
-    const html = '<!doctype html><html><head><meta charset="utf-8"><base href="' + document.baseURI + '"><style>' + css +
+    const html = '<!doctype html><html><head><meta charset="utf-8"><meta name="format-detection" content="telephone=no,address=no,email=no,date=no"><base href="' + document.baseURI + '"><style>' + css +
       'body{background:#fff!important;color:#171717}.invoice{width:' + PDF_W + 'px!important;max-width:none!important;margin:0!important;box-shadow:none!important}</style></head><body>' +
       $('invoice').outerHTML + '</body></html>';
 
@@ -358,6 +362,11 @@ async function downloadPdf() {
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait', compress: true });
     const pageH = Math.floor(canvas.width * 297 / 210);
+    if (canvas.height > pageH + 4 && canvas.height <= pageH * 1.2) {
+      // Sedikit kelebihan tinggi: kecilkan proporsional agar tetap 1 halaman
+      const w = canvas.width * 297 / canvas.height;
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', (210 - w) / 2, 0, w, 297, undefined, 'FAST');
+    } else {
     const pages = Math.max(1, Math.ceil((canvas.height - 4) / pageH));
     for (let p = 0; p < pages; p++) {
       const sliceH = Math.min(pageH, canvas.height - p * pageH);
@@ -371,12 +380,13 @@ async function downloadPdf() {
       if (p > 0) pdf.addPage();
       pdf.addImage(part.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, Math.min(297, sliceH * 210 / canvas.width), undefined, 'FAST');
     }
+    }
 
     const name = ($('customer').value || 'PEMESAN').replace(/[\\/:*?"<>|]/g, ' ').replace(/\s+/g, ' ').trim();
     pdf.save('INVOICE VILLA MALIKA ' + name + '.pdf');
   } catch (err) {
     console.error(err);
-    alert('Gagal membuat PDF. Pastikan halaman dibuka lewat GitHub Pages / server (bukan file lokal) dan file villa-header.jpg & TTD_NOVA.png ada di folder yang sama.');
+    alert('Gagal membuat PDF. Pastikan halaman dibuka lewat GitHub Pages / server (bukan file lokal) dan file villa-header.jpg & TTD NOVA.png ada di folder yang sama.');
   } finally {
     if (frame && frame.parentNode) frame.parentNode.removeChild(frame);
     setLoading(false);
