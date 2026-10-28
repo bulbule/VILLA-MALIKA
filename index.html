@@ -3,866 +3,362 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Villa Malika - Modern Private Booking</title>
+  <title>Admin Dashboard - Generator Invoice Villa Malika</title>
   
-  <!-- Favicon Logo di Tab Browser -->
-  <link rel="icon" type="image/x-icon" href="logo villa.ico">
-  <link rel="shortcut icon" type="image/x-icon" href="logo villa.ico">
-
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Villa Malika - Private Villa Collection">
-  <meta property="og:description" content="Sewa Villa Mewah di Cisarua, Bogor. Fasilitas Private Pool, Meja Biliar, Kamar Mandi Air Hangat, & Halaman Luas.">
-  <meta property="og:image" content="https://bulbule.github.io/VILLA-MALIKA/flayer%20villa%201%20copy.jpg">
-  <meta property="og:url" content="https://bulbule.github.io/VILLA-MALIKA/">
-  <meta property="og:type" content="website">
-
-  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    :root {
-      --bg-light: #f8fafc;
-      --card-white: #ffffff;
-      --navy-dark: #0b1329;
-      --navy-primary: #1e293b;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --gold-accent: #d4af37;
-      --gold-light: #fef08a;
-      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
-      --border-light: #e2e8f0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+    body { background: #0f172a; color: #f8fafc; padding: 20px; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      padding-bottom: 90px;
-    }
-
-    /* HERO SLIDESHOW SECTION */
-    .hero {
-      position: relative;
-      min-height: 75vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 30px 20px 50px;
-      color: #ffffff;
-      border-bottom-left-radius: 32px;
-      border-bottom-right-radius: 32px;
-      overflow: hidden;
-    }
-
-    .hero-slides {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 1;
-    }
-
-    .slide {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 1.2s ease-in-out;
-    }
-
-    .slide.active { opacity: 1; }
-
-    .hero-overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(to bottom, rgba(11, 19, 41, 0.2), var(--navy-dark));
-      z-index: 2;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 3;
-      max-width: 1000px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: var(--gold-light);
-      margin-bottom: 12px;
-    }
-
-    .hero-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .hero-desc {
-      font-size: 0.95rem;
-      color: #cbd5e1;
-      max-width: 500px;
-      margin-bottom: 25px;
-    }
-
-    .slide-dots {
-      display: flex;
-      gap: 8px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .dot.active {
-      background: var(--gold-accent);
-      width: 25px;
-      border-radius: 10px;
-    }
-
-    /* TABS SELECTOR */
-    .main-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .section-header { margin: 30px 0 15px; }
-
-    .section-header h2 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .villa-tabs {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      margin-bottom: 25px;
-      scrollbar-width: none;
-    }
-    .villa-tabs::-webkit-scrollbar { display: none; }
-
-    .tab-chip {
-      background: var(--card-white);
-      color: var(--text-muted);
-      border: 1px solid var(--border-light);
-      padding: 10px 22px;
-      border-radius: 25px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-      transition: all 0.25s ease;
-    }
-
-    .tab-chip.active {
-      background: var(--navy-dark);
-      color: #ffffff;
-      border-color: var(--navy-dark);
-      box-shadow: 0 4px 15px rgba(11, 19, 41, 0.2);
-    }
-
-    /* VILLA CONTENT CARD */
-    .villa-content {
-      display: none;
-      animation: fadeIn 0.4s ease forwards;
-    }
-    .villa-content.active { display: block; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-bottom: 25px;
-    }
-
-    .gallery-item {
-      height: 180px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    .gallery-item:hover img { transform: scale(1.05); }
-
-    .details-card {
-      background: var(--card-white);
-      border-radius: 24px;
-      padding: 25px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-light);
-      margin-bottom: 30px;
-    }
-
-    .villa-header-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .villa-name {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-
-    .rating-tag {
-      background: #fef9c3;
-      color: #a16207;
-      padding: 6px 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .villa-intro {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 25px;
-    }
-
-    .facilities-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: var(--text-main);
-    }
-
-    .facility-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-
-    .facility-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: #f1f5f9;
-      padding: 12px 16px;
-      border-radius: 16px;
-    }
-
-    .facility-icon {
-      width: 38px;
-      height: 38px;
-      background: var(--card-white);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--navy-dark);
-      font-size: 1.1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-
-    .facility-text {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .rates-card {
-      background: #f8fafc;
-      border-radius: 18px;
-      padding: 20px;
-      border: 1px solid var(--border-light);
-    }
-
-    .rates-header {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .rate-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px dashed var(--border-light);
-      font-size: 0.9rem;
-    }
-
-    .rate-row:last-child { border-bottom: none; }
-    .rate-label { color: var(--text-muted); }
-    .rate-price { font-weight: 700; color: var(--navy-dark); }
-
-    .maps-card {
-      background: var(--card-white);
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-light);
-      margin-bottom: 40px;
-    }
-
-    .map-frame {
-      width: 100%;
-      height: 280px;
-      border-radius: 16px;
-      border: none;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-
-    /* FIXED BOTTOM BAR */
-    .bottom-bar {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: var(--card-white);
-      border-top: 1px solid var(--border-light);
-      padding: 12px 20px;
-      box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
-      z-index: 900;
-    }
-
-    .bottom-bar-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .price-tag span {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .price-tag strong {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--navy-dark);
-    }
-
-    .bottom-action-group {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn-book {
-      background: var(--navy-dark);
-      color: #ffffff;
-      border: none;
-      padding: 12px 22px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 15px rgba(11, 19, 41, 0.2);
-    }
-
-    .btn-share {
-      background: #ffffff;
-      color: var(--navy-dark);
-      border: 1px solid var(--border-light);
-      padding: 12px 18px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      transition: all 0.2s ease;
-    }
-    .btn-share:hover { background: #f1f5f9; }
-
-    /* MODAL POPUPS */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(4px);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    .modal.show { display: flex; }
-
-    .modal-box {
-      background: var(--card-white);
-      border-radius: 24px;
-      padding: 25px;
+    /* LOGIN SCREEN */
+    #loginScreen {
       max-width: 380px;
-      width: 100%;
+      margin: 80px auto;
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 1px solid #334155;
       text-align: center;
+    }
+    #loginScreen h2 { margin-bottom: 20px; color: #d4af37; }
+    .form-group { margin-bottom: 15px; text-align: left; }
+    .form-group label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 5px; }
+    .form-group input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 0.95rem; }
+    .btn-login { width: 100%; padding: 12px; border-radius: 10px; border: none; background: #d4af37; color: #0f172a; font-weight: 700; cursor: pointer; margin-top: 10px; }
+
+    /* DASHBOARD WRAPPER */
+    #dashboardApp { display: none; max-width: 1200px; margin: 0 auto; }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #334155; }
+    .admin-header h1 { font-size: 1.5rem; color: #d4af37; }
+    .btn-logout { background: #ef4444; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+
+    .dashboard-grid { display: grid; grid-template-columns: 420px 1fr; gap: 30px; align-items: start; }
+
+    /* FORM PANEL */
+    .form-panel { background: #1e293b; padding: 25px; border-radius: 20px; border: 1px solid #334155; }
+    .form-panel h3 { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 15px; }
+
+    .items-table-input { width: 100%; margin-bottom: 15px; font-size: 0.85rem; }
+    .items-table-input td { padding: 4px; }
+    .items-table-input input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; }
+    .btn-add-row { background: #3b82f6; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; margin-bottom: 15px; }
+    .btn-generate { width: 100%; padding: 14px; background: #22c55e; color: #fff; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+
+    /* PREVIEW CONTAINER */
+    .preview-container { background: #334155; padding: 20px; border-radius: 20px; display: flex; justify-content: center; overflow-x: auto; }
+
+    /* A5 INVOICE DESAIN EXACT */
+    .invoice-a5 {
+      width: 148mm;
+      min-height: 210mm;
+      background: #ffffff;
+      color: #0f172a;
+      padding: 12mm 10mm;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       position: relative;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      box-sizing: border-box;
     }
 
-    .close-modal {
-      position: absolute;
-      top: 15px; right: 20px;
-      font-size: 1.4rem;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
+    /* INVOICE HEADER */
+    .inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+    .inv-brand { display: flex; align-items: center; gap: 10px; }
+    .inv-logo-img { width: 42px; }
+    .inv-title-text h2 { font-size: 1.2rem; font-weight: 800; color: #d4af37; letter-spacing: 1px; }
+    .inv-title-text p { font-size: 0.65rem; font-weight: 700; color: #475569; letter-spacing: 2px; }
 
-    .contact-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #f8fafc;
-      border: 1px solid var(--border-light);
-      padding: 14px 18px;
-      border-radius: 16px;
-      margin-top: 12px;
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 600;
-    }
-    .contact-btn:hover { background: #f1f5f9; }
+    .inv-contact { font-size: 0.62rem; color: #475569; text-align: right; line-height: 1.4; }
+    .inv-contact i { color: #d4af37; margin-right: 3px; }
 
-    .brochure-img-preview {
-      width: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      border-radius: 12px;
-      margin: 12px 0;
-      border: 1px solid var(--border-light);
-    }
+    .inv-banner-title { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; color: #0f172a; margin-top: 5px; border-bottom: 2px solid #d4af37; display: inline-block; padding-bottom: 2px; }
+    .inv-sub-banner { font-size: 0.75rem; font-weight: 800; color: #d4af37; letter-spacing: 3px; margin-bottom: 15px; }
 
-    .share-action-btns {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
+    .inv-meta-grid { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.72rem; }
+    .meta-col strong { color: #0f172a; font-weight: 800; }
+    .meta-col table td { padding: 1px 0; }
+    .meta-col table td:first-child { color: #64748b; width: 85px; }
 
-    .btn-share-action {
-      flex: 1;
-      padding: 12px;
-      border-radius: 14px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      text-decoration: none;
-    }
+    /* INVOICE TABLE */
+    .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 0.7rem; }
+    .inv-table th { background: #0f172a; color: #fff; padding: 6px; text-align: left; font-size: 0.65rem; text-transform: uppercase; }
+    .inv-table td { padding: 6px; border-bottom: 1px solid #e2e8f0; color: #1e293b; }
+    .inv-table tr:nth-child(even) { background: #f8fafc; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
 
-    .btn-copy-link {
-      background: var(--navy-dark);
-      color: #ffffff;
-    }
+    /* SUMMARY TOTALS */
+    .inv-summary-section { display: flex; justify-content: space-between; margin-bottom: 15px; gap: 10px; }
+    .bank-box { border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; flex: 1; display: flex; align-items: center; gap: 10px; }
+    .bank-logo { width: 45px; }
+    .bank-info { font-size: 0.75rem; color: #0f172a; }
+    .bank-info strong { display: block; font-size: 0.85rem; color: #1e3a8a; }
 
-    .btn-download-img {
-      background: #f1f5f9;
-      color: var(--text-main);
-      border: 1px solid var(--border-light);
+    .totals-box { background: #fef9c3; border-radius: 10px; padding: 8px 12px; width: 170px; font-size: 0.7rem; }
+    .total-row { display: flex; justify-content: space-between; padding: 3px 0; font-weight: 700; }
+    .total-row.grand { border-top: 1px solid #ca8a04; margin-top: 4px; padding-top: 4px; color: #0f172a; font-size: 0.78rem; }
+
+    /* TERMS & FOOTER */
+    .inv-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 10px; font-size: 0.62rem; color: #475569; }
+    .terms-box { width: 62%; }
+    .terms-box ol { padding-left: 12px; line-height: 1.35; }
+    .terms-box li { margin-bottom: 2px; }
+
+    .sign-box { width: 32%; text-align: center; }
+    .sign-box p { margin-bottom: 30px; font-size: 0.6rem; line-height: 1.2; }
+    .sign-img { height: 35px; margin-bottom: 5px; }
+    .sign-name { font-weight: 700; color: #0f172a; border-top: 1px solid #94a3b8; padding-top: 2px; }
+
+    /* PRINT STYLES FOR EXACT A5 */
+    @media print {
+      body * { visibility: hidden; }
+      #invoiceArea, #invoiceArea * { visibility: visible; }
+      #invoiceArea { position: absolute; left: 0; top: 0; width: 148mm; height: 210mm; box-shadow: none; padding: 10mm; }
+      @page { size: A5 portrait; margin: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO SLIDESHOW SECTION -->
-  <section class="hero">
-    <div class="hero-slides">
-      <div class="slide active" style="background-image: url('HALAMAN_3_11zon.webp');"></div>
-      <div class="slide" style="background-image: url('WhatsApp Image 2026-10-14 at 11.04.21.webp');"></div>
-      <div class="slide" style="background-image: url('bgweb.webp');"></div>
+  <!-- 1. LOGIN SCREEN -->
+  <div id="loginScreen">
+    <h2><i class="fa-solid fa-lock"></i> Admin Login</h2>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="username" value="admin">
     </div>
-    
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-      <div class="hero-badge"><i class="fa-solid fa-crown"></i> PRIVATE VILLA COLLECTION</div>
-      <h1 class="hero-title">Villa Malika</h1>
-      <p class="hero-desc">Nikmati pengalaman menginap eksklusif dengan fasilitas mewah, udara segar Cisarua, dan pemandangan alam memukau.</p>
-      
-      <div class="slide-dots">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" value="villamalika123">
     </div>
-  </section>
-
-  <div class="main-container">
-    
-    <!-- CATEGORY TABS (URUTAN BARU: VILLA 3, VILLA 2, VILLA 1) -->
-    <div class="section-header">
-      <h2>Pilih Unit Villa</h2>
-    </div>
-
-    <div class="villa-tabs">
-      <button class="tab-chip active" onclick="switchVilla('villa3', 'Rp5.000.000 / malam')">Villa Malika 3</button>
-      <button class="tab-chip" onclick="switchVilla('villa2', 'Rp3.000.000 / malam')">Villa Malika 2</button>
-      <button class="tab-chip" onclick="switchVilla('villa1', 'Rp3.000.000 / malam')">Villa Malika 1</button>
-    </div>
-
-    <!-- VILLA 3 CONTENT (LUXURY - UTAMA) -->
-    <div id="villa3" class="villa-content active">
-      <div class="gallery-grid">
-        <div class="gallery-item"><img src="VILLA 3.5.webp" alt="Villa 3 Facade"></div>
-        <div class="gallery-item"><img src="VILLA 3 RUANG TAMU.webp" alt="Mewah Living Room"></div>
-        <div class="gallery-item"><img src="VILLA 3.6.webp" alt="Kitchen Island"></div>
-        <div class="gallery-item"><img src="VILLA 3.3.webp" alt="Kamar Tidur Mewah"></div>
-      </div>
-
-      <div class="details-card">
-        <div class="villa-header-info">
-          <div class="villa-name">Villa Malika 3</div>
-          <div class="rating-tag"><i class="fa-solid fa-star"></i> 5.0 (Luxury)</div>
-        </div>
-        <p class="villa-intro">Bangunan 2 tingkat bergaya arsitektur ultra-mewah dengan kitchen island, area ruang tamu luas berlantai marmer, meja biliar, dan balkon pemandangan indah.</p>
-
-        <!-- FASILITAS UTAMA VILLA 3 -->
-        <div class="facilities-title">Fasilitas Utama</div>
-        <div class="facility-list">
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-bed"></i></div>
-            <div class="facility-text">4 Kamar (20–40 Orang)</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-circle-dot"></i></div>
-            <div class="facility-text">Meja Biliar Eksklusif</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-water-ladder"></i></div>
-            <div class="facility-text">Akses Private Pool</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-kitchen-set"></i></div>
-            <div class="facility-text">Kitchen Island & Alat Masak</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-temperature-arrow-up"></i></div>
-            <div class="facility-text">Kamar Mandi Air Hangat</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-tv"></i></div>
-            <div class="facility-text">Sound System & Karaoke</div>
-          </div>
-        </div>
-
-        <!-- RINCIAN HARGA VILLA 3 -->
-        <div class="rates-card">
-          <div class="rates-header">Paket Harga Sewa</div>
-          <div class="rate-row"><span class="rate-label">Weekday</span><span class="rate-price">Rp5.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Friday</span><span class="rate-price">Rp5.500.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Weekend</span><span class="rate-price">Rp7.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">High Season</span><span class="rate-price">Rp8.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Bundling Villa 2 & 3</span><span class="rate-price">Mulai Rp7.000.000</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- VILLA 2 CONTENT (MODERN) -->
-    <div id="villa2" class="villa-content">
-      <div class="gallery-grid">
-        <div class="gallery-item"><img src="VILLA 2.8.webp" alt="Ruang Makan"></div>
-        <div class="gallery-item"><img src="VILLA 2.6.webp" alt="Living Room"></div>
-        <div class="gallery-item"><img src="VILLA 2.webp" alt="Kamar Utama"></div>
-        <div class="gallery-item"><img src="VILLA 2.4.webp" alt="Kamar Mandi"></div>
-      </div>
-
-      <div class="details-card">
-        <div class="villa-header-info">
-          <div class="villa-name">Villa Malika 2</div>
-          <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.9 (Modern)</div>
-        </div>
-        <p class="villa-intro">Mengusung konsep interior warm-modern yang hangat dan privat. Sangat nyaman untuk liburan santai dan berkumpul bersama.</p>
-
-        <!-- FASILITAS UTAMA VILLA 2 -->
-        <div class="facilities-title">Fasilitas Utama</div>
-        <div class="facility-list">
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-bed"></i></div>
-            <div class="facility-text">3 Kamar (6–25 Orang)</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-water-ladder"></i></div>
-            <div class="facility-text">Private Swimming Pool</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-temperature-arrow-up"></i></div>
-            <div class="facility-text">Kamar Mandi Air Hangat</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-couch"></i></div>
-            <div class="facility-text">Ruang Santai & TV</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-utensils"></i></div>
-            <div class="facility-text">Dapur & Dining Area</div>
-          </div>
-        </div>
-
-        <!-- RINCIAN HARGA VILLA 2 -->
-        <div class="rates-card">
-          <div class="rates-header">Paket Harga Sewa</div>
-          <div class="rate-row"><span class="rate-label">Weekday</span><span class="rate-price">Rp3.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Friday</span><span class="rate-price">Rp3.500.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Weekend</span><span class="rate-price">Rp4.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">High Season</span><span class="rate-price">Rp5.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Bundling Villa 2 & 3</span><span class="rate-price">Mulai Rp7.000.000</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- VILLA 1 CONTENT (LEGACY - FOTO DIUPDATE) -->
-    <div id="villa1" class="villa-content">
-      <div class="gallery-grid">
-        <div class="gallery-item"><img src="VILLA 1.1_17_11zon.webp" alt="Ruang Santai Klasik"></div>
-        <div class="gallery-item"><img src="VILLA 1.2_16_11zon.webp" alt="Ruang Tamu Kayu"></div>
-        <div class="gallery-item"><img src="VILLA 1.3_15_11zon.webp" alt="Kamar Utama"></div>
-        <div class="gallery-item"><img src="VILLA 1.5_13_11zon.webp" alt="Ruang Keluarga"></div>
-      </div>
-
-      <div class="details-card">
-        <div class="villa-header-info">
-          <div class="villa-name">Villa Malika 1</div>
-          <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.8 (Legacy)</div>
-        </div>
-        <p class="villa-intro">Suasana asri nan hangat bergaya klasik dengan pemandangan pegunungan dan halaman rumput membentang luas. Ideal untuk acara keluarga besar atau gathering perusahaan.</p>
-
-        <!-- FASILITAS UTAMA VILLA 1 -->
-        <div class="facilities-title">Fasilitas Utama</div>
-        <div class="facility-list">
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-bed"></i></div>
-            <div class="facility-text">3 Kamar (6–30 Orang)</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-water-ladder"></i></div>
-            <div class="facility-text">Private Swimming Pool</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-tree"></i></div>
-            <div class="facility-text">Halaman Rumput Luas</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-temperature-arrow-up"></i></div>
-            <div class="facility-text">Kamar Mandi Air Hangat</div>
-          </div>
-          <div class="facility-item">
-            <div class="facility-icon"><i class="fa-solid fa-wifi"></i></div>
-            <div class="facility-text">Wi-Fi & Smart TV</div>
-          </div>
-        </div>
-
-        <!-- RINCIAN HARGA VILLA 1 -->
-        <div class="rates-card">
-          <div class="rates-header">Paket Harga Sewa</div>
-          <div class="rate-row"><span class="rate-label">Weekday</span><span class="rate-price">Rp3.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Friday</span><span class="rate-price">Rp3.500.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Weekend</span><span class="rate-price">Rp4.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">High Season</span><span class="rate-price">Rp5.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">Paket Natal & Tahun Baru (3H2M)</span><span class="rate-price">Rp8.000.000</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MAPS LOCATION -->
-    <div class="section-header">
-      <h2>Lokasi Villa</h2>
-    </div>
-    <div class="maps-card">
-      <div style="font-size:0.9rem; color:var(--text-muted);"><i class="fa-solid fa-location-dot" style="color:red;"></i> Jl. Pasir Tugu No.17, Cibeureum, Cisarua, Bogor</div>
-      <iframe class="map-frame" src="https://maps.google.com/maps?q=VILLA%20MALIKA%202,%20Jl.%20Pasir%20Tugu%20No.17,%20Cibeureum,%20Cisarua&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
-    </div>
-
+    <button class="btn-login" onclick="doLogin()">Masuk Dashboard</button>
   </div>
 
-  <!-- FIXED BOTTOM BOOKING & SHARE BAR -->
-  <div class="bottom-bar">
-    <div class="bottom-bar-inner">
-      <div class="price-tag">
-        <span>Mulai Dari</span>
-        <strong id="displayPrice">Rp5.000.000 / malam</strong>
+  <!-- 2. DASHBOARD APP -->
+  <div id="dashboardApp">
+    <div class="admin-header">
+      <h1><i class="fa-solid fa-file-invoice"></i> Generator Invoice Villa Malika</h1>
+      <button class="btn-logout" onclick="doLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- FORM INPUT -->
+      <div class="form-panel">
+        <h3>Input Data Invoice</h3>
+        
+        <div class="form-group">
+          <label>No. Invoice</label>
+          <input type="text" id="inNo" value="VM-01234" oninput="renderInvoice()">
+        </div>
+        <div class="form-group">
+          <label>Nama Pemesan</label>
+          <input type="text" id="inNama" value="Cahaya Dewi" oninput="renderInvoice()">
+        </div>
+        <div class="form-group">
+          <label>Tanggal Invoice</label>
+          <input type="text" id="inTanggal" value="25 Agustus 2026" oninput="renderInvoice()">
+        </div>
+        <div class="form-group">
+          <label>Jatuh Tempo</label>
+          <input type="text" id="inTempo" value="24 September 2026 (30 Hari)" oninput="renderInvoice()">
+        </div>
+
+        <h3 style="margin-top:20px;">Rincian Item</h3>
+        <table class="items-table-input">
+          <thead>
+            <tr><th>Deskripsi</th><th style="width:50px">Qty</th><th>Harga (Rp)</th></tr>
+          </thead>
+          <tbody id="inputItemsBody">
+            <tr>
+              <td><input type="text" class="item-desc" value="Villa 1 (Hari 2) Check in: Minggu, 2 Juni 2026" oninput="renderInvoice()"></td>
+              <td><input type="number" class="item-qty" value="1" oninput="renderInvoice()"></td>
+              <td><input type="number" class="item-price" value="3300000" oninput="renderInvoice()"></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn-add-row" onclick="addItemRow()"><i class="fa-solid fa-plus"></i> Tambah Item</button>
+
+        <div class="form-group">
+          <label>DP Terbayar (Rp)</label>
+          <input type="number" id="inDp" value="1650000" oninput="renderInvoice()">
+        </div>
+
+        <button class="btn-generate" onclick="window.print()"><i class="fa-solid fa-print"></i> Download PDF / Cetak Invoice</button>
       </div>
-      <div class="bottom-action-group">
-        <button class="btn-share" onclick="shareBrochure()"><i class="fa-solid fa-share-nodes"></i> Bagikan</button>
-        <button class="btn-book" onclick="openContactModal()"><i class="fa-brands fa-whatsapp"></i> Book Now</button>
+
+      <!-- LIVE PREVIEW A5 INVOICE -->
+      <div class="preview-container">
+        <div id="invoiceArea" class="invoice-a5">
+          
+          <div class="inv-header">
+            <div class="inv-brand">
+              <img src="logo villa.ico" class="inv-logo-img" alt="Logo">
+              <div class="inv-title-text">
+                <h2>VILLA MALIKA</h2>
+                <p>VILLA & RESORT</p>
+              </div>
+            </div>
+            <div class="inv-contact">
+              <p><i class="fa-solid fa-location-dot"></i> Jl. Pasir Tugu No.17, Cibeureum,<br>Kec. Cisarua, Kabupaten Bogor 16750</p>
+              <p><i class="fa-solid fa-phone"></i> +62 813-1526-5266</p>
+            </div>
+          </div>
+
+          <div class="inv-banner-title">INVOICE</div>
+          <div class="inv-sub-banner">VILLA MALIKA</div>
+
+          <div class="inv-meta-grid">
+            <div class="meta-col">
+              <strong>NOTA PEMBAYARAN</strong>
+              <table>
+                <tr><td>No. Invoice</td><td>: <span id="outNo">VM-01234</span></td></tr>
+                <tr><td>Tanggal</td><td>: <span id="outTanggal">25 Agustus 2026</span></td></tr>
+                <tr><td>Jatuh Tempo</td><td>: <span id="outTempo">24 September 2026</span></td></tr>
+              </table>
+            </div>
+            <div class="meta-col text-right">
+              <strong>NAMA PEMESAN</strong>
+              <div style="font-size:0.9rem; font-weight:700; margin-top:2px;" id="outNama">Cahaya Dewi</div>
+            </div>
+          </div>
+
+          <table class="inv-table">
+            <thead>
+              <tr>
+                <th style="width:25px">NO</th>
+                <th>DESKRIPSI</th>
+                <th style="width:35px" class="text-center">QTY</th>
+                <th style="width:85px" class="text-right">HARGA SATUAN</th>
+                <th style="width:85px" class="text-right">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody id="outItemsBody">
+              <!-- Item Rincian Dynamic -->
+            </tbody>
+          </table>
+
+          <div class="inv-summary-section">
+            <div class="bank-box">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia_logo.svg" class="bank-logo" alt="BCA">
+              <div class="bank-info">
+                <strong>1080792880</strong>
+                <span>A/n Nursilfiah</span>
+              </div>
+            </div>
+            <div class="totals-box">
+              <div class="total-row"><span>TOTAL</span><span id="outGrandTotal">Rp0</span></div>
+              <div class="total-row"><span>DP (50%)</span><span id="outDp">Rp0</span></div>
+              <div class="total-row grand"><span>SISA</span><span id="outSisa">Rp0</span></div>
+            </div>
+          </div>
+
+          <div class="inv-footer">
+            <div class="terms-box">
+              <strong style="color:#0f172a; display:block; margin-bottom:3px;">KETENTUAN BOOKING:</strong>
+              <ol>
+                <li>Dp Minimal 50%</li>
+                <li>Pelunasan H-1 (Jika H-1 belum pelunasan, bookingan otomatis tercancel & DP dianggap hangus)</li>
+                <li>Mengajukan Reschedule max 7 hari sebelum hari H</li>
+                <li>First pay first book (tidak bisa block tanggal kalau belum DP)</li>
+                <li>Hanya menerima pembayaran Melalui sistem transfer antar bank (real time online / bi fast)</li>
+              </ol>
+            </div>
+            <div class="sign-box">
+              <p>Saya telah setuju dengan syarat dan ketentuan yang berlaku.</p>
+              <div style="font-weight:700; font-family:'Segoe Script', cursive; font-size:1.1rem; color:#0f172a; margin-bottom:5px;">Miss Nova</div>
+              <div class="sign-name">Miss Nova<br><span style="font-size:0.55rem; color:#64748b; font-weight:normal;">VILLA MALIKA</span></div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- POPUP WHATSAPP MODAL -->
-  <div id="contactModal" class="modal">
-    <div class="modal-box">
-      <span class="close-modal" onclick="closeContactModal()">&times;</span>
-      <h3 style="margin-bottom:6px;">Reservasi Villa</h3>
-      <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:15px;">Silakan pilih kontak admin untuk cek ketersediaan tanggal:</p>
-
-      <a id="linkNova" href="#" target="_blank" class="contact-btn">
-        <span>Mrs. Nova (0813-1526-5266)</span>
-        <i class="fa-brands fa-whatsapp" style="color:#25D366; font-size:1.4rem;"></i>
-      </a>
-
-      <a id="linkAngky" href="#" target="_blank" class="contact-btn">
-        <span>Mr. Angky (0856-1118-866)</span>
-        <i class="fa-brands fa-whatsapp" style="color:#25D366; font-size:1.4rem;"></i>
-      </a>
-    </div>
-  </div>
-
-  <!-- POPUP PREVIEW BROSUR & SHARE MODAL (BROSUR BARU) -->
-  <div id="shareModal" class="modal">
-    <div class="modal-box">
-      <span class="close-modal" onclick="closeShareModal()">&times;</span>
-      <h3 style="font-size: 1.1rem; color: var(--navy-dark);">Brosur Villa Malika</h3>
-      
-      <img src="flayer villa 1 copy.jpg" alt="Brosur Villa Malika" class="brochure-img-preview">
-      
-      <div class="share-action-btns">
-        <button class="btn-share-action btn-copy-link" onclick="copyWebLink()">
-          <i class="fa-regular fa-copy"></i> Salin Link
-        </button>
-        <a href="flayer villa 1 copy.jpg" download="Brosur-Villa-Malika.jpg" class="btn-share-action btn-download-img">
-          <i class="fa-solid fa-download"></i> Unduh Foto
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // 1. AUTOMATIC HERO SLIDESHOW LOGIC
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-
-    function nextSlide() {
-      slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
-    }
-    setInterval(nextSlide, 4000);
-
-    // 2. TAB SWITCHING LOGIC (DEFAULT VILLA 3)
-    let currentVillaName = 'Villa Malika 3';
-
-    function switchVilla(villaId, startingPrice) {
-      document.querySelectorAll('.villa-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-chip').forEach(el => el.classList.remove('active'));
-
-      document.getElementById(villaId).classList.add('active');
-      event.currentTarget.classList.add('active');
-
-      document.getElementById('displayPrice').innerText = startingPrice;
-
-      if(villaId === 'villa3') currentVillaName = 'Villa Malika 3';
-      if(villaId === 'villa2') currentVillaName = 'Villa Malika 2';
-      if(villaId === 'villa1') currentVillaName = 'Villa Malika 1';
+    function doLogin() {
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      if(u === 'admin' && p === 'villamalika123') {
+        localStorage.setItem('vm_admin', 'true');
+        showDashboard();
+      } else {
+        alert('Username atau Password salah!');
+      }
     }
 
-    // 3. WHATSAPP MODAL LOGIC
-    function openContactModal() {
-      const msg = `Halo, saya tertarik untuk melakukan booking ${currentVillaName}. Mohon informasi ketersediaan tanggal dan prosedurnya. Terima kasih!`;
-      const encodedMsg = encodeURIComponent(msg);
-
-      document.getElementById('linkNova').href = `https://wa.me/6281315265266?text=${encodedMsg}`;
-      document.getElementById('linkAngky').href = `https://wa.me/628561118866?text=${encodedMsg}`;
-
-      document.getElementById('contactModal').classList.add('show');
+    function doLogout() {
+      localStorage.removeItem('vm_admin');
+      location.reload();
     }
 
-    function closeContactModal() {
-      document.getElementById('contactModal').classList.remove('show');
+    function showDashboard() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboardApp').style.display = 'block';
+      renderInvoice();
     }
 
-    // 4. BROCHURE & LINK SHARE LOGIC (BROSUR BARU)
-    async function shareBrochure() {
-      const shareData = {
-        title: 'Villa Malika - Private Villa Collection',
-        text: 'Dapatkan penawaran dan brosur sewa Villa Malika Cisarua, Bogor:',
-        url: window.location.href
-      };
+    if(localStorage.getItem('vm_admin') === 'true') {
+      showDashboard();
+    }
 
-      if (navigator.canShare && navigator.canShare({ files: [new File([], '')] })) {
-        try {
-          const response = await fetch('flayer villa 1 copy.jpg');
-          const blob = await response.blob();
-          const file = new File([blob], 'Brosur-Villa-Malika.jpg', { type: blob.type });
+    function addItemRow() {
+      const tbody = document.getElementById('inputItemsBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" class="item-desc" value="Lain-lain" oninput="renderInvoice()"></td>
+        <td><input type="number" class="item-qty" value="1" oninput="renderInvoice()"></td>
+        <td><input type="number" class="item-price" value="0" oninput="renderInvoice()"></td>
+      `;
+      tbody.appendChild(tr);
+      renderInvoice();
+    }
 
-          await navigator.share({
-            title: shareData.title,
-            text: shareData.text,
-            url: shareData.url,
-            files: [file]
-          });
-          return;
-        } catch (err) {
-          console.log('Fallback to share modal:', err);
-        }
+    function formatRupiah(num) {
+      return new Intl.NumberFormat('id-ID').format(num);
+    }
+
+    function renderInvoice() {
+      document.getElementById('outNo').innerText = document.getElementById('inNo').value;
+      document.getElementById('outNama').innerText = document.getElementById('inNama').value;
+      document.getElementById('outTanggal').innerText = document.getElementById('inTanggal').value;
+      document.getElementById('outTempo').innerText = document.getElementById('inTempo').value;
+
+      const descs = document.querySelectorAll('.item-desc');
+      const qtys = document.querySelectorAll('.item-qty');
+      const prices = document.querySelectorAll('.item-price');
+
+      const outBody = document.getElementById('outItemsBody');
+      outBody.innerHTML = '';
+
+      let grandTotal = 0;
+
+      for(let i=0; i<descs.length; i++) {
+        const q = parseFloat(qtys[i].value) || 0;
+        const p = parseFloat(prices[i].value) || 0;
+        const tot = q * p;
+        grandTotal += tot;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="text-center">${i+1}</td>
+          <td>${descs[i].value}</td>
+          <td class="text-center">${q}</td>
+          <td class="text-right">${p ? formatRupiah(p) : '-'}</td>
+          <td class="text-right">${tot ? formatRupiah(tot) : '-'}</td>
+        `;
+        outBody.appendChild(row);
       }
 
-      document.getElementById('shareModal').classList.add('show');
-    }
+      const dp = parseFloat(document.getElementById('inDp').value) || 0;
+      const sisa = grandTotal - dp;
 
-    function copyWebLink() {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Link website berhasil disalin!');
-    }
-
-    function closeShareModal() {
-      document.getElementById('shareModal').classList.remove('show');
-    }
-
-    // CLOSE MODALS WHEN CLICKING OUTSIDE
-    window.onclick = function(event) {
-      const contactModal = document.getElementById('contactModal');
-      const shareModal = document.getElementById('shareModal');
-      if (event.target === contactModal) closeContactModal();
-      if (event.target === shareModal) closeShareModal();
+      document.getElementById('outGrandTotal').innerText = 'Rp ' + formatRupiah(grandTotal);
+      document.getElementById('outDp').innerText = 'Rp ' + formatRupiah(dp);
+      document.getElementById('outSisa').innerText = 'Rp ' + formatRupiah(sisa);
     }
   </script>
 </body>
