@@ -1,26 +1,10 @@
-<!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
-<title>Invoice Villa Malika</title>
-<style>
-:root{--navy:#101827;--panel:#202c40;--gold:#d5a43c;--cream:#fffaf0;--ink:#171717;--muted:#718096;--line:#d6d6d6}
-*{box-sizing:border-box}body{margin:0;background:var(--navy);font-family:Arial,Helvetica,sans-serif;color:#edf2f7}
-
-/* LOGIN SCREEN STYLE */
-#loginScreen{max-width:380px;margin:80px auto;background:var(--panel);padding:32px 24px;border-radius:20px;box-shadow:0 10px 30px #0005;border:1px solid #344155;text-align:center}
-#loginScreen h2{color:#f2c34f;margin:0 0 20px;font-size:22px}
-.login-field{margin-bottom:16px;text-align:left}
-.login-field label{display:block;color:#a9bfd8;font-size:13px;margin-bottom:6px}
 .login-field input{width:100%;background:#101827;border:1px solid #3c4b61;color:white;border-radius:9px;padding:11px 12px;font:inherit}
 .login-field input:focus{outline:2px solid #e3b64f;border-color:transparent}
 .btn-login{width:100%;background:#f2c34f;color:#101827;border:0;border-radius:9px;padding:12px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:8px}
-
+ 
 /* GENERATOR INVOICE APP STYLE */
 #mainApp{display:none}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 3%;border-bottom:1px solid #344155}
+.topbar{flex-wrap:wrap;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 3%;border-bottom:1px solid #344155}
 .topbar h1{font-size:clamp(19px,2.2vw,30px);color:#f2c34f;margin:0}.topbar button,.btn{border:0;border-radius:9px;padding:12px 16px;font-weight:700;cursor:pointer}
 .logout{background:#ed4444;color:white}
 .app{display:grid;grid-template-columns:minmax(320px,500px) minmax(480px,1fr);gap:28px;padding:28px 3%;align-items:start}
@@ -70,6 +54,14 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
 #pdfLoadingText{font-size:18px;font-weight:700;color:#f2c34f}
 #pdfLoading small{color:#a9bfd8;font-size:13px}
 .print:disabled{opacity:.6;cursor:wait}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs button{background:#394960;color:white}.tabs button.active{background:#f2c34f;color:#101827}
+.badgeRow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-8px 0 16px}#editBadge{font-size:13px;color:#f4c95e;font-weight:700}
+.btn.sm{padding:6px 10px;font-size:12px;margin-right:6px}
+.infobox{border:1px solid #3c4b61;border-radius:10px;padding:14px;color:#dce6f3;font-size:13px;line-height:1.7;margin-bottom:12px}
+.hist{width:100%;border-collapse:collapse;font-size:13px}.hist th,.hist td{padding:10px 8px;border-bottom:1px solid #344155;text-align:left;white-space:nowrap}.hist th{color:#a9bfd8}
+input[type=date]{color-scheme:dark}
+.stamp{display:none;position:absolute;top:26px;right:34px;transform:rotate(-12deg);border:5px double #d12b2b;color:#d12b2b;font-weight:900;font-size:34px;font-family:Arial,sans-serif;letter-spacing:6px;padding:4px 18px;border-radius:10px;opacity:.85;pointer-events:none}
+@media(max-width:560px){.stamp{font-size:22px;top:16px;right:12px;border-width:3px;padding:2px 10px;letter-spacing:3px}}
 @media(max-width:1000px){.app{grid-template-columns:1fr}.preview-wrap{padding:12px}.invoice{max-width:794px}}
 @media(max-width:560px){.app{padding:14px 10px;gap:14px}.editor{padding:16px}.grid2{grid-template-columns:1fr}.items-head,.item-row{grid-template-columns:minmax(85px,1.4fr) 42px minmax(72px,1fr) 28px;gap:5px}.preview-wrap{padding:6px}.paper{padding:18px 13px;margin-left:2%;margin-right:2%;border-radius:20px}.meta{font-size:11px}.detail-table{font-size:10px}.detail-table th{font-size:9px;padding:8px 3px}.detail-table td{padding:7px 4px}.summary{width:100%;min-width:0}.payrow{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.sign{border-left:0;border-top:1px solid #eed9a6;padding:16px 0}.invoice-header{height:190px}}
 @page{size:A4;margin:0}
@@ -79,7 +71,7 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
 </style>
 </head>
 <body>
-
+ 
 <!-- FORM LOGIN ADMIN -->
 <div id="loginScreen">
   <h2>🔒 Admin Villa Malika</h2>
@@ -95,29 +87,31 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
     <button class="btn-login" type="submit">Masuk Dashboard</button>
   </form>
 </div>
-
+ 
 <!-- APP GENERATOR INVOICE -->
 <div id="mainApp">
   <header class="topbar">
     <h1>▤ Generator Invoice Villa Malika</h1>
-    <button class="logout" type="button" id="logoutBtn">🚪 Logout Admin</button>
+    <nav class="tabs"><button type="button" data-tab="invoice" class="active">🧾 Invoice</button><button type="button" data-tab="receipt">✅ Kwitansi</button><button type="button" data-tab="history">📋 Riwayat</button></nav>
+    <button class="logout" type="button" id="logoutBtn">🚪 Logout</button>
   </header>
-  <main class="app">
-    <section class="editor">
+  <main class="app" id="viewApp">
+    <section class="editor" id="edInvoice">
       <h2>Input Data Invoice</h2>
-      <div class="field"><label for="invNo">No. Invoice</label><input id="invNo" value="VM-01234"></div>
-      <div class="field"><label for="customer">Nama Pemesan</label><input id="customer" value="Cahaya Dewi"></div>
+  <div class="badgeRow"><span id="editBadge"></span><button class="btn secondary sm" id="newInvBtn" type="button">＋ Invoice Baru</button></div>
+      <div class="field"><label for="invNo">No. Invoice</label><input id="invNo" value="" placeholder="Otomatis saat disimpan" readonly></div>
+      <div class="field"><label for="customer">Nama Pemesan</label><input id="customer" placeholder="Nama lengkap pemesan"></div>
       <div class="grid2">
-        <div class="field"><label for="invDate">Tanggal Invoice</label><input id="invDate" value="25 Agustus 2026"></div>
-        <div class="field"><label for="dueDate">Jatuh Tempo (opsional)</label><input id="dueDate" value=""></div>
+        <div class="field"><label for="invDate">Tanggal Invoice</label><input id="invDate" type="date"></div>
+        <div class="field"><label for="dueDate">Jatuh Tempo (opsional)</label><input id="dueDate" type="date"></div>
       </div>
       <div class="grid2">
         <div class="field"><label for="unit">Unit Villa</label><input id="unit" value="Villa 1"></div>
-        <div class="field"><label for="duration">Waktu Sewa</label><input id="duration" value="Hari 2"></div>
+        <div class="field"><label for="duration">Waktu Sewa</label><input id="duration" value=""></div>
       </div>
       <div class="grid2">
-        <div class="field"><label for="checkin">Tanggal Check-in</label><input id="checkin" value="Minggu, 2 Juni 2026"></div>
-        <div class="field"><label for="checkout">Tanggal Check-out (opsional)</label><input id="checkout" value=""></div>
+        <div class="field"><label for="checkin">Tanggal Check-in</label><input id="checkin" type="date"></div>
+        <div class="field"><label for="checkout">Tanggal Check-out (opsional)</label><input id="checkout" type="date"></div>
       </div>
       <h3>Rincian Item</h3>
       <div class="items-head"><span>Deskripsi</span><span>Qty</span><span>Harga (Rp)</span><span></span></div>
@@ -137,36 +131,47 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
         <strong>Ketentuan booking:</strong> DP minimal 50%; pelunasan H-1; reschedule maksimal H-7; first pay first book; transfer antarbank real-time online/BI Fast.<br>
         <strong>Penanggung jawab:</strong> Miss Nova
       </div>
-      <button class="btn print" type="button" id="pdfBtn">▣ Download PDF Invoice</button>
-      <p style="color:#9fb0c6;font-size:12px;line-height:1.5">PDF langsung terunduh dengan nama “INVOICE VILLA MALIKA + nama pemesan”. Pastikan nilai DP sesuai pembayaran aktual.</p>
+      <button class="btn print" type="button" id="pdfBtn">💾 Simpan ke Database &amp; Download PDF</button>
+      <p style="color:#9fb0c6;font-size:12px;line-height:1.5">Klik tombol hijau: data tersimpan ke spreadsheet (nomor invoice otomatis), lalu PDF terunduh. Untuk revisi, buka dari tab Riwayat → Revisi (nomor tetap).</p>
     </section>
-
+ 
+    <section class="editor" id="edReceipt" style="display:none">
+      <h2>Buat Kwitansi Lunas</h2>
+      <div class="field"><label for="rcpSearch">Cari invoice (nomor / nama)</label><input id="rcpSearch" placeholder="mis. VM-0003 atau Cahaya"></div>
+      <div class="field"><label for="rcpSelect">Pilih invoice</label><select id="rcpSelect" size="6"></select></div>
+      <div class="field"><label for="rcpDate">Tanggal Pelunasan</label><input type="date" id="rcpDate"></div>
+      <div class="infobox" id="rcpInfo">Pilih invoice dari daftar di atas.</div>
+      <button class="btn print" type="button" id="rcpBtn">✅ Simpan Lunas &amp; Download Kwitansi PDF</button>
+    </section>
+ 
     <section class="preview-wrap">
       <article class="invoice" id="invoice">
         <div class="invoice-header" id="invoiceHeader">
           <div class="brand-overlay"><div class="brand">VILLA MALIKA</div><div class="sub">VILLA &amp; RESORT</div></div>
         </div>
         <div class="paper">
+          <div class="stamp" id="stamp">LUNAS</div>
           <h1 class="invoice-title">INVOICE</h1><div class="title-sub">— VILLA MALIKA</div>
           <div class="meta">
-            <div><strong>NOTA PEMBAYARAN</strong><br>No. Invoice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvNo">VM-01234</span><br>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvDate">25 Agustus 2026</span><br><span id="dueLine" style="display:none">Jatuh Tempo&nbsp;&nbsp;: <span id="pDue"></span><br></span><span id="checkoutLine" style="display:none">Check-out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckout"></span></span></div>
+            <div><strong id="metaTitle">NOTA PEMBAYARAN</strong><br>No. Invoice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvNo">VM-01234</span><br>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvDate">25 Agustus 2026</span><br><span id="dueLine" style="display:none"><span id="dueLbl">Jatuh Tempo&nbsp;&nbsp;</span>: <span id="pDue"></span><br></span><span id="checkoutLine" style="display:none">Check-out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckout"></span></span></div>
             <div class="customer"><strong>NAMA PEMESAN</strong><br><span id="pCustomer">Cahaya Dewi</span></div>
           </div>
           <table class="detail-table"><thead><tr><th style="width:8%">NO</th><th>DESKRIPSI</th><th style="width:10%">QTY</th><th style="width:20%">HARGA SATUAN</th><th style="width:20%">TOTAL</th></tr></thead><tbody id="pItems"></tbody></table>
           <div class="payrow">
-            <div class="bank"><h3>Rekening Pembayaran</h3><div class="bank-content"><div class="bca" id="pBankName">BCA</div><div style="border-left:1px solid #bbb;padding-left:12px"><div class="bank-no" id="pAccount">1080792880</div><div class="bank-name">A/n <span id="pAccountName">Nursilfiah</span></div></div></div></div>
+            <div class="bank" id="bankBox"><h3>Rekening Pembayaran</h3><div class="bank-content"><div class="bca" id="pBankName">BCA</div><div style="border-left:1px solid #bbb;padding-left:12px"><div class="bank-no" id="pAccount">1080792880</div><div class="bank-name">A/n <span id="pAccountName">Nursilfiah</span></div></div></div></div>
+          <div class="bank" id="recvBox" style="display:none"><h3>Diterima Dari</h3><div class="bank-no" id="rcvName"></div><div class="bank-name" id="rcvFor"></div></div>
           <div class="summary">
             <div class="sumrow total"><span>TOTAL PEMBAYARAN</span><strong id="pTotal">Rp3.300.000</strong></div>
-            <div class="sumrow"><span><b>DP</b></span><strong id="pDP">Rp1.650.000</strong></div>
-            <div class="sumrow"><span><b>SISA PEMBAYARAN</b></span><strong id="pBalance">Rp1.650.000</strong></div>
+            <div class="sumrow"><span id="lblDP"><b>DP</b> (Minimal 50%)</span><strong id="pDP">Rp1.650.000</strong></div>
+            <div class="sumrow"><span id="lblBal"><b>SISA PEMBAYARAN</b></span><strong id="pBalance">Rp1.650.000</strong></div>
           </div>
           </div>
           <div class="lower">
             <div>
-              <div class="terms"><h3>● &nbsp; KETENTUAN BOOKING &nbsp; ●</h3><ol id="pTerms"></ol></div>
+              <div class="terms"><h3 id="termsTitle">● &nbsp; KETENTUAN BOOKING &nbsp; ●</h3><ol id="pTerms"></ol></div>
             </div>
             <div class="sign">
-              <div class="sign-note">Saya telah setuju dengan syarat dan ketentuan yang berlaku.<br>Terima kasih telah menginap dan berkunjung di villa kami.</div>
+              <div class="sign-note" id="signNote">Saya telah setuju dengan syarat dan ketentuan yang berlaku.<br>Terima kasih telah menginap dan berkunjung di villa kami.</div>
               <!-- Tanda tangan: file 'TTD NOVA.png' di folder yang sama dengan index.html -->
               <img class="signature-img" alt="Tanda tangan Miss Nova" src="TTD%20NOVA.png" onerror="this.style.visibility='hidden'">
               <div class="sign-line"></div>
@@ -179,122 +184,281 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
       </article>
     </section>
   </main>
+  <section id="viewHistory" style="display:none">
+    <div class="editor" style="margin:28px 3%">
+      <h2>Riwayat Invoice</h2>
+      <div class="field"><input id="histSearch" placeholder="Cari nomor atau nama..."></div>
+      <div style="overflow:auto"><table class="hist"><thead><tr><th>No</th><th>Nama</th><th>Check-in</th><th>Total</th><th>Sisa</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="histBody"></tbody></table></div>
+    </div>
+  </section>
 </div>
-
+ 
 <div id="pdfLoading" role="status" aria-live="polite">
   <div class="spinner"></div>
   <div id="pdfLoadingText">Membuat PDF...</div>
   <small>Mohon tunggu, jangan tutup halaman ini</small>
 </div>
-
+ 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 /* HELPER (harus dideklarasikan paling awal) */
 const $ = id => document.getElementById(id);
 const money = n => 'Rp' + Math.round(Number(n) || 0).toLocaleString('id-ID');
-
-/* LOGIN LOGIC */
-function checkLogin() {
-  const u = $('adminUser').value.trim();
-  const p = $('adminPass').value.trim();
-  if (u === 'admin' && p === 'villamalika123') {
-    try { localStorage.setItem('vm_admin_logged', 'true'); } catch (e) {}
-    openMainApp();
-  } else {
-    alert('Username atau Password yang kamu masukkan salah!');
+ 
+/* ===== KONFIGURASI ===== */
+const API_URL = 'PASTE_URL_WEB_APP_APPS_SCRIPT_DI_SINI';
+let TOKEN = '', invoices = [], mode = 'invoice', editingNo = '', paidISO = '';
+const safeName = n => (n || 'PEMESAN').replace(/[\\/:*?"<>|]/g, ' ').replace(/\s+/g, ' ').trim();
+ 
+async function api(action, data) {
+  if (!/^https:\/\//.test(API_URL)) throw new Error('API_URL di admin.html belum diisi.');
+  const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ action, token: TOKEN }, data || {})) });
+  const j = await res.json();
+  if (!j.ok) {
+    if (j.error === 'unauthorized') { alert('Sesi habis, silakan login lagi.'); doLogout(); }
+    throw new Error(j.error || 'Terjadi kesalahan');
   }
+  return j;
 }
-
+ 
+/* ===== TANGGAL ===== */
+const HARI = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+const BULAN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+function parseISO(s) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
+function fmtDate(s) { const d = parseISO(s); return d ? HARI[d.getDay()] + ', ' + d.getDate() + ' ' + BULAN[d.getMonth()] + ' ' + d.getFullYear() : ''; }
+function toISO(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function addDays(iso, n) { const d = parseISO(iso) || new Date(); d.setDate(d.getDate() + n); return toISO(d); }
+function autoDuration() {
+  const a = parseISO($('checkin').value), b = parseISO($('checkout').value);
+  if (a && b && b > a) $('duration').value = Math.round((b - a) / 864e5) + ' Malam';
+  syncFirstItem();
+}
+function syncFirstItem() {
+  const d = document.querySelector('.item-row .desc');
+  if (d) d.value = ($('unit').value + ' (' + $('duration').value + ')').trim();
+}
+ 
+/* ===== FORM ===== */
+function createRow(d, q, p) {
+  const row = document.createElement('div');
+  row.className = 'item-row';
+  row.innerHTML = '<input aria-label="Deskripsi" class="desc"><input aria-label="Qty" type="number" min="0" class="qty"><input aria-label="Harga" type="number" min="0" class="price"><button class="remove" type="button" title="Hapus item">×</button>';
+  row.querySelector('.desc').value = d; row.querySelector('.qty').value = q; row.querySelector('.price').value = p;
+  row.querySelectorAll('input').forEach(el => el.addEventListener('input', render));
+  $('items').appendChild(row);
+}
+function rebuildItems(list) { $('items').innerHTML = ''; list.forEach(i => createRow(i.desc, i.qty, i.price)); wireRemove(); }
+function collect() {
+  return {
+    no: $('invNo').value, name: $('customer').value.trim(), invDate: $('invDate').value, dueDate: $('dueDate').value,
+    unit: $('unit').value, duration: $('duration').value, checkin: $('checkin').value, checkout: $('checkout').value,
+    dp: Number($('dp').value) || 0,
+    items: [...document.querySelectorAll('.item-row')].map(r => ({ desc: r.querySelector('.desc').value, qty: Number(r.querySelector('.qty').value) || 0, price: Number(r.querySelector('.price').value) || 0 }))
+  };
+}
+function loadInvoice(v) {
+  $('invNo').value = v.no; $('customer').value = v.name; $('invDate').value = v.invDate; $('dueDate').value = v.dueDate;
+  $('unit').value = v.unit; $('duration').value = v.duration; $('checkin').value = v.checkin; $('checkout').value = v.checkout;
+  $('dp').value = v.dp; rebuildItems(v.items);
+}
+function setBadge() { $('editBadge').textContent = editingNo ? '✏️ Revisi: ' + editingNo : '🆕 Invoice baru'; }
+function resetForm() {
+  editingNo = ''; paidISO = ''; $('invNo').value = ''; $('customer').value = '';
+  const t = toISO(new Date());
+  $('invDate').value = t; $('dueDate').value = ''; $('checkin').value = t; $('checkout').value = addDays(t, 1);
+  $('unit').value = 'Villa 1'; $('duration').value = '';
+  rebuildItems([{ desc: '', qty: 1, price: 0 }, { desc: 'Extra Bed', qty: 0, price: 250000 }, { desc: 'Catering', qty: 0, price: 75000 }, { desc: 'Lain-lain', qty: 0, price: 0 }]);
+  autoDuration(); $('dp').value = 0; setBadge(); render();
+}
+ 
+/* ===== LOGIN (diverifikasi di server) ===== */
+async function checkLogin() {
+  const u = $('adminUser').value.trim(), p = $('adminPass').value;
+  if (!u || !p) { alert('Isi username dan password.'); return; }
+  setLoading(true, 'Memeriksa login...');
+  try {
+    const r = await api('login', { user: u, pass: p });
+    TOKEN = r.token;
+    try { localStorage.setItem('vm_token', TOKEN); } catch (e) {}
+    await openMainApp();
+  } catch (e) { alert(e.message); }
+  finally { setLoading(false); }
+}
 function doLogout() {
-  try { localStorage.removeItem('vm_admin_logged'); } catch (e) {}
+  try { localStorage.removeItem('vm_token'); } catch (e) {}
   location.reload();
 }
-
-function openMainApp() {
+async function openMainApp() {
   $('loginScreen').style.display = 'none';
   $('mainApp').style.display = 'block';
-  render();
+  showTab('invoice');
+  try { await refreshList(); } catch (e) { if (e.message !== 'unauthorized') alert('Gagal memuat data: ' + e.message); }
 }
-
-/* RENDER INVOICE */
+async function refreshList() { const r = await api('list'); invoices = r.invoices; renderHistory(); fillReceiptSelect(); }
+ 
+/* ===== TAB ===== */
+function showTab(t) {
+  document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
+  const hist = t === 'history';
+  $('viewApp').style.display = hist ? 'none' : '';
+  $('viewHistory').style.display = hist ? 'block' : 'none';
+  if (hist) { renderHistory(); return; }
+  mode = t === 'receipt' ? 'receipt' : 'invoice';
+  $('edInvoice').style.display = mode === 'invoice' ? '' : 'none';
+  $('edReceipt').style.display = mode === 'receipt' ? '' : 'none';
+  if (mode === 'receipt') { if (!$('rcpDate').value) $('rcpDate').value = toISO(new Date()); paidISO = $('rcpDate').value; fillReceiptSelect(); }
+  setBadge(); render();
+}
+function mkBtn(txt, fn) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn secondary sm'; b.textContent = txt; b.onclick = fn; return b; }
+const totalOf = v => v.items.reduce((a, i) => a + i.qty * i.price, 0);
+function renderHistory() {
+  const q = $('histSearch').value.toLowerCase(), tb = $('histBody');
+  tb.innerHTML = '';
+  invoices.filter(i => (i.no + ' ' + i.name).toLowerCase().includes(q)).forEach(i => {
+    const tr = document.createElement('tr');
+    [i.no, i.name, fmtDate(i.checkin), money(i.total), money(Math.max(0, i.total - i.dp)), i.status].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+    const td = document.createElement('td');
+    td.appendChild(mkBtn('Revisi', () => { loadInvoice(i); editingNo = i.no; showTab('invoice'); }));
+    td.appendChild(mkBtn('Kwitansi', () => { showTab('receipt'); $('rcpSearch').value = ''; fillReceiptSelect(); pickReceipt(i.no); }));
+    tr.appendChild(td); tb.appendChild(tr);
+  });
+}
+ 
+/* ===== SIMPAN INVOICE ===== */
+async function onSaveInvoice() {
+  const inv = collect();
+  if (!inv.name) { alert('Isi Nama Pemesan dulu.'); return; }
+  if (!inv.items.some(i => i.qty * i.price > 0)) { alert('Isi minimal 1 item dengan qty dan harga.'); return; }
+  const btn = $('pdfBtn'); btn.disabled = true;
+  try {
+    setLoading(true, 'Menyimpan ke database...');
+    const r = await api('save', { invoice: inv, no: editingNo });
+    editingNo = r.invoice.no; $('invNo').value = editingNo; setBadge();
+    await refreshList();
+    await downloadPdf('INVOICE VILLA MALIKA ' + safeName(inv.name) + '.pdf');
+  } catch (e) { alert('Gagal menyimpan: ' + e.message); }
+  finally { setLoading(false); btn.disabled = false; }
+}
+ 
+/* ===== KWITANSI ===== */
+function fillReceiptSelect() {
+  const q = $('rcpSearch').value.toLowerCase(), sel = $('rcpSelect');
+  sel.innerHTML = '';
+  invoices.filter(i => (i.no + ' ' + i.name).toLowerCase().includes(q)).forEach(i => {
+    const o = document.createElement('option');
+    o.value = i.no;
+    o.textContent = i.no + ' · ' + i.name + ' · ' + (i.status === 'LUNAS' ? '✓ LUNAS' : 'sisa ' + money(Math.max(0, i.total - i.dp)));
+    sel.appendChild(o);
+  });
+  if (editingNo) sel.value = editingNo;
+}
+function pickReceipt(no) {
+  const v = invoices.find(i => i.no === no);
+  if (!v) return;
+  loadInvoice(v); editingNo = no; $('rcpSelect').value = no;
+  if (v.paidDate) $('rcpDate').value = v.paidDate;
+  $('rcpDate').disabled = v.status === 'LUNAS';
+  paidISO = $('rcpDate').value;
+  $('rcpInfo').textContent = v.no + ' · ' + v.name + ' | Total ' + money(v.total) + ' | DP ' + money(v.dp) + ' | Sisa ' + money(Math.max(0, v.total - v.dp)) + ' | Status: ' + v.status;
+  setBadge(); render();
+}
+async function onSaveReceipt() {
+  if (!editingNo) { alert('Pilih invoice dulu.'); return; }
+  const v = invoices.find(i => i.no === editingNo), btn = $('rcpBtn');
+  btn.disabled = true;
+  try {
+    setLoading(true, 'Menyimpan pelunasan...');
+    const r = await api('receipt', { no: editingNo, paidDate: $('rcpDate').value });
+    paidISO = r.invoice.paidDate; await refreshList(); pickReceipt(editingNo);
+    await downloadPdf('KWITANSI VILLA MALIKA ' + safeName(v ? v.name : $('customer').value) + '.pdf');
+  } catch (e) { alert('Gagal menyimpan: ' + e.message); }
+  finally { setLoading(false); btn.disabled = false; }
+}
+ 
+/* RENDER INVOICE / KWITANSI */
 function render() {
-  $('pInvNo').textContent = $('invNo').value;
-  $('pCustomer').textContent = $('customer').value;
-  $('pInvDate').textContent = $('invDate').value;
-  $('pDue').textContent = $('dueDate').value;
-  $('dueLine').style.display = $('dueDate').value.trim() ? 'inline' : 'none';
-  $('pCheckout').textContent = $('checkout').value;
-  $('checkoutLine').style.display = $('checkout').value.trim() ? 'inline' : 'none';
+  const rc = mode === 'receipt' && !!editingNo;
+  const inv = collect();
+  $('pInvNo').textContent = inv.no || '(otomatis)';
+  $('pCustomer').textContent = inv.name;
+  $('pInvDate').textContent = fmtDate(inv.invDate);
+  const due = rc ? paidISO : inv.dueDate;
+  $('dueLbl').innerHTML = rc ? 'Tgl Lunas&nbsp;&nbsp;&nbsp;&nbsp;' : 'Jatuh Tempo&nbsp;&nbsp;';
+  $('pDue').textContent = fmtDate(due);
+  $('dueLine').style.display = due ? 'inline' : 'none';
+  $('pCheckout').textContent = fmtDate(inv.checkout);
+  $('checkoutLine').style.display = inv.checkout ? 'inline' : 'none';
   $('pBankName').textContent = 'BCA';
   $('pAccount').textContent = '1080792880';
   $('pAccountName').textContent = 'Nursilfiah';
-
+ 
+  document.querySelector('.invoice-title').textContent = rc ? 'KWITANSI' : 'INVOICE';
+  $('metaTitle').textContent = rc ? 'BUKTI PEMBAYARAN' : 'NOTA PEMBAYARAN';
+  $('stamp').style.display = rc ? 'block' : 'none';
+  $('bankBox').style.display = rc ? 'none' : 'flex';
+  $('recvBox').style.display = rc ? 'flex' : 'none';
+  $('rcvName').textContent = inv.name;
+  $('rcvFor').textContent = 'Pembayaran: ' + (inv.items[0] ? inv.items[0].desc : '');
+  $('lblDP').innerHTML = rc ? '<b>DP</b> (Terbayar)' : '<b>DP</b> (Minimal 50%)';
+  $('lblBal').innerHTML = rc ? '<b>PELUNASAN</b>' : '<b>SISA PEMBAYARAN</b>';
+  $('signNote').innerHTML = (rc ? 'Pembayaran telah diterima dengan baik.' : 'Saya telah setuju dengan syarat dan ketentuan yang berlaku.') + '<br>Terima kasih telah menginap dan berkunjung di villa kami.';
+  $('termsTitle').textContent = rc ? '● \u00a0 KETERANGAN \u00a0 ●' : '● \u00a0 KETENTUAN BOOKING \u00a0 ●';
+ 
   const tbody = $('pItems');
   tbody.innerHTML = '';
-  let total = 0;
-  [...document.querySelectorAll('.item-row')].forEach((row, i) => {
-    const desc = row.querySelector('.desc').value;
-    const qty = Math.max(0, Number(row.querySelector('.qty').value) || 0);
-    const price = Math.max(0, Number(row.querySelector('.price').value) || 0);
-    const sub = qty * price;
-    total += sub;
+  inv.items.forEach((it, i) => {
+    const sub = it.qty * it.price;
     const tr = document.createElement('tr');
-    const values = [String(i + 1), desc, qty ? qty : '-', price ? money(price) : '-', sub ? money(sub) : '-'];
-    values.forEach((v, j) => {
+    [String(i + 1), it.desc, it.qty ? it.qty : '-', it.price ? money(it.price) : '-', sub ? money(sub) : '-'].forEach((v, j) => {
       const td = document.createElement('td');
       td.textContent = v;
-      if (j === 1 && desc.toLowerCase().includes('villa')) {
+      if (j === 1 && it.desc.toLowerCase().includes('villa')) {
         const small = document.createElement('span');
         small.className = 'subtext';
-        small.textContent = 'Check-in: ' + $('checkin').value;
+        small.textContent = 'Check-in: ' + fmtDate(inv.checkin);
         td.appendChild(small);
       }
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
   });
-
-  const dp = Math.max(0, Number($('dp').value) || 0);
+  const total = totalOf(inv);
   $('pTotal').textContent = money(total);
-  $('pDP').textContent = money(dp);
-  $('pBalance').textContent = money(Math.max(0, total - dp));
-
+  $('pDP').textContent = money(inv.dp);
+  $('pBalance').textContent = money(Math.max(0, total - inv.dp));
+ 
   const ol = $('pTerms');
   ol.innerHTML = '';
-  [
+  (rc ? ['Kwitansi ini adalah bukti pembayaran LUNAS untuk invoice ' + inv.no + '.', 'Mohon simpan kwitansi ini sebagai bukti pembayaran.'] : [
     'DP Minimal 50%',
     'Pelunasan H-1 (Jika H-1 belum pelunasan, bookingan otomatis tercancel & DP dianggap hangus)',
     'Mengajukan Reschedule maksimal 7 hari sebelum hari H. Jika melebihi H-7, DP hangus dengan alasan apa pun',
     'First pay first book (tidak bisa block tanggal kalau belum DP)',
     'Hanya menerima pembayaran melalui sistem transfer antar bank (real time online / BI Fast)'
-  ].forEach(t => {
-    const li = document.createElement('li');
-    li.textContent = t;
-    ol.appendChild(li);
-  });
-
+  ]).forEach(t => { const li = document.createElement('li'); li.textContent = t; ol.appendChild(li); });
+ 
   $('pContact').textContent = 'Jl. Pasir Tugu No.17, Cibeureum, Kec. Cisarua, Kabupaten Bogor, Jawa Barat 16750  |  +62 813-1526-5266';
 }
-
+ 
 /* EVENTS */
 $('loginForm').addEventListener('submit', e => { e.preventDefault(); checkLogin(); });
 $('logoutBtn').addEventListener('click', doLogout);
-
+ 
 document.querySelectorAll('.editor input, .editor textarea').forEach(el => el.addEventListener('input', render));
-
+ 
 function setPrintTitle() {
   const name = ($('customer').value || 'PEMESAN').trim().replace(/[\\/:*?"<>|]/g, ' ').replace(/\s+/g, ' ');
   document.title = 'Invoice Villa Malika ' + name;
 }
 window.addEventListener('beforeprint', setPrintTitle);
-
+ 
 function wireRemove() {
   document.querySelectorAll('.remove').forEach(btn => {
     btn.onclick = () => { btn.closest('.item-row').remove(); render(); };
   });
 }
-
+ 
 $('addItem').addEventListener('click', () => {
   const row = document.createElement('div');
   row.className = 'item-row';
@@ -304,10 +468,24 @@ $('addItem').addEventListener('click', () => {
   wireRemove();
   render();
 });
-
+ 
 wireRemove();
-render();
-
+resetForm();
+ 
+/* EVENT TAMBAHAN */
+document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+$('pdfBtn').addEventListener('click', onSaveInvoice);
+$('rcpBtn').addEventListener('click', onSaveReceipt);
+$('newInvBtn').addEventListener('click', () => { if (confirm('Kosongkan form dan buat invoice baru?')) resetForm(); });
+$('rcpSearch').addEventListener('input', fillReceiptSelect);
+$('rcpSelect').addEventListener('change', () => pickReceipt($('rcpSelect').value));
+$('rcpDate').addEventListener('input', () => { paidISO = $('rcpDate').value; render(); });
+$('histSearch').addEventListener('input', renderHistory);
+['unit', 'duration', 'checkin', 'checkout'].forEach(id => $(id).addEventListener('input', () => {
+  if (id === 'checkin' || id === 'checkout') autoDuration(); else syncFirstItem();
+  render();
+}));
+ 
 /* DOWNLOAD PDF LANGSUNG (tanpa dialog print) */
 const PDF_W = 794; // lebar A4 pada 96dpi
 function preload(src) {
@@ -318,37 +496,34 @@ function setLoading(on, msg) {
   if (msg) $('pdfLoadingText').textContent = msg;
 }
 const tick = ms => new Promise(r => setTimeout(r, ms));
-
-async function downloadPdf() {
-  const btn = $('pdfBtn');
-  if (btn.disabled) return;
+ 
+async function downloadPdf(fileName) {
   if (!window.html2canvas || !window.jspdf) {
     alert('Library PDF belum termuat. Periksa koneksi internet lalu coba lagi.');
-    return;
+    return false;
   }
-  btn.disabled = true;
-  setLoading(true, 'Menyiapkan invoice...');
-  let frame;
+  setLoading(true, 'Menyiapkan dokumen...');
+  let frame, ok = false;
   try {
     render();
     await tick(60);
     await Promise.all([preload('villa-header.jpg'), preload('TTD%20NOVA.png')]);
-
+ 
     // Render invoice di iframe lebar tetap 794px supaya hasil PDF selalu sama (desktop maupun HP)
     const css = document.querySelector('style').textContent;
     const html = '<!doctype html><html><head><meta charset="utf-8"><meta name="format-detection" content="telephone=no,address=no,email=no,date=no"><base href="' + document.baseURI + '"><style>' + css +
       'body{background:#fff!important;color:#171717}.invoice{width:' + PDF_W + 'px!important;max-width:none!important;margin:0!important;box-shadow:none!important}</style></head><body>' +
       $('invoice').outerHTML + '</body></html>';
-
+ 
     frame = document.createElement('iframe');
     frame.setAttribute('aria-hidden', 'true');
     frame.style.cssText = 'position:fixed;left:-10000px;top:0;width:' + PDF_W + 'px;height:1123px;border:0;pointer-events:none';
     await new Promise(res => { frame.onload = res; frame.srcdoc = html; document.body.appendChild(frame); });
-
+ 
     const doc = frame.contentDocument;
     await Promise.all([...doc.images].map(im => im.complete ? Promise.resolve() : new Promise(r => { im.onload = im.onerror = r; })));
     if (doc.fonts && doc.fonts.ready) await doc.fonts.ready;
-
+ 
     setLoading(true, 'Merender invoice...');
     await tick(50);
     const inv = doc.getElementById('invoice');
@@ -356,7 +531,7 @@ async function downloadPdf() {
       scale: 2, useCORS: true, backgroundColor: '#ffffff',
       width: PDF_W, windowWidth: PDF_W, scrollX: 0, scrollY: 0
     });
-
+ 
     setLoading(true, 'Menyusun PDF...');
     await tick(50);
     const { jsPDF } = window.jspdf;
@@ -381,24 +556,25 @@ async function downloadPdf() {
       pdf.addImage(part.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, Math.min(297, sliceH * 210 / canvas.width), undefined, 'FAST');
     }
     }
-
-    const name = ($('customer').value || 'PEMESAN').replace(/[\\/:*?"<>|]/g, ' ').replace(/\s+/g, ' ').trim();
-    pdf.save('INVOICE VILLA MALIKA ' + name + '.pdf');
+ 
+    pdf.save(fileName);
+    ok = true;
   } catch (err) {
     console.error(err);
     alert('Gagal membuat PDF. Pastikan halaman dibuka lewat GitHub Pages / server (bukan file lokal) dan file villa-header.jpg & TTD NOVA.png ada di folder yang sama.');
   } finally {
     if (frame && frame.parentNode) frame.parentNode.removeChild(frame);
     setLoading(false);
-    btn.disabled = false;
   }
+  return ok;
 }
-$('pdfBtn').addEventListener('click', downloadPdf);
-
+ 
 /* Cek status login saat halaman dibuka (di akhir, setelah semua fungsi siap) */
 try {
-  if (localStorage.getItem('vm_admin_logged') === 'true') openMainApp();
+  const t = localStorage.getItem('vm_token');
+  if (t) { TOKEN = t; openMainApp(); }
 } catch (e) {}
 </script>
 </body>
 </html>
+ 
