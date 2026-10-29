@@ -144,7 +144,7 @@ input[type=date]{color-scheme:dark}
         <strong>Rekening:</strong> BANK BCA · 1080792880 · A/n Nursilfiah<br>
         <strong>Alamat:</strong> Jl. Pasir Tugu No.17, Cibeureum, Kec. Cisarua, Kabupaten Bogor, Jawa Barat 16750<br>
         <strong>Telepon:</strong> +62 813-1526-5266<br>
-        <strong>Ketentuan booking:</strong> DP minimal 50%; pelunasan H-1; reschedule maksimal H-7; first pay first book; transfer antarbank real-time online/BI Fast.<br>
+        <strong>Ketentuan booking:</strong> DP  50%; pelunasan H-1; reschedule maksimal H-7; first pay first book; transfer antarbank real-time online/BI Fast.<br>
         <strong>Penanggung jawab:</strong> Miss Nova
       </div>
       <button class="btn print" type="button" id="pdfBtn">💾 Simpan ke Database &amp; Download PDF</button>
@@ -345,7 +345,7 @@ function renderHistory() {
 async function onSaveInvoice() {
   const inv = collect();
   if (!inv.name) { alert('Isi Nama Pemesan dulu.'); return; }
-  if (!inv.items.some(i => i.qty * i.price > 0)) { alert('Isi minimal 1 item dengan qty dan harga.'); return; }
+  if (!inv.items.some(i => i.qty * i.price > 0)) { alert('Isi  1 item dengan qty dan harga.'); return; }
   const btn = $('pdfBtn'); btn.disabled = true;
   try {
     setLoading(true, 'Menyimpan ke database...');
@@ -418,7 +418,7 @@ function render() {
   $('recvBox').style.display = rc ? 'flex' : 'none';
   $('rcvName').textContent = inv.name;
   $('rcvFor').textContent = 'Pembayaran: ' + (inv.items[0] ? inv.items[0].desc : '');
-  $('lblDP').innerHTML = rc ? '<b>DP</b> (Terbayar)' : '<b>DP</b> (Minimal 50%)';
+  $('lblDP').innerHTML = rc ? '<b>DP</b> (Terbayar)' : '<b>DP</b>';
   $('lblBal').innerHTML = rc ? '<b>PELUNASAN</b>' : '<b>SISA PEMBAYARAN</b>';
   $('signNote').innerHTML = (rc ? 'Pembayaran telah diterima dengan baik.' : 'Saya telah setuju dengan syarat dan ketentuan yang berlaku.') + '<br>Terima kasih telah menginap dan berkunjung di villa kami.';
   $('termsTitle').textContent = rc ? '● \u00a0 KETERANGAN \u00a0 ●' : '● \u00a0 KETENTUAN BOOKING \u00a0 ●';
