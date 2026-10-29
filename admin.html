@@ -223,7 +223,7 @@ const $ = id => document.getElementById(id);
 const money = n => 'Rp' + Math.round(Number(n) || 0).toLocaleString('id-ID');
  
 /* ===== KONFIGURASI ===== */
-const API_URL = 'PASTE_URL_WEB_APP_APPS_SCRIPT_DI_SINI';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxu3_J0EL1z5MMOoPoYng7LFMCfnsywHSJlCA72XZTfP5-Wr945e5OgCZqIMK4wHSlcxw/exec';
 let TOKEN = '', invoices = [], mode = 'invoice', editingNo = '', paidISO = '';
 const safeName = n => (n || 'PEMESAN').replace(/[\\/:*?"<>|]/g, ' ').replace(/\s+/g, ' ').trim();
  
