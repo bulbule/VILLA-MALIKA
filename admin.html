@@ -169,7 +169,7 @@ input[type=date]{color-scheme:dark}
           <div class="stamp" id="stamp">LUNAS</div>
           <h1 class="invoice-title">INVOICE</h1><div class="title-sub">— VILLA MALIKA</div>
           <div class="meta">
-            <div><strong id="metaTitle">NOTA PEMBAYARAN</strong><br>No. Invoice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvNo">VM-01234</span><br>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvDate">25 Agustus 2026</span><br><span id="dueLine" style="display:none"><span id="dueLbl">Jatuh Tempo&nbsp;&nbsp;</span>: <span id="pDue"></span><br></span><span id="checkoutLine" style="display:none">Check-out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckout"></span></span></div>
+            <div><strong id="metaTitle">NOTA PEMBAYARAN</strong><br>No. Invoice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvNo">VM-01234</span><br>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvDate">25 Agustus 2026</span><br><span id="dueLine" style="display:none"><span id="dueLbl">Jatuh Tempo&nbsp;&nbsp;</span>: <span id="pDue"></span><br></span><span id="checkinLine" style="display:none">Check-in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckin"></span><br></span><span id="checkoutLine" style="display:none">Check-out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckout"></span></span></div>
             <div class="customer"><strong>NAMA PEMESAN</strong><br><span id="pCustomer">Cahaya Dewi</span></div>
           </div>
           <table class="detail-table"><thead><tr><th style="width:8%">NO</th><th>DESKRIPSI</th><th style="width:10%">QTY</th><th style="width:20%">HARGA SATUAN</th><th style="width:20%">TOTAL</th></tr></thead><tbody id="pItems"></tbody></table>
@@ -403,6 +403,8 @@ function render() {
   $('dueLbl').innerHTML = rc ? 'Tgl Lunas&nbsp;&nbsp;&nbsp;&nbsp;' : 'Jatuh Tempo&nbsp;&nbsp;';
   $('pDue').textContent = fmtDate(due);
   $('dueLine').style.display = due ? 'inline' : 'none';
+  $('pCheckin').textContent = fmtDate(inv.checkin);
+  $('checkinLine').style.display = inv.checkin ? 'inline' : 'none';
   $('pCheckout').textContent = fmtDate(inv.checkout);
   $('checkoutLine').style.display = inv.checkout ? 'inline' : 'none';
   $('pBankName').textContent = 'BCA';
@@ -429,12 +431,6 @@ function render() {
     [String(i + 1), it.desc, it.qty ? it.qty : '-', it.price ? money(it.price) : '-', sub ? money(sub) : '-'].forEach((v, j) => {
       const td = document.createElement('td');
       td.textContent = v;
-      if (j === 1 && it.desc.toLowerCase().includes('villa')) {
-        const small = document.createElement('span');
-        small.className = 'subtext';
-        small.textContent = 'Check-in: ' + fmtDate(inv.checkin);
-        td.appendChild(small);
-      }
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
