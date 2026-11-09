@@ -145,9 +145,9 @@
   <div class="main-container">
     <div class="section-header"><h2>Pilih Unit Villa</h2></div>
     <div class="villa-tabs">
-      <button class="tab-chip active" onclick="switchVilla('villa3', 'Rp5.000.000 / malam')">Villa Malika 3</button>
-      <button class="tab-chip" onclick="switchVilla('villa2', 'Rp3.000.000 / malam')">Villa Malika 2</button>
-      <button class="tab-chip" onclick="switchVilla('villa1', 'Rp3.000.000 / malam')">Villa Malika 1</button>
+      <button class="tab-chip active" onclick="switchVilla('villa3', 'Rp5.000.000 / malam', this)">Villa Malika 3</button>
+      <button class="tab-chip" onclick="switchVilla('villa2', 'Rp3.000.000 / malam', this)">Villa Malika 2</button>
+      <button class="tab-chip" onclick="switchVilla('villa1', 'Rp3.000.000 / malam', this)">Villa Malika 1</button>
     </div>
 
     <!-- VILLA 3 -->
@@ -307,11 +307,11 @@
     let currentVillaName = 'Villa Malika 3';
     updateWaLink();
 
-    function switchVilla(villaId, startingPrice) {
+    function switchVilla(villaId, startingPrice, btn) {
       document.querySelectorAll('.villa-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-chip').forEach(el => el.classList.remove('active'));
       document.getElementById(villaId).classList.add('active');
-      event.currentTarget.classList.add('active');
+      if (btn) btn.classList.add('active');
       document.getElementById('displayPrice').innerText = startingPrice;
 
       if(villaId === 'villa3') currentVillaName = 'Villa Malika 3';
@@ -350,6 +350,8 @@
     </a>
   </div>
 
+  <!-- Chatbot Mimin (butuh: mimin-chat.js, "admin a.png", "admin b.png" di folder yang sama) -->
+  <script src="mimin-chat.js" defer></script>
+
 </body>
-</html>
 </html>
