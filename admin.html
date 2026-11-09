@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
-<title>Invoice Villa Malika</title>
+<title>Admin Villa Malika</title>
 <style>
 :root{--navy:#101827;--panel:#202c40;--gold:#d5a43c;--cream:#fffaf0;--ink:#171717;--muted:#718096;--line:#d6d6d6}
 *{box-sizing:border-box}body{margin:0;background:var(--navy);font-family:Arial,Helvetica,sans-serif;color:#edf2f7}
- 
+
 /* LOGIN SCREEN STYLE */
 #loginScreen{max-width:380px;margin:80px auto;background:var(--panel);padding:32px 24px;border-radius:20px;box-shadow:0 10px 30px #0005;border:1px solid #344155;text-align:center}
 #loginScreen h2{color:#f2c34f;margin:0 0 20px;font-size:22px}
@@ -17,23 +17,28 @@
 .login-field input{width:100%;background:#101827;border:1px solid #3c4b61;color:white;border-radius:9px;padding:11px 12px;font:inherit}
 .login-field input:focus{outline:2px solid #e3b64f;border-color:transparent}
 .btn-login{width:100%;background:#f2c34f;color:#101827;border:0;border-radius:9px;padding:12px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:8px}
- 
-/* GENERATOR INVOICE APP STYLE */
+
+/* APP STYLE */
 #mainApp{display:none}
 .topbar{flex-wrap:wrap;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 3%;border-bottom:1px solid #344155}
 .topbar h1{font-size:clamp(19px,2.2vw,30px);color:#f2c34f;margin:0}.topbar button,.btn{border:0;border-radius:9px;padding:12px 16px;font-weight:700;cursor:pointer}
 .logout{background:#ed4444;color:white}
 .app{display:grid;grid-template-columns:minmax(320px,500px) minmax(480px,1fr);gap:28px;padding:28px 3%;align-items:start}
+.app.nopreview{grid-template-columns:minmax(320px,640px);justify-content:center}
 .editor{background:#202c40;border:1px solid #344155;border-radius:22px;padding:24px;box-shadow:0 8px 25px #0002}
 .editor h2{font-size:20px;margin:0 0 20px}.editor h3{font-size:17px;margin:24px 0 12px;color:#f4c95e}
 label{display:block;color:#a9bfd8;font-size:13px;margin:0 0 6px}
 input,textarea,select{width:100%;background:#101827;border:1px solid #3c4b61;color:white;border-radius:9px;padding:11px 12px;font:inherit;min-width:0}
-input:focus,textarea:focus{outline:2px solid #e3b64f;border-color:transparent}
+input:focus,textarea:focus,select:focus{outline:2px solid #e3b64f;border-color:transparent}
+input[type=checkbox]{width:auto;accent-color:#f2c34f}
 .field{margin-bottom:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.items-head,.item-row{display:grid;grid-template-columns:minmax(100px,1.6fr) 58px minmax(85px,1fr) 34px;gap:8px;align-items:center}
+.items-head,.item-row{display:grid;grid-template-columns:minmax(90px,1.5fr) 46px minmax(78px,1fr) 66px 30px;gap:6px;align-items:center}
 .items-head{font-size:12px;color:#dce6f3;text-align:center;margin:0 0 8px}.item-row{margin-bottom:8px}
-.item-row input{padding:10px 8px}.remove{background:#7f2933;color:white;padding:8px;border-radius:7px;border:0;cursor:pointer}
+.item-row input,.item-row select{padding:10px 6px}.item-row select{font-size:12px}
+.item-row.sewa .desc{border-color:#d5a43c88}
+.remove{background:#7f2933;color:white;padding:8px;border-radius:7px;border:0;cursor:pointer}
 .add{background:#3c82ee;color:white;margin:5px 0 12px}.print{background:#1fc66a;color:white;width:100%;font-size:16px;margin-top:5px}.secondary{background:#394960;color:white}
+.lunasbtn{background:#f2c34f;color:#101827}
 .preview-wrap{background:#344256;border-radius:22px;padding:22px;min-width:0;overflow:auto}
 .invoice{background:white;color:var(--ink);width:100%;max-width:794px;margin:0 auto;min-height:1123px;box-shadow:0 10px 30px #0003;position:relative;overflow:hidden}
 .invoice-header{height:245px;background-color:#161616;background-image:url('villa-header.jpg');position:relative;background-size:cover;background-position:center 40%;color:white}
@@ -51,8 +56,10 @@ input:focus,textarea:focus{outline:2px solid #e3b64f;border-color:transparent}
 .detail-table td{border:1px solid #d4d4d4;padding:10px 8px;vertical-align:middle}
 .detail-table td:nth-child(1),.detail-table td:nth-child(3){text-align:center}
 .detail-table td:nth-child(4),.detail-table td:nth-child(5){text-align:right;white-space:nowrap}
+.detail-table tr.disc td{color:#b3261e;background:#fff7f6}
 .subtext{display:block;color:#555;font-size:11px;margin-top:4px}
 .payrow{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;margin:8px 0 22px}.summary{margin:0;width:auto;min-width:0;background:#fff5df;border-radius:6px;overflow:hidden;font-size:13px}
+.sumwrap{position:relative;min-width:0}.sumwrap.rc{padding-bottom:58px}
 .sumrow{display:flex;justify-content:space-between;gap:12px;padding:10px 13px;border-bottom:2px solid white}
 .sumrow:last-child{border-bottom:0}.sumrow.total{background:#f4dca9;font-weight:800;font-size:15px}.sumrow strong{white-space:nowrap}
 .lower{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
@@ -71,23 +78,76 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
 #pdfLoading small{color:#a9bfd8;font-size:13px}
 .print:disabled{opacity:.6;cursor:wait}
 .tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs button{background:#394960;color:white}.tabs button.active{background:#f2c34f;color:#101827}
-.badgeRow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-8px 0 16px}#editBadge{font-size:13px;color:#f4c95e;font-weight:700}
+.badgeRow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-8px 0 16px;flex-wrap:wrap}#editBadge{font-size:13px;color:#f4c95e;font-weight:700}
 .btn.sm{padding:6px 10px;font-size:12px;margin-right:6px}
 .infobox{border:1px solid #3c4b61;border-radius:10px;padding:14px;color:#dce6f3;font-size:13px;line-height:1.7;margin-bottom:12px}
 .hist{width:100%;border-collapse:collapse;font-size:13px}.hist th,.hist td{padding:10px 8px;border-bottom:1px solid #344155;text-align:left;white-space:nowrap}.hist th{color:#a9bfd8}
+.tag{display:inline-block;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700}
+.tag.lunas{background:#2fbf7122;color:#5be39a}.tag.belum{background:#f2c34f22;color:#f2c34f}.tag.vvip{background:#e5484d33;color:#ff8f93}.tag.agen{background:#4a8df633;color:#8db8ff}.tag.batal{background:#94a3b833;color:#cbd5e1}
+.hist tr.batal td{opacity:.5}.hist tr.batal td:last-child{opacity:1}
+.btn.danger{background:#7f2933;color:#fff}.btn.ok{background:#1fc66a;color:#fff}
+.muted{color:#8aa0bb}
 input[type=date]{color-scheme:dark}
-.stamp{display:none;position:absolute;top:26px;right:34px;transform:rotate(-12deg);border:5px double #d12b2b;color:#d12b2b;font-weight:900;font-size:34px;font-family:Arial,sans-serif;letter-spacing:6px;padding:4px 18px;border-radius:10px;opacity:.85;pointer-events:none}
-@media(max-width:560px){.stamp{font-size:22px;top:16px;right:12px;border-width:3px;padding:2px 10px;letter-spacing:3px}}
-@media(max-width:1000px){.app{grid-template-columns:1fr}.preview-wrap{padding:12px}.invoice{max-width:794px}}
-@media(max-width:560px){.app{padding:14px 10px;gap:14px}.editor{padding:16px}.grid2{grid-template-columns:1fr}.items-head,.item-row{grid-template-columns:minmax(85px,1.4fr) 42px minmax(72px,1fr) 28px;gap:5px}.preview-wrap{padding:6px}.paper{padding:18px 13px;margin-left:2%;margin-right:2%;border-radius:20px}.meta{font-size:11px}.detail-table{font-size:10px}.detail-table th{font-size:9px;padding:8px 3px}.detail-table td{padding:7px 4px}.summary{width:100%;min-width:0}.payrow{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.sign{border-left:0;border-top:1px solid #eed9a6;padding:16px 0}.invoice-header{height:190px}}
+.stamp{display:none;position:absolute;right:10px;bottom:2px;transform:rotate(-8deg);border:4px double #d12b2b;color:#d12b2b;font-weight:900;font-size:26px;font-family:Arial,sans-serif;letter-spacing:5px;padding:2px 14px;border-radius:8px;opacity:.88;pointer-events:none}
+@media(max-width:560px){.stamp{font-size:20px;letter-spacing:3px;border-width:3px;padding:2px 10px}}
+
+/* FORM BOOKING (tambahan) */
+.villa-pick{display:flex;gap:10px;flex-wrap:wrap}
+.villa-pick label{display:flex;align-items:center;gap:8px;background:#101827;border:1px solid #3c4b61;border-radius:9px;padding:10px 14px;margin:0;color:#e2e8f0;cursor:pointer;font-size:14px}
+.villa-pick label:has(input:checked){border-color:#f2c34f;background:#2b2a1a}
+.warn{background:#4a1d22;border:1px solid #ed4444;color:#ffb4b4;border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.5;margin-bottom:14px}
+.discbox{border:1px dashed #d5a43c;border-radius:10px;padding:12px;margin-bottom:12px;color:#f4e3b5;font-size:13px}
+.discbox label{color:#f4e3b5;font-size:14px;display:flex;gap:8px;align-items:center;margin:0 0 4px;cursor:pointer}
+.hint{color:#9fb0c6;font-size:12px;line-height:1.5}
+#liveSum{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;color:#f4c95e}
+
+/* KALENDER */
+#viewCal{display:none;padding:22px 3% 50px}
+.cal-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
+.cal-toolbar h2{margin:0;font-size:clamp(18px,2.4vw,24px);color:#f2c34f;min-width:170px;text-align:center}
+.cal-toolbar .btn{padding:9px 14px}.cal-toolbar .grow{flex:1}
+#calInfo{font-size:12px;color:#a9bfd8;margin:0 0 10px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12px;color:#c3d1e3;margin-bottom:12px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-3px;border:1px solid #0005}
+.cal-scroll{overflow-x:auto;border:1px solid #344155;border-radius:16px;background:#17212f}
+.cal{min-width:780px}
+.cal-head,.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.cal-head div{padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#a9bfd8;border-bottom:1px solid #344155;background:#202c40}
+.week{position:relative;border-bottom:1px solid #2b384c}.week:last-child{border-bottom:0}
+.days{height:100%}
+.day{border-right:1px solid #2b384c;padding:5px 7px;font-size:12px;color:#e3ecf7;min-width:0}
+.day:last-child{border-right:0}
+.day.other{color:#5d6d84;background:#131b28}
+.day .dn{display:inline-block;min-width:22px;height:22px;line-height:22px;text-align:center;border-radius:11px;padding:0 4px}
+.day.today .dn{background:#f2c34f;color:#101827;font-weight:800}
+.bars{position:absolute;inset:0;pointer-events:none}
+.bar{position:absolute;height:22px;border-radius:7px;padding:0 7px;font:600 11px/22px Arial,Helvetica,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;pointer-events:auto;border:0;text-align:left;box-shadow:0 1px 3px #0005}
+.bar b{font-weight:800;margin-right:6px}
+.bar.dp{background:#f2c34f;color:#2b2000}.bar.lunas{background:#2fbf71;color:#04210f}
+.bar.agen{background:#4a8df6;color:#fff}.bar.vvip{background:#e5484d;color:#fff}
+.bar:hover,.bar:focus-visible{filter:brightness(1.12);outline:2px solid #fff}
+.lg-dp{background:#f2c34f}.lg-lunas{background:#2fbf71}.lg-agen{background:#4a8df6}.lg-vvip{background:#e5484d}.lg-free{background:#17212f}
+
+/* POPUP DETAIL */
+#detailModal,#komisiModal{position:fixed;inset:0;z-index:9000;background:rgba(8,12,22,.75);display:none;align-items:center;justify-content:center;padding:16px}
+#detailModal.show,#komisiModal.show{display:flex}
+.dbox{background:#202c40;border:1px solid #344155;border-radius:20px;padding:22px;max-width:440px;width:100%;max-height:92vh;overflow:auto}
+.dbox h3{margin:0 0 4px;color:#f2c34f;font-size:20px}
+.dbox .sub{color:#a9bfd8;font-size:13px;margin-bottom:14px}
+.drow{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid #344155;font-size:14px}
+.drow span:first-child{color:#a9bfd8}.drow span:last-child{text-align:right;font-weight:700}
+.dbtns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}.dbtns .btn{flex:1;min-width:90px}
+
+@media(max-width:1000px){.app,.app.nopreview{grid-template-columns:1fr}.preview-wrap{padding:12px}.invoice{max-width:794px}}
+@media(max-width:560px){.app{padding:14px 10px;gap:14px}.editor{padding:16px}.grid2{grid-template-columns:1fr}.items-head,.item-row{grid-template-columns:minmax(80px,1.4fr) 40px minmax(70px,1fr) 58px 28px;gap:4px}.item-row input,.item-row select{padding:9px 4px;font-size:13px}.preview-wrap{padding:6px}.paper{padding:18px 13px;margin-left:2%;margin-right:2%;border-radius:20px}.meta{font-size:11px}.detail-table{font-size:10px}.detail-table th{font-size:9px;padding:8px 3px}.detail-table td{padding:7px 4px}.summary{width:100%;min-width:0}.payrow{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.sign{border-left:0;border-top:1px solid #eed9a6;padding:16px 0}.invoice-header{height:190px}#viewCal{padding:14px 8px 40px}.cal{min-width:600px}.cal-head div{font-size:11px;padding:8px 2px}.topbar{padding:14px 4%}.tabs button{padding:10px 12px;font-size:13px}}
 @page{size:A4;margin:0}
 @media print{
- body{background:white;color:black}.topbar,#loginScreen,.editor{display:none!important}.app{display:block;padding:0}.preview-wrap{padding:0;background:white;border-radius:0;overflow:visible}.invoice{width:210mm;min-height:297mm;max-width:none;margin:0;box-shadow:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}.invoice-header{height:65mm}.paper{margin:-10mm 7mm 6mm;padding:7mm 7mm 8mm;border-width:1mm;border-radius:8mm}.invoice-title{font-size:48pt}.title-sub{margin-bottom:7mm}.meta{font-size:9pt;margin-bottom:7mm}.detail-table{font-size:8pt}.detail-table th{font-size:7.5pt}.detail-table td{padding:2.5mm 2mm}.summary{font-size:9pt;margin-bottom:6mm}.sumrow{padding:2.5mm 3mm}.sumrow.total{font-size:10pt}.bank{padding:3mm}.terms ol{font-size:7.5pt}.terms h3,.bank h3{font-size:9pt}.sign{font-size:8pt}.bca{font-size:22pt}.bank-no{font-size:13pt}.footer-note{font-size:7pt}
+ body{background:white;color:black}.topbar,#loginScreen,.editor,#viewCal,#detailModal{display:none!important}.app{display:block;padding:0}.preview-wrap{padding:0;background:white;border-radius:0;overflow:visible}.invoice{width:210mm;min-height:297mm;max-width:none;margin:0;box-shadow:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}.invoice-header{height:65mm}.paper{margin:-10mm 7mm 6mm;padding:7mm 7mm 8mm;border-width:1mm;border-radius:8mm}.invoice-title{font-size:48pt}.title-sub{margin-bottom:7mm}.meta{font-size:9pt;margin-bottom:7mm}.detail-table{font-size:8pt}.detail-table th{font-size:7.5pt}.detail-table td{padding:2.5mm 2mm}.summary{font-size:9pt;margin-bottom:6mm}.sumrow{padding:2.5mm 3mm}.sumrow.total{font-size:10pt}.bank{padding:3mm}.terms ol{font-size:7.5pt}.terms h3,.bank h3{font-size:9pt}.sign{font-size:8pt}.bca{font-size:22pt}.bank-no{font-size:13pt}.footer-note{font-size:7pt}
 }
 </style>
 </head>
 <body>
- 
+
 <!-- FORM LOGIN ADMIN -->
 <div id="loginScreen">
   <h2>🔒 Admin Villa Malika</h2>
@@ -103,42 +163,76 @@ input[type=date]{color-scheme:dark}
     <button class="btn-login" type="submit">Masuk Dashboard</button>
   </form>
 </div>
- 
-<!-- APP GENERATOR INVOICE -->
+
+<!-- APLIKASI ADMIN -->
 <div id="mainApp">
   <header class="topbar">
-    <h1>▤ Generator Invoice Villa Malika</h1>
-    <nav class="tabs"><button type="button" data-tab="invoice" class="active">🧾 Invoice</button><button type="button" data-tab="receipt">✅ Kwitansi</button><button type="button" data-tab="history">📋 Riwayat</button></nav>
+    <h1>▤ Admin Villa Malika</h1>
+    <nav class="tabs"><button type="button" data-tab="calendar" class="active">📅 Kalender</button><button type="button" data-tab="invoice">➕ Booking</button><button type="button" data-tab="receipt">✅ Kwitansi</button><button type="button" data-tab="history">📋 Riwayat</button></nav>
     <button class="logout" type="button" id="logoutBtn">🚪 Logout</button>
   </header>
-  <main class="app" id="viewApp">
+
+  <!-- KALENDER BOOKING -->
+  <section id="viewCal">
+    <div class="cal-toolbar">
+      <button class="btn secondary" id="calPrev" type="button" aria-label="Bulan sebelumnya">‹</button>
+      <h2 id="calTitle"></h2>
+      <button class="btn secondary" id="calNext" type="button" aria-label="Bulan berikutnya">›</button>
+      <button class="btn secondary" id="calToday" type="button">Hari ini</button>
+      <span class="grow"></span>
+      <button class="btn lunasbtn" id="calNew" type="button">＋ Booking Baru</button>
+    </div>
+    <div id="calInfo"></div>
+    <div class="legend">
+      <span><i class="lg-dp"></i>Terbooking (DP)</span><span><i class="lg-lunas"></i>Sudah lunas</span><span><i class="lg-agen"></i>Booking agen / broker</span><span><i class="lg-vvip"></i>VVIP</span><span><i class="lg-free"></i>Kosong / tersedia</span>
+    </div>
+    <div class="cal-scroll"><div class="cal" id="cal"></div></div>
+    <p class="hint">Klik bar booking untuk melihat detail. Bar dimulai dari tengah hari check-in dan berakhir di tengah hari check-out, jadi hari check-out bisa dipakai tamu berikutnya.</p>
+  </section>
+
+  <main class="app" id="viewApp" style="display:none">
     <section class="editor" id="edInvoice">
-      <h2>Input Data Invoice</h2>
-  <div class="badgeRow"><span id="editBadge"></span><button class="btn secondary sm" id="newInvBtn" type="button">＋ Invoice Baru</button></div>
+      <h2>Form Booking</h2>
+      <div class="badgeRow"><span id="editBadge"></span><span><button class="btn secondary sm previewToggle" type="button"></button><button class="btn secondary sm" id="newInvBtn" type="button">＋ Booking Baru</button></span></div>
       <div class="field"><label for="invNo">No. Invoice</label><input id="invNo" value="" placeholder="Otomatis saat disimpan" readonly></div>
       <div class="field"><label for="customer">Nama Pemesan</label><input id="customer" placeholder="Nama lengkap pemesan"></div>
       <div class="grid2">
-        <div class="field"><label for="invDate">Tanggal Invoice</label><input id="invDate" type="date"></div>
-        <div class="field"><label for="dueDate">Jatuh Tempo (opsional)</label><input id="dueDate" type="date"></div>
+        <div class="field"><label for="btype">Status Booking</label><select id="btype"><option value="Umum">Umum</option><option value="VVIP">VVIP</option><option value="Agen">Agen / Broker</option></select></div>
+        <div class="field"><label for="payMethod">Metode Pembayaran</label><select id="payMethod"><option>Transfer</option><option>Cash</option><option>QRIS</option><option>Lainnya</option></select></div>
       </div>
-      <div class="grid2">
-        <div class="field"><label for="unit">Unit Villa</label><input id="unit" value="Villa 1"></div>
-        <div class="field"><label for="duration">Waktu Sewa</label><input id="duration" value=""></div>
+      <div class="field" id="agentBox" style="display:none">
+        <label for="agentSel">Agen / Broker</label>
+        <select id="agentSel"></select>
+        <input id="agentNew" placeholder="Nama atau inisial agen baru" style="display:none;margin-top:8px">
+      </div>
+      <div class="field"><label>Villa yang dibooking</label>
+        <div class="villa-pick"><label><input type="checkbox" id="v1"> Villa 1</label><label><input type="checkbox" id="v2"> Villa 2</label><label><input type="checkbox" id="v3"> Villa 3</label></div>
       </div>
       <div class="grid2">
         <div class="field"><label for="checkin">Tanggal Check-in</label><input id="checkin" type="date"></div>
-        <div class="field"><label for="checkout">Tanggal Check-out (opsional)</label><input id="checkout" type="date"></div>
+        <div class="field"><label for="checkout">Tanggal Check-out</label><input id="checkout" type="date"></div>
       </div>
+      <div id="conflictBox" class="warn" style="display:none"></div>
+      <div class="grid2">
+        <div class="field"><label for="duration">Waktu Sewa</label><input id="duration" value=""></div>
+        <div class="field"><label for="invDate">Tanggal Invoice</label><input id="invDate" type="date"></div>
+      </div>
+      <div class="field"><label for="dueDate">Jatuh Tempo (opsional)</label><input id="dueDate" type="date"></div>
       <h3>Rincian Item</h3>
-      <div class="items-head"><span>Deskripsi</span><span>Qty</span><span>Harga (Rp)</span><span></span></div>
-      <div id="items">
-        <div class="item-row"><input aria-label="Deskripsi" value="Villa 1 (Hari 2)" class="desc"><input aria-label="Qty" type="number" min="0" value="1" class="qty"><input aria-label="Harga" type="number" min="0" value="3300000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
-        <div class="item-row"><input aria-label="Deskripsi" value="Extra Bed" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="250000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
-        <div class="item-row"><input aria-label="Deskripsi" value="Catering" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="75000" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
-        <div class="item-row"><input aria-label="Deskripsi" value="Lain-lain" class="desc"><input aria-label="Qty" type="number" min="0" value="0" class="qty"><input aria-label="Harga" type="number" min="0" value="0" class="price"><button class="remove" type="button" title="Hapus item">×</button></div>
-      </div>
+      <div class="items-head"><span>Deskripsi</span><span>Qty</span><span>Harga (Rp)</span><span>Villa</span><span></span></div>
+      <div id="items"></div>
       <button class="btn add" id="addItem" type="button">＋ Tambah Item</button>
-      <div class="field"><label for="dp">DP Terbayar (Rp)</label><input id="dp" type="number" min="0" value="1650000"></div>
+      <h3>Diskon</h3>
+      <div class="discbox" id="bundleRow" style="display:none">
+        <label><input type="checkbox" id="bundleOn"> Diskon Bundling Villa 2 &amp; 3 (otomatis)</label>
+        <div id="bundleInfo"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label for="discSpecial">Diskon Khusus (Rp, opsional)</label><input id="discSpecial" type="number" min="0" value="0"></div>
+        <div class="field"><label for="discDesc">Keterangan Diskon</label><input id="discDesc" placeholder="mis. Diskon dari Bos"></div>
+      </div>
+      <div class="field"><label for="dp">DP Terbayar (Rp)</label><input id="dp" type="number" min="0" value="0"></div>
+      <div class="infobox" id="liveSum"></div>
       <h3>Informasi Tetap Villa Malika</h3>
       <div style="border:1px solid #3c4b61;border-radius:10px;padding:14px;color:#dce6f3;font-size:13px;line-height:1.7">
         <strong>Rekening:</strong> BANK BCA · 1080792880 · A/n Nursilfiah<br>
@@ -147,26 +241,27 @@ input[type=date]{color-scheme:dark}
         <strong>Ketentuan booking:</strong> DP  50%; pelunasan H-1; reschedule maksimal H-7; first pay first book; transfer antarbank real-time online/BI Fast.<br>
         <strong>Penanggung jawab:</strong> Miss Nova
       </div>
-      <button class="btn print" type="button" id="pdfBtn">💾 Simpan ke Database &amp; Download PDF</button>
-      <p style="color:#9fb0c6;font-size:12px;line-height:1.5">Klik tombol hijau: data tersimpan ke spreadsheet (nomor invoice otomatis), lalu PDF terunduh. Untuk revisi, buka dari tab Riwayat → Revisi (nomor tetap).</p>
+      <button class="btn print" type="button" id="pdfBtn">💾 Booking DP: Simpan &amp; Download Invoice PDF</button>
+      <button class="btn print lunasbtn" type="button" id="lunasBtn">✅ Booking Lunas: Simpan &amp; Download Kwitansi PDF</button>
+      <p class="hint">Booking DP: data tersimpan ke spreadsheet (nomor otomatis) dan PDF invoice terunduh. Booking Lunas: booking langsung ditandai LUNAS dan PDF kwitansi (dengan stempel LUNAS) terunduh. Booking yang DP dulu bisa dibuatkan kwitansi lunas nanti dari tab Riwayat atau Kwitansi.</p>
     </section>
- 
+
     <section class="editor" id="edReceipt" style="display:none">
       <h2>Buat Kwitansi Lunas</h2>
+      <div class="badgeRow"><span></span><button class="btn secondary sm previewToggle" type="button"></button></div>
       <div class="field"><label for="rcpSearch">Cari invoice (nomor / nama)</label><input id="rcpSearch" placeholder="mis. VM-0003 atau Cahaya"></div>
       <div class="field"><label for="rcpSelect">Pilih invoice</label><select id="rcpSelect" size="6"></select></div>
       <div class="field"><label for="rcpDate">Tanggal Pelunasan</label><input type="date" id="rcpDate"></div>
       <div class="infobox" id="rcpInfo">Pilih invoice dari daftar di atas.</div>
       <button class="btn print" type="button" id="rcpBtn">✅ Simpan Lunas &amp; Download Kwitansi PDF</button>
     </section>
- 
+
     <section class="preview-wrap">
       <article class="invoice" id="invoice">
         <div class="invoice-header" id="invoiceHeader">
           <div class="brand-overlay"><div class="brand">VILLA MALIKA</div><div class="sub">VILLA &amp; RESORT</div></div>
         </div>
         <div class="paper">
-          <div class="stamp" id="stamp">LUNAS</div>
           <h1 class="invoice-title">INVOICE</h1><div class="title-sub">— VILLA MALIKA</div>
           <div class="meta">
             <div><strong id="metaTitle">NOTA PEMBAYARAN</strong><br>No. Invoice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvNo">VM-01234</span><br>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pInvDate">25 Agustus 2026</span><br><span id="dueLine" style="display:none"><span id="dueLbl">Jatuh Tempo&nbsp;&nbsp;</span>: <span id="pDue"></span><br></span><span id="checkinLine" style="display:none">Check-in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckin"></span><br></span><span id="checkoutLine" style="display:none">Check-out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span id="pCheckout"></span></span></div>
@@ -175,12 +270,15 @@ input[type=date]{color-scheme:dark}
           <table class="detail-table"><thead><tr><th style="width:8%">NO</th><th>DESKRIPSI</th><th style="width:10%">QTY</th><th style="width:20%">HARGA SATUAN</th><th style="width:20%">TOTAL</th></tr></thead><tbody id="pItems"></tbody></table>
           <div class="payrow">
             <div class="bank" id="bankBox"><h3>Rekening Pembayaran</h3><div class="bank-content"><div class="bca" id="pBankName">BCA</div><div style="border-left:1px solid #bbb;padding-left:12px"><div class="bank-no" id="pAccount">1080792880</div><div class="bank-name">A/n <span id="pAccountName">Nursilfiah</span></div></div></div></div>
-          <div class="bank" id="recvBox" style="display:none"><h3>Diterima Dari</h3><div class="bank-no" id="rcvName"></div><div class="bank-name" id="rcvFor"></div></div>
-          <div class="summary">
-            <div class="sumrow total"><span>TOTAL PEMBAYARAN</span><strong id="pTotal">Rp3.300.000</strong></div>
-            <div class="sumrow"><span id="lblDP"><b>DP</b></span><strong id="pDP">Rp1.650.000</strong></div>
-            <div class="sumrow"><span id="lblBal"><b>SISA PEMBAYARAN</b></span><strong id="pBalance">Rp1.650.000</strong></div>
-          </div>
+            <div class="bank" id="recvBox" style="display:none"><h3>Diterima Dari</h3><div class="bank-no" id="rcvName"></div><div class="bank-name" id="rcvFor"></div></div>
+            <div class="sumwrap" id="sumwrap">
+              <div class="summary">
+                <div class="sumrow total"><span>TOTAL PEMBAYARAN</span><strong id="pTotal">Rp3.300.000</strong></div>
+                <div class="sumrow"><span id="lblDP"><b>DP</b></span><strong id="pDP">Rp1.650.000</strong></div>
+                <div class="sumrow"><span id="lblBal"><b>SISA PEMBAYARAN</b></span><strong id="pBalance">Rp1.650.000</strong></div>
+              </div>
+              <div class="stamp" id="stamp">LUNAS</div>
+            </div>
           </div>
           <div class="lower">
             <div>
@@ -200,33 +298,58 @@ input[type=date]{color-scheme:dark}
       </article>
     </section>
   </main>
+
   <section id="viewHistory" style="display:none">
     <div class="editor" style="margin:28px 3%">
-      <h2>Riwayat Invoice</h2>
-      <div class="field"><input id="histSearch" placeholder="Cari nomor atau nama..."></div>
-      <div style="overflow:auto"><table class="hist"><thead><tr><th>No</th><th>Nama</th><th>Check-in</th><th>Total</th><th>Sisa</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="histBody"></tbody></table></div>
+      <h2>Riwayat Booking</h2>
+      <div class="grid2"><div class="field"><input id="histSearch" placeholder="Cari nomor, nama, atau agen..."></div>
+        <div class="field"><select id="histFilter" aria-label="Filter status"><option value="all">Semua booking</option><option value="active">Aktif saja</option><option value="cancel">Batal saja</option></select></div></div>
+      <div style="overflow:auto"><table class="hist"><thead><tr><th>No</th><th>Nama</th><th>Villa</th><th>Check-in</th><th>Total</th><th>Sisa</th><th>Status</th><th>Tipe</th><th>Komisi</th><th>Aksi</th></tr></thead><tbody id="histBody"></tbody></table></div>
     </div>
   </section>
 </div>
- 
+
+<!-- POPUP DETAIL BOOKING -->
+<div id="detailModal" role="dialog" aria-modal="true" aria-label="Detail booking">
+  <div class="dbox">
+    <h3 id="dTitle"></h3>
+    <div class="sub" id="dSub"></div>
+    <div id="dBody"></div>
+    <div class="dbtns" id="dBtns"></div>
+  </div>
+</div>
+
+<!-- POPUP KOMISI AGEN -->
+<div id="komisiModal" role="dialog" aria-modal="true" aria-label="Komisi agen">
+  <div class="dbox">
+    <h3>💸 Komisi Agen</h3>
+    <div class="sub" id="kSub"></div>
+    <div id="kBody"></div>
+    <div class="field" style="margin-top:14px"><label for="kAmount">Fee untuk agen (Rp)</label><input id="kAmount" type="number" min="0" inputmode="numeric" placeholder="mis. 500000"></div>
+    <div class="drow"><span>Pemasukan bersih booking</span><span id="kNet"></span></div>
+    <div class="dbtns"><button class="btn ok" id="kSave" type="button">💾 Simpan Komisi</button><button class="btn secondary" id="kClose" type="button">Batal</button></div>
+  </div>
+</div>
+
 <div id="pdfLoading" role="status" aria-live="polite">
   <div class="spinner"></div>
   <div id="pdfLoadingText">Membuat PDF...</div>
   <small>Mohon tunggu, jangan tutup halaman ini</small>
 </div>
- 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 /* HELPER (harus dideklarasikan paling awal) */
 const $ = id => document.getElementById(id);
 const money = n => 'Rp' + Math.round(Number(n) || 0).toLocaleString('id-ID');
- 
+const BUNDLING = 1000000; // diskon bundling Villa 2 + Villa 3 per malam
+
 /* ===== KONFIGURASI ===== */
 const API_URL = 'https://script.google.com/macros/s/AKfycbxu3_J0EL1z5MMOoPoYng7LFMCfnsywHSJlCA72XZTfP5-Wr945e5OgCZqIMK4wHSlcxw/exec';
-let TOKEN = '', invoices = [], mode = 'invoice', editingNo = '', paidISO = '';
+let TOKEN = '', invoices = [], agents = [], mode = 'invoice', editingNo = '', paidISO = '', previewOn = window.innerWidth > 1000;
 const safeName = n => (n || 'PEMESAN').replace(/[\\/:*?"<>|]/g, ' ').replace(/\s+/g, ' ').trim();
- 
+
 async function api(action, data) {
   if (!/^https:\/\//.test(API_URL)) throw new Error('API_URL di admin.html belum diisi.');
   const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ action, token: TOKEN }, data || {})) });
@@ -237,57 +360,154 @@ async function api(action, data) {
   }
   return j;
 }
- 
+
 /* ===== TANGGAL ===== */
 const HARI = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 const BULAN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+const DAYMS = 864e5;
 function parseISO(s) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
 function fmtDate(s) { const d = parseISO(s); return d ? HARI[d.getDay()] + ', ' + d.getDate() + ' ' + BULAN[d.getMonth()] + ' ' + d.getFullYear() : ''; }
+function fmtShort(s) { const d = parseISO(s); return d ? d.getDate() + ' ' + BULAN[d.getMonth()].slice(0, 3) + ' ' + d.getFullYear() : ''; }
 function toISO(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
 function addDays(iso, n) { const d = parseISO(iso) || new Date(); d.setDate(d.getDate() + n); return toISO(d); }
-function autoDuration() {
-  const a = parseISO($('checkin').value), b = parseISO($('checkout').value);
-  if (a && b && b > a) $('duration').value = Math.round((b - a) / 864e5) + ' Malam';
-  syncFirstItem();
+function dayIdx(d) { return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / DAYMS); } // nomor hari (untuk hitung selisih)
+function nightsCount() { const a = parseISO($('checkin').value), b = parseISO($('checkout').value); return a && b && b > a ? dayIdx(b) - dayIdx(a) : 0; }
+function autoDuration() { const n = nightsCount(); if (n) $('duration').value = n + ' Malam'; refreshBooking(false); }
+
+/* ===== VILLA, AGEN, DISKON ===== */
+const selectedUnits = () => [1, 2, 3].filter(n => $('v' + n).checked);
+const unitLabel = u => u && u.length ? 'Villa ' + u.join(' & ') : '-';
+const unitsBar = u => 'VILLA ' + (u && u.length ? u.join('&') : '?');
+function syncAgentUI() {
+  const isAgen = $('btype').value === 'Agen';
+  $('agentBox').style.display = isAgen ? '' : 'none';
+  $('agentNew').style.display = isAgen && $('agentSel').value === '__new__' ? '' : 'none';
 }
-function syncFirstItem() {
-  const d = document.querySelector('.item-row .desc');
-  if (d) d.value = ($('unit').value + ' (' + $('duration').value + ')').trim();
+function opt(v, t) { const o = document.createElement('option'); o.value = v; o.textContent = t; return o; }
+function fillAgentSelect(selected) {
+  const s = $('agentSel'); s.innerHTML = '';
+  s.appendChild(opt('', '— pilih agen —'));
+  const names = agents.slice();
+  if (selected && names.indexOf(selected) < 0) names.push(selected);
+  names.forEach(a => s.appendChild(opt(a, a)));
+  s.appendChild(opt('__new__', '＋ Agen baru…'));
+  s.value = selected || '';
+  syncAgentUI();
 }
- 
+function getAgent() {
+  if ($('btype').value !== 'Agen') return '';
+  const v = $('agentSel').value;
+  return v === '__new__' ? $('agentNew').value.trim() : v;
+}
+const bundleEligible = () => { const u = selectedUnits(); return u.indexOf(2) >= 0 && u.indexOf(3) >= 0; };
+const bundleAmount = () => bundleEligible() && $('bundleOn').checked ? BUNDLING * Math.max(1, nightsCount()) : 0;
+function updateBundleUI(autoCheck) {
+  const ok = bundleEligible();
+  $('bundleRow').style.display = ok ? '' : 'none';
+  if (autoCheck) $('bundleOn').checked = ok;
+  const n = Math.max(1, nightsCount());
+  $('bundleInfo').textContent = 'Potongan ' + money(BUNDLING * n) + ' (' + n + ' malam × ' + money(BUNDLING) + ')';
+}
+
 /* ===== FORM ===== */
-function createRow(d, q, p) {
+function createRow(d, q, p, v, sewa) {
   const row = document.createElement('div');
-  row.className = 'item-row';
-  row.innerHTML = '<input aria-label="Deskripsi" class="desc"><input aria-label="Qty" type="number" min="0" class="qty"><input aria-label="Harga" type="number" min="0" class="price"><button class="remove" type="button" title="Hapus item">×</button>';
+  row.className = 'item-row' + (sewa ? ' sewa' : '');
+  row.innerHTML = '<input aria-label="Deskripsi" class="desc"><input aria-label="Qty" type="number" min="0" class="qty"><input aria-label="Harga" type="number" min="0" class="price"><select aria-label="Villa" class="vsel"><option value="0">Umum</option><option value="1">V1</option><option value="2">V2</option><option value="3">V3</option></select><button class="remove" type="button" title="Hapus item">×</button>';
   row.querySelector('.desc').value = d; row.querySelector('.qty').value = q; row.querySelector('.price').value = p;
-  row.querySelectorAll('input').forEach(el => el.addEventListener('input', render));
-  $('items').appendChild(row);
+  const vs = row.querySelector('.vsel'), rm = row.querySelector('.remove');
+  vs.value = String(v || 0);
+  if (sewa) { vs.disabled = true; rm.style.visibility = 'hidden'; }   // baris sewa diatur lewat pilihan villa di atas
+  row.querySelectorAll('input,select').forEach(el => { el.addEventListener('input', render); el.addEventListener('change', render); });
+  rm.onclick = () => { row.remove(); render(); };
+  return row;
 }
-function rebuildItems(list) { $('items').innerHTML = ''; list.forEach(i => createRow(i.desc, i.qty, i.price)); wireRemove(); }
+function rebuildItems(list) { $('items').innerHTML = ''; list.forEach(i => $('items').appendChild(createRow(i.desc, i.qty, i.price, i.villa, i.sewa))); }
+/* Satu baris sewa per villa yang dicentang; harga tetap diisi manual dan dipertahankan */
+function syncSewaRows() {
+  const box = $('items'), units = selectedUnits(), dur = $('duration').value.trim(), rows = {};
+  box.querySelectorAll('.item-row.sewa').forEach(r => {
+    const u = +r.querySelector('.vsel').value;
+    if (units.indexOf(u) < 0 || rows[u]) r.remove(); else rows[u] = r;
+  });
+  units.forEach(u => {
+    if (!rows[u]) rows[u] = createRow('', 1, 0, u, true);
+    rows[u].querySelector('.desc').value = 'Villa ' + u + (dur ? ' (' + dur + ')' : '');
+  });
+  units.forEach(u => box.insertBefore(rows[u], box.querySelector('.item-row:not(.sewa)')));
+}
+function refreshBooking(autoCheck) { syncSewaRows(); updateBundleUI(!!autoCheck); render(); }
 function collect() {
   return {
-    no: $('invNo').value, name: $('customer').value.trim(), invDate: $('invDate').value, dueDate: $('dueDate').value,
-    unit: $('unit').value, duration: $('duration').value, checkin: $('checkin').value, checkout: $('checkout').value,
+    no: $('invNo').value, name: $('customer').value.trim(), type: $('btype').value, agent: getAgent(), units: selectedUnits(),
+    unit: unitLabel(selectedUnits()), invDate: $('invDate').value, dueDate: $('dueDate').value,
+    duration: $('duration').value, checkin: $('checkin').value, checkout: $('checkout').value, payMethod: $('payMethod').value,
     dp: Number($('dp').value) || 0,
-    items: [...document.querySelectorAll('.item-row')].map(r => ({ desc: r.querySelector('.desc').value, qty: Number(r.querySelector('.qty').value) || 0, price: Number(r.querySelector('.price').value) || 0 }))
+    discount: { bundling: bundleAmount(), special: Math.max(0, Number($('discSpecial').value) || 0), specialDesc: $('discDesc').value.trim() },
+    items: [...document.querySelectorAll('#items .item-row')].map(r => ({
+      desc: r.querySelector('.desc').value, qty: Number(r.querySelector('.qty').value) || 0, price: Number(r.querySelector('.price').value) || 0,
+      villa: Number(r.querySelector('.vsel').value) || 0, sewa: r.classList.contains('sewa')
+    }))
   };
+}
+/* Data lama belum punya penanda baris sewa: baris yang diawali "Villa N" dianggap baris sewa */
+function normalizeItems(v) {
+  const items = (v.items || []).map(i => ({ desc: i.desc, qty: i.qty, price: i.price, villa: i.villa || 0, sewa: !!i.sewa }));
+  if (!items.some(i => i.sewa)) items.forEach(i => { const m = /^villa\s*(?:malika\s*)?([1-3])\b/i.exec(i.desc || ''); if (m) { i.sewa = true; i.villa = +m[1]; } });
+  return items;
 }
 function loadInvoice(v) {
   $('invNo').value = v.no; $('customer').value = v.name; $('invDate').value = v.invDate; $('dueDate').value = v.dueDate;
-  $('unit').value = v.unit; $('duration').value = v.duration; $('checkin').value = v.checkin; $('checkout').value = v.checkout;
-  $('dp').value = v.dp; rebuildItems(v.items);
+  $('duration').value = v.duration; $('checkin').value = v.checkin; $('checkout').value = v.checkout;
+  $('btype').value = v.type || 'Umum';
+  [1, 2, 3].forEach(n => { $('v' + n).checked = (v.units || []).indexOf(n) >= 0; });
+  $('payMethod').value = v.payMethod || 'Transfer';
+  const d = v.discount || {};
+  $('discSpecial').value = d.special || 0; $('discDesc').value = d.specialDesc || '';
+  $('dp').value = v.dp; rebuildItems(normalizeItems(v));
+  $('agentNew').value = ''; fillAgentSelect(v.agent || '');
+  $('bundleOn').checked = (d.bundling || 0) > 0; updateBundleUI(false);
 }
-function setBadge() { $('editBadge').textContent = editingNo ? '✏️ Revisi: ' + editingNo : '🆕 Invoice baru'; }
+function setBadge() { $('editBadge').textContent = editingNo ? '✏️ Revisi: ' + editingNo : '🆕 Booking baru'; }
 function resetForm() {
   editingNo = ''; paidISO = ''; $('invNo').value = ''; $('customer').value = '';
   const t = toISO(new Date());
   $('invDate').value = t; $('dueDate').value = ''; $('checkin').value = t; $('checkout').value = addDays(t, 1);
-  $('unit').value = 'Villa 1'; $('duration').value = '';
-  rebuildItems([{ desc: '', qty: 1, price: 0 }, { desc: 'Extra Bed', qty: 0, price: 250000 }, { desc: 'Catering', qty: 0, price: 75000 }, { desc: 'Lain-lain', qty: 0, price: 0 }]);
-  autoDuration(); $('dp').value = 0; setBadge(); render();
+  $('btype').value = 'Umum'; [1, 2, 3].forEach(n => { $('v' + n).checked = false; });
+  $('payMethod').value = 'Transfer'; $('discSpecial').value = 0; $('discDesc').value = ''; $('bundleOn').checked = false;
+  rebuildItems([{ desc: 'Extra Bed', qty: 0, price: 250000, villa: 0 }, { desc: 'Catering', qty: 0, price: 75000, villa: 0 }, { desc: 'Lain-lain', qty: 0, price: 0, villa: 0 }]);
+  $('agentNew').value = ''; fillAgentSelect('');
+  $('dp').value = 0; $('duration').value = ''; autoDuration(); setBadge();
 }
- 
+function newBooking() { resetForm(); showTab('invoice'); }
+
+/* ===== HITUNG ===== */
+const subtotalOf = v => v.items.reduce((a, i) => a + i.qty * i.price, 0);
+const discountOf = v => (Number(v.discount && v.discount.bundling) || 0) + (Number(v.discount && v.discount.special) || 0);
+const totalOf = v => Math.max(0, subtotalOf(v) - discountOf(v));
+
+/* ===== BENTROK TANGGAL (peringatan di form; server tetap yang menentukan) ===== */
+function stayRange(ci, co) {
+  const a = parseISO(ci); if (!a) return null;
+  let b = parseISO(co); const ai = dayIdx(a);
+  let bi = b ? dayIdx(b) : 0; if (!b || bi <= ai) bi = ai + 1;
+  return [ai, bi];
+}
+const sameStay = (a, b) => a && b && a.checkin === b.checkin && a.checkout === b.checkout && (a.units || []).join() === (b.units || []).join();
+function conflictsFor(inv) {
+  const me = stayRange(inv.checkin, inv.checkout);
+  if (!me || !inv.units.length) return [];
+  if (sameStay(invoices.find(i => i.no === editingNo), inv)) return [];
+  const out = [];
+  invoices.forEach(o => {
+    if (!o.no || o.no === editingNo || o.status === 'BATAL') return;
+    const shared = (o.units || []).filter(x => inv.units.indexOf(x) >= 0);
+    const r = stayRange(o.checkin, o.checkout);
+    if (shared.length && r && me[0] < r[1] && r[0] < me[1]) out.push('⚠ Villa ' + shared.join(' & ') + ' bentrok dengan ' + o.no + ' (' + o.name + ', ' + fmtShort(o.checkin) + ' s/d ' + fmtShort(o.checkout) + ')');
+  });
+  return out;
+}
+
 /* ===== LOGIN (diverifikasi di server) ===== */
 async function checkLogin() {
   const u = $('adminUser').value.trim(), p = $('adminPass').value;
@@ -308,60 +528,246 @@ function doLogout() {
 async function openMainApp() {
   $('loginScreen').style.display = 'none';
   $('mainApp').style.display = 'block';
-  showTab('invoice');
+  initCal(); setPreview(previewOn); resetForm();
+  showTab('calendar');
   try { await refreshList(); } catch (e) { if (e.message !== 'unauthorized') alert('Gagal memuat data: ' + e.message); }
 }
-async function refreshList() { const r = await api('list'); invoices = r.invoices; renderHistory(); fillReceiptSelect(); }
- 
+async function refreshList() {
+  const r = await api('list');
+  invoices = r.invoices; agents = r.agents || [];
+  fillAgentSelect(getAgent());
+  renderHistory(); fillReceiptSelect(); renderCalendar(); render();
+}
+
 /* ===== TAB ===== */
+function setPreview(on) {
+  previewOn = on;
+  $('viewApp').classList.toggle('nopreview', !on);
+  document.querySelector('.preview-wrap').style.display = on ? '' : 'none';
+  document.querySelectorAll('.previewToggle').forEach(b => { b.textContent = on ? '🙈 Sembunyikan preview' : '👁 Lihat preview'; });
+}
 function showTab(t) {
   document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
-  const hist = t === 'history';
-  $('viewApp').style.display = hist ? 'none' : '';
-  $('viewHistory').style.display = hist ? 'block' : 'none';
-  if (hist) { renderHistory(); return; }
+  $('viewCal').style.display = t === 'calendar' ? 'block' : 'none';
+  $('viewHistory').style.display = t === 'history' ? 'block' : 'none';
+  $('viewApp').style.display = t === 'invoice' || t === 'receipt' ? '' : 'none';
+  if (t === 'calendar') { renderCalendar(); return; }
+  if (t === 'history') { renderHistory(); return; }
   mode = t === 'receipt' ? 'receipt' : 'invoice';
   $('edInvoice').style.display = mode === 'invoice' ? '' : 'none';
   $('edReceipt').style.display = mode === 'receipt' ? '' : 'none';
   if (mode === 'receipt') { if (!$('rcpDate').value) $('rcpDate').value = toISO(new Date()); paidISO = $('rcpDate').value; fillReceiptSelect(); }
   setBadge(); render();
 }
+
+/* ===== KALENDER ===== */
+let calY = 0, calM = 0;
+function initCal() { const n = new Date(); calY = n.getFullYear(); calM = n.getMonth(); }
+function stayDays(b) { const r = stayRange(b.checkin, b.checkout); return r ? { s: r[0], e: r[1] } : null; }
+const nightsOf = b => { const d = stayDays(b); return d ? d.e - d.s : 1; };
+const colorOf = b => b.type === 'VVIP' ? 'vvip' : b.type === 'Agen' ? 'agen' : b.status === 'LUNAS' ? 'lunas' : 'dp';
+function barText(b) {
+  return [b.name, nightsOf(b) + ' mlm', b.status === 'LUNAS' ? 'LUNAS' : 'DP', b.type === 'Agen' ? 'Agen: ' + (b.agent || '-') : b.type === 'VVIP' ? 'VVIP' : ''].filter(Boolean).join(' · ');
+}
+function renderCalendar() {
+  $('calTitle').textContent = BULAN[calM] + ' ' + calY;
+  const first = new Date(calY, calM, 1), offset = (first.getDay() + 6) % 7;           // minggu mulai Senin
+  const dim = new Date(calY, calM + 1, 0).getDate(), weeks = Math.ceil((offset + dim) / 7);
+  const gridStart = new Date(calY, calM, 1 - offset), g0 = dayIdx(gridStart), today = dayIdx(new Date());
+  const list = invoices.filter(b => b.status !== 'BATAL').map(b => ({ b, d: stayDays(b) })).filter(x => x.d);   // booking batal tidak tampil
+  const cal = $('cal'); cal.innerHTML = '';
+  const head = document.createElement('div'); head.className = 'cal-head';
+  ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'].forEach(h => { const c = document.createElement('div'); c.textContent = h; head.appendChild(c); });
+  cal.appendChild(head);
+  const m0 = dayIdx(first), m1 = dayIdx(new Date(calY, calM + 1, 1));
+  $('calInfo').textContent = list.filter(x => x.d.s < m1 && x.d.e > m0).length + ' booking pada bulan ini';
+  for (let w = 0; w < weeks; w++) {
+    const w0 = g0 + w * 7, w6 = w0 + 6, segs = [];
+    list.forEach(x => {
+      if (x.d.s > w6 || x.d.e < w0) return;
+      const i0 = Math.max(x.d.s, w0) - w0, i1 = Math.min(x.d.e, w6) - w0;
+      segs.push({ b: x.b, left: x.d.s >= w0 ? i0 + 0.5 : 0, right: x.d.e <= w6 ? i1 + 0.5 : 7 });
+    });
+    segs.sort((a, c) => a.left - c.left || (c.right - c.left) - (a.right - a.left) || String(a.b.no).localeCompare(String(c.b.no)));
+    const lanes = [];
+    segs.forEach(sg => { let l = lanes.findIndex(end => end <= sg.left + 1e-6); if (l < 0) { l = lanes.length; lanes.push(0); } lanes[l] = sg.right; sg.lane = l; });
+    const week = document.createElement('div'); week.className = 'week';
+    week.style.height = Math.max(96, 32 + lanes.length * 26 + 8) + 'px';
+    const days = document.createElement('div'); days.className = 'days';
+    for (let k = 0; k < 7; k++) {
+      const d = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate() + w * 7 + k);
+      const c = document.createElement('div');
+      c.className = 'day' + (d.getMonth() !== calM ? ' other' : '') + (dayIdx(d) === today ? ' today' : '');
+      const n = document.createElement('span'); n.className = 'dn';
+      n.textContent = d.getDate() === 1 ? d.getDate() + ' ' + BULAN[d.getMonth()].slice(0, 3) : d.getDate();
+      c.appendChild(n); days.appendChild(c);
+    }
+    const bars = document.createElement('div'); bars.className = 'bars';
+    segs.forEach(sg => {
+      const bt = document.createElement('button'); bt.type = 'button';
+      bt.className = 'bar ' + colorOf(sg.b);
+      bt.style.left = 'calc(' + (sg.left / 7 * 100) + '% + 1px)';
+      bt.style.width = 'calc(' + ((sg.right - sg.left) / 7 * 100) + '% - 2px)';
+      bt.style.top = (32 + sg.lane * 26) + 'px';
+      const full = unitsBar(sg.b.units) + ' · ' + barText(sg.b);
+      bt.title = full + ' (' + sg.b.no + ')';
+      const t = document.createElement('b'); t.textContent = unitsBar(sg.b.units); bt.appendChild(t); bt.appendChild(document.createTextNode(barText(sg.b)));   // potongan sempit terpotong "…", detail ada di popup
+      bt.setAttribute('aria-label', full);
+      bt.addEventListener('click', () => showDetail(sg.b));
+      bars.appendChild(bt);
+    });
+    week.appendChild(days); week.appendChild(bars); cal.appendChild(week);
+  }
+}
+function moveMonth(n) { const d = new Date(calY, calM + n, 1); calY = d.getFullYear(); calM = d.getMonth(); renderCalendar(); }
+
+/* ===== POPUP DETAIL ===== */
+function drow(label, value) { const r = document.createElement('div'); r.className = 'drow'; const a = document.createElement('span'); a.textContent = label; const b = document.createElement('span'); b.textContent = value; r.appendChild(a); r.appendChild(b); return r; }
+function showDetail(b) {
+  $('dTitle').textContent = unitsBar(b.units) + ' · ' + b.name;
+  $('dSub').textContent = b.no + (b.type === 'Agen' ? ' · Agen: ' + (b.agent || '-') : b.type === 'VVIP' ? ' · VVIP' : '');
+  const body = $('dBody'); body.innerHTML = '';
+  const sisa = Math.max(0, b.total - b.dp), d = b.discount || {};
+  const rows = [['Check-in', fmtDate(b.checkin)], ['Check-out', fmtDate(b.checkout)], ['Lama menginap', nightsOf(b) + ' malam'],
+    ['Status', b.status === 'LUNAS' ? 'LUNAS' + (b.paidDate ? ' (' + fmtShort(b.paidDate) + ')' : '') : 'DP (belum lunas)'],
+    ['Tipe booking', b.type === 'Agen' ? 'Agen · ' + (b.agent || '-') : b.type]];
+  if (b.payMethod) rows.push(['Metode bayar', b.payMethod]);
+  if (d.bundling) rows.push(['Diskon bundling', '−' + money(d.bundling)]);
+  if (d.special) rows.push(['Diskon' + (d.specialDesc ? ' (' + d.specialDesc + ')' : ''), '−' + money(d.special)]);
+  rows.push(['Total', money(b.total)], ['DP', money(b.dp)], ['Sisa', money(sisa)]);
+  if (b.type === 'Agen') rows.push(['Komisi agen', b.commission ? '−' + money(b.commission) : 'Belum diisi'], ['Pemasukan bersih', money(b.total - (b.commission || 0))]);
+  rows.forEach(r => body.appendChild(drow(r[0], r[1])));
+  const btns = $('dBtns'); btns.innerHTML = '';
+  const mk = (t, cls, fn) => { const x = document.createElement('button'); x.type = 'button'; x.className = 'btn ' + cls; x.textContent = t; x.onclick = fn; btns.appendChild(x); };
+  if (b.status !== 'LUNAS') mk('✏️ Revisi', 'secondary', () => { closeDetail(); startRevision(b); });
+  mk('🧾 Kwitansi', 'secondary', () => { closeDetail(); openReceipt(b.no); });
+  if (b.type === 'Agen') mk('💸 Komisi Agen', 'secondary', () => { closeDetail(); openKomisi(b); });
+  mk('🚫 Batalkan', 'danger', () => { closeDetail(); cancelBooking(b); });
+  mk('Tutup', 'secondary', closeDetail);
+  $('detailModal').classList.add('show');
+}
+function closeDetail() { $('detailModal').classList.remove('show'); }
+function startRevision(i) { loadInvoice(i); editingNo = i.no; showTab('invoice'); }
+function openReceipt(no) { showTab('receipt'); $('rcpSearch').value = ''; fillReceiptSelect(); pickReceipt(no); }
+
+/* ===== RIWAYAT ===== */
 function mkBtn(txt, fn) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn secondary sm'; b.textContent = txt; b.onclick = fn; return b; }
-const totalOf = v => v.items.reduce((a, i) => a + i.qty * i.price, 0);
+function tagEl(txt, cls) { const s = document.createElement('span'); s.className = 'tag ' + cls; s.textContent = txt; return s; }
 function renderHistory() {
-  const q = $('histSearch').value.toLowerCase(), tb = $('histBody');
+  const q = $('histSearch').value.toLowerCase(), f = $('histFilter').value, tb = $('histBody');
   tb.innerHTML = '';
-  invoices.filter(i => (i.no + ' ' + i.name).toLowerCase().includes(q)).forEach(i => {
-    const tr = document.createElement('tr');
-    [i.no, i.name, fmtDate(i.checkin), money(i.total), money(Math.max(0, i.total - i.dp)), i.status].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+  invoices.filter(i => (f === 'all' || (f === 'cancel') === (i.status === 'BATAL')) && (i.no + ' ' + i.name + ' ' + (i.agent || '')).toLowerCase().includes(q)).forEach(i => {
+    const batal = i.status === 'BATAL', tr = document.createElement('tr');
+    if (batal) tr.className = 'batal';
+    [i.no, i.name, unitLabel(i.units), fmtDate(i.checkin), money(i.total), batal ? '-' : money(Math.max(0, i.total - i.dp))].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+    const ts = document.createElement('td');
+    const st = tagEl(i.status, batal ? 'batal' : i.status === 'LUNAS' ? 'lunas' : 'belum');
+    if (batal && i.cancelReason) st.title = 'Alasan: ' + i.cancelReason;
+    ts.appendChild(st);
+    if (batal && i.cancelReason) { const r = document.createElement('div'); r.className = 'muted'; r.style.cssText = 'font-size:11px;margin-top:3px;white-space:normal;max-width:160px'; r.textContent = i.cancelReason; ts.appendChild(r); }
+    tr.appendChild(ts);
+    const tt = document.createElement('td');
+    tt.appendChild(i.type === 'Agen' ? tagEl('Agen: ' + (i.agent || '-'), 'agen') : i.type === 'VVIP' ? tagEl('VVIP', 'vvip') : document.createTextNode('Umum'));
+    tr.appendChild(tt);
+    const tk = document.createElement('td');
+    if (i.type === 'Agen') { tk.textContent = i.commission ? money(i.commission) : 'Belum diisi'; if (!i.commission) tk.className = 'muted'; } else { tk.textContent = '-'; tk.className = 'muted'; }
+    tr.appendChild(tk);
     const td = document.createElement('td');
-    td.appendChild(mkBtn('Revisi', () => { loadInvoice(i); editingNo = i.no; showTab('invoice'); }));
-    td.appendChild(mkBtn('Kwitansi', () => { showTab('receipt'); $('rcpSearch').value = ''; fillReceiptSelect(); pickReceipt(i.no); }));
+    if (batal) {
+      td.appendChild(mkBtn('Aktifkan lagi', () => restoreBooking(i)));
+    } else {
+      td.appendChild(mkBtn('Revisi', () => startRevision(i)));
+      td.appendChild(mkBtn('Kwitansi', () => openReceipt(i.no)));
+      if (i.type === 'Agen') td.appendChild(mkBtn('Komisi Agen', () => openKomisi(i)));
+      const bt = mkBtn('Batalkan', () => cancelBooking(i)); bt.classList.remove('secondary'); bt.classList.add('danger'); td.appendChild(bt);
+    }
     tr.appendChild(td); tb.appendChild(tr);
   });
 }
- 
-/* ===== SIMPAN INVOICE ===== */
-async function onSaveInvoice() {
-  const inv = collect();
-  if (!inv.name) { alert('Isi Nama Pemesan dulu.'); return; }
-  if (!inv.items.some(i => i.qty * i.price > 0)) { alert('Isi  1 item dengan qty dan harga.'); return; }
-  const btn = $('pdfBtn'); btn.disabled = true;
+
+/* ===== BATAL & KOMISI AGEN ===== */
+async function runOp(action, data, msg) {
+  setLoading(true, msg);
+  try { await api(action, data); await refreshList(); return true; }
+  catch (e) { alert(e.message); return false; }
+  finally { setLoading(false); }
+}
+function cancelBooking(b) {
+  const reason = prompt('Batalkan booking ' + b.no + ' (' + b.name + ')?\nTanggal villa akan dibebaskan di kalender, datanya tetap tersimpan di Riwayat.\n\nTulis alasan pembatalan (boleh dikosongkan), lalu OK:', '');
+  if (reason === null) return;
+  runOp('cancel', { no: b.no, reason: reason }, 'Membatalkan booking...');
+}
+function restoreBooking(b) {
+  if (!confirm('Aktifkan lagi booking ' + b.no + ' (' + b.name + ')?\nTanggalnya akan dicek lagi terhadap booking lain.')) return;
+  runOp('restore', { no: b.no }, 'Mengaktifkan booking...');
+}
+let komisiFor = null;
+function updateKomisiNet() {
+  if (!komisiFor) return;
+  const a = Math.max(0, Number($('kAmount').value) || 0);
+  $('kNet').textContent = money(komisiFor.total - a) + (a > komisiFor.total ? ' (melebihi total!)' : '');
+}
+function openKomisi(b) {
+  komisiFor = b;
+  $('kSub').textContent = b.no + ' · ' + b.name + ' · Agen: ' + (b.agent || '-');
+  const body = $('kBody'); body.innerHTML = '';
+  body.appendChild(drow('Total booking', money(b.total)));
+  body.appendChild(drow('Komisi tersimpan', b.commission ? money(b.commission) : 'Belum diisi'));
+  $('kAmount').value = b.commission || '';
+  updateKomisiNet();
+  $('komisiModal').classList.add('show');
+  setTimeout(() => $('kAmount').focus(), 50);
+}
+function closeKomisi() { $('komisiModal').classList.remove('show'); komisiFor = null; }
+async function saveKomisi() {
+  if (!komisiFor) return;
+  const amt = Math.round(Number($('kAmount').value) || 0);
+  if (amt > komisiFor.total) { alert('Komisi tidak boleh melebihi total booking (' + money(komisiFor.total) + ').'); return; }
+  if (await runOp('commission', { no: komisiFor.no, amount: amt }, 'Menyimpan komisi...')) closeKomisi();
+}
+
+/* ===== SIMPAN BOOKING ===== */
+function validateBooking(inv) {
+  if (!inv.name) return 'Isi Nama Pemesan dulu.';
+  if (!inv.units.length) return 'Pilih minimal 1 villa.';
+  if (!inv.checkin || !inv.checkout || nightsCount() < 1) return 'Isi tanggal check-in dan check-out (check-out harus setelah check-in).';
+  if (inv.type === 'Agen' && !inv.agent) return 'Pilih atau isi nama agen.';
+  if (!inv.items.some(i => i.qty * i.price > 0)) return 'Isi minimal 1 item dengan qty dan harga.';
+  const t = totalOf(inv);
+  if (t <= 0) return 'Total setelah diskon harus lebih dari 0.';
+  if (inv.dp > t) return 'DP tidak boleh melebihi total.';
+  return '';
+}
+async function onSaveBooking(lunas) {
+  const inv = collect(), err = validateBooking(inv);
+  if (err) { alert(err); return; }
+  const dups = conflictsFor(inv);
+  if (dups.length) { alert(dups[0].replace('⚠ ', '') + '\n\nUbah tanggal atau villa dulu.'); return; }
+  if (lunas && !confirm('Tandai booking ini LUNAS dan buat kwitansi lunas?')) return;
+  const b1 = $('pdfBtn'), b2 = $('lunasBtn'); b1.disabled = b2.disabled = true;
   try {
     setLoading(true, 'Menyimpan ke database...');
-    const r = await api('save', { invoice: inv, no: editingNo });
+    const payload = { invoice: inv, no: editingNo };
+    if (lunas) { payload.lunas = true; payload.paidDate = toISO(new Date()); }
+    const r = await api('save', payload);
     editingNo = r.invoice.no; $('invNo').value = editingNo; setBadge();
     await refreshList();
-    await downloadPdf('INVOICE VILLA MALIKA ' + safeName(inv.name) + '.pdf');
+    if (lunas) {
+      openReceipt(editingNo);
+      await downloadPdf('KWITANSI VILLA MALIKA ' + safeName(inv.name) + '.pdf');
+    } else {
+      fillAgentSelect(inv.agent);
+      await downloadPdf('INVOICE VILLA MALIKA ' + safeName(inv.name) + '.pdf');
+    }
   } catch (e) { alert('Gagal menyimpan: ' + e.message); }
-  finally { setLoading(false); btn.disabled = false; }
+  finally { setLoading(false); b1.disabled = b2.disabled = false; }
 }
- 
+
 /* ===== KWITANSI ===== */
 function fillReceiptSelect() {
   const q = $('rcpSearch').value.toLowerCase(), sel = $('rcpSelect');
   sel.innerHTML = '';
-  invoices.filter(i => (i.no + ' ' + i.name).toLowerCase().includes(q)).forEach(i => {
+  invoices.filter(i => i.status !== 'BATAL' && (i.no + ' ' + i.name).toLowerCase().includes(q)).forEach(i => {
     const o = document.createElement('option');
     o.value = i.no;
     o.textContent = i.no + ' · ' + i.name + ' · ' + (i.status === 'LUNAS' ? '✓ LUNAS' : 'sisa ' + money(Math.max(0, i.total - i.dp)));
@@ -371,7 +777,7 @@ function fillReceiptSelect() {
 }
 function pickReceipt(no) {
   const v = invoices.find(i => i.no === no);
-  if (!v) return;
+  if (!v || v.status === 'BATAL') return;
   loadInvoice(v); editingNo = no; $('rcpSelect').value = no;
   if (v.paidDate) $('rcpDate').value = v.paidDate;
   $('rcpDate').disabled = v.status === 'LUNAS';
@@ -391,8 +797,13 @@ async function onSaveReceipt() {
   } catch (e) { alert('Gagal menyimpan: ' + e.message); }
   finally { setLoading(false); btn.disabled = false; }
 }
- 
+
 /* RENDER INVOICE / KWITANSI */
+function addRow(tbody, cells, cls) {
+  const tr = document.createElement('tr'); if (cls) tr.className = cls;
+  cells.forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+  tbody.appendChild(tr);
+}
 function render() {
   const rc = mode === 'receipt' && !!editingNo;
   const inv = collect();
@@ -410,36 +821,34 @@ function render() {
   $('pBankName').textContent = 'BCA';
   $('pAccount').textContent = '1080792880';
   $('pAccountName').textContent = 'Nursilfiah';
- 
+
   document.querySelector('.invoice-title').textContent = rc ? 'KWITANSI' : 'INVOICE';
   $('metaTitle').textContent = rc ? 'BUKTI PEMBAYARAN' : 'NOTA PEMBAYARAN';
   $('stamp').style.display = rc ? 'block' : 'none';
+  $('sumwrap').classList.toggle('rc', rc);
   $('bankBox').style.display = rc ? 'none' : 'flex';
   $('recvBox').style.display = rc ? 'flex' : 'none';
   $('rcvName').textContent = inv.name;
-  $('rcvFor').textContent = 'Pembayaran: ' + (inv.items[0] ? inv.items[0].desc : '');
+  $('rcvFor').textContent = 'Pembayaran sewa ' + unitLabel(inv.units) + (inv.duration ? ' (' + inv.duration + ')' : '') + (inv.payMethod ? ' · ' + inv.payMethod : '');
   $('lblDP').innerHTML = rc ? '<b>DP</b> (Terbayar)' : '<b>DP</b>';
   $('lblBal').innerHTML = rc ? '<b>PELUNASAN</b>' : '<b>SISA PEMBAYARAN</b>';
   $('signNote').innerHTML = (rc ? 'Pembayaran telah diterima dengan baik.' : 'Saya telah setuju dengan syarat dan ketentuan yang berlaku.') + '<br>Terima kasih telah menginap dan berkunjung di villa kami.';
-  $('termsTitle').textContent = rc ? '● \u00a0 KETERANGAN \u00a0 ●' : '● \u00a0 KETENTUAN BOOKING \u00a0 ●';
- 
+  $('termsTitle').textContent = rc ? '●   KETERANGAN   ●' : '●   KETENTUAN BOOKING   ●';
+
   const tbody = $('pItems');
   tbody.innerHTML = '';
   inv.items.forEach((it, i) => {
     const sub = it.qty * it.price;
-    const tr = document.createElement('tr');
-    [String(i + 1), it.desc, it.qty ? it.qty : '-', it.price ? money(it.price) : '-', sub ? money(sub) : '-'].forEach((v, j) => {
-      const td = document.createElement('td');
-      td.textContent = v;
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
+    addRow(tbody, [String(i + 1), it.desc, it.qty ? it.qty : '-', it.price ? money(it.price) : '-', sub ? money(sub) : '-']);
   });
-  const total = totalOf(inv);
+  const dsc = inv.discount;
+  if (dsc.bundling > 0) addRow(tbody, ['', 'Diskon Bundling Villa 2 & 3 (' + Math.max(1, nightsCount()) + ' malam)', '-', '-', '−' + money(dsc.bundling)], 'disc');
+  if (dsc.special > 0) addRow(tbody, ['', dsc.specialDesc || 'Diskon', '-', '-', '−' + money(dsc.special)], 'disc');
+  const total = totalOf(inv), sisa = Math.max(0, total - inv.dp);
   $('pTotal').textContent = money(total);
   $('pDP').textContent = money(inv.dp);
-  $('pBalance').textContent = money(Math.max(0, total - inv.dp));
- 
+  $('pBalance').textContent = money(sisa);
+
   const ol = $('pTerms');
   ol.innerHTML = '';
   (rc ? ['Kwitansi ini adalah bukti pembayaran LUNAS untuk invoice ' + inv.no + '.', 'Mohon simpan kwitansi ini sebagai bukti pembayaran.'] : [
@@ -449,55 +858,59 @@ function render() {
     'First pay first book (tidak bisa block tanggal kalau belum DP)',
     'Hanya menerima pembayaran melalui sistem transfer antar bank (real time online / BI Fast)'
   ]).forEach(t => { const li = document.createElement('li'); li.textContent = t; ol.appendChild(li); });
- 
+
   $('pContact').textContent = 'Jl. Pasir Tugu No.17, Cibeureum, Kec. Cisarua, Kabupaten Bogor, Jawa Barat 16750  |  +62 813-1526-5266';
+
+  // ringkasan cepat di form + peringatan bentrok
+  $('liveSum').innerHTML = '';
+  [['Total ' + money(total)], ['DP ' + money(inv.dp)], ['Sisa ' + money(sisa)]].forEach(t => { const s = document.createElement('span'); s.textContent = t[0]; $('liveSum').appendChild(s); });
+  const cf = mode === 'invoice' ? conflictsFor(inv) : [];
+  $('conflictBox').style.display = cf.length ? '' : 'none';
+  $('conflictBox').textContent = cf.join('\n');
+  $('conflictBox').style.whiteSpace = 'pre-line';
 }
- 
+
 /* EVENTS */
 $('loginForm').addEventListener('submit', e => { e.preventDefault(); checkLogin(); });
 $('logoutBtn').addEventListener('click', doLogout);
- 
-document.querySelectorAll('.editor input, .editor textarea').forEach(el => el.addEventListener('input', render));
- 
+
+document.querySelectorAll('.editor input, .editor textarea, .editor select').forEach(el => { el.addEventListener('input', render); el.addEventListener('change', render); });
+
 function setPrintTitle() {
   const name = ($('customer').value || 'PEMESAN').trim().replace(/[\\/:*?"<>|]/g, ' ').replace(/\s+/g, ' ');
   document.title = 'Invoice Villa Malika ' + name;
 }
 window.addEventListener('beforeprint', setPrintTitle);
- 
-function wireRemove() {
-  document.querySelectorAll('.remove').forEach(btn => {
-    btn.onclick = () => { btn.closest('.item-row').remove(); render(); };
-  });
-}
- 
-$('addItem').addEventListener('click', () => {
-  const row = document.createElement('div');
-  row.className = 'item-row';
-  row.innerHTML = '<input aria-label="Deskripsi" value="Item baru" class="desc"><input aria-label="Qty" type="number" min="0" value="1" class="qty"><input aria-label="Harga" type="number" min="0" value="0" class="price"><button class="remove" type="button" title="Hapus item">×</button>';
-  $('items').appendChild(row);
-  row.querySelectorAll('input').forEach(el => el.addEventListener('input', render));
-  wireRemove();
-  render();
-});
- 
-wireRemove();
-resetForm();
- 
-/* EVENT TAMBAHAN */
+
+$('addItem').addEventListener('click', () => { $('items').appendChild(createRow('Item baru', 1, 0, 0, false)); render(); });
 document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
-$('pdfBtn').addEventListener('click', onSaveInvoice);
+$('pdfBtn').addEventListener('click', () => onSaveBooking(false));
+$('lunasBtn').addEventListener('click', () => onSaveBooking(true));
 $('rcpBtn').addEventListener('click', onSaveReceipt);
-$('newInvBtn').addEventListener('click', () => { if (confirm('Kosongkan form dan buat invoice baru?')) resetForm(); });
+$('newInvBtn').addEventListener('click', () => { if (confirm('Kosongkan form dan buat booking baru?')) resetForm(); });
+$('calNew').addEventListener('click', newBooking);
+$('calPrev').addEventListener('click', () => moveMonth(-1));
+$('calNext').addEventListener('click', () => moveMonth(1));
+$('calToday').addEventListener('click', () => { initCal(); renderCalendar(); });
 $('rcpSearch').addEventListener('input', fillReceiptSelect);
 $('rcpSelect').addEventListener('change', () => pickReceipt($('rcpSelect').value));
 $('rcpDate').addEventListener('input', () => { paidISO = $('rcpDate').value; render(); });
 $('histSearch').addEventListener('input', renderHistory);
-['unit', 'duration', 'checkin', 'checkout'].forEach(id => $(id).addEventListener('input', () => {
-  if (id === 'checkin' || id === 'checkout') autoDuration(); else syncFirstItem();
-  render();
-}));
- 
+$('histFilter').addEventListener('change', renderHistory);
+$('kAmount').addEventListener('input', updateKomisiNet);
+$('kSave').addEventListener('click', saveKomisi);
+$('kClose').addEventListener('click', closeKomisi);
+$('komisiModal').addEventListener('click', e => { if (e.target === $('komisiModal')) closeKomisi(); });
+$('btype').addEventListener('change', () => { syncAgentUI(); render(); });
+$('agentSel').addEventListener('change', () => { syncAgentUI(); render(); });
+[1, 2, 3].forEach(n => $('v' + n).addEventListener('change', () => refreshBooking(true)));
+['checkin', 'checkout'].forEach(id => $(id).addEventListener('input', autoDuration));
+$('duration').addEventListener('input', () => refreshBooking(false));
+$('bundleOn').addEventListener('change', render);
+document.querySelectorAll('.previewToggle').forEach(b => b.addEventListener('click', () => setPreview(!previewOn)));
+$('detailModal').addEventListener('click', e => { if (e.target === $('detailModal')) closeDetail(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDetail(); closeKomisi(); } });
+
 /* DOWNLOAD PDF LANGSUNG (tanpa dialog print) */
 const PDF_W = 794; // lebar A4 pada 96dpi
 function preload(src) {
@@ -508,7 +921,7 @@ function setLoading(on, msg) {
   if (msg) $('pdfLoadingText').textContent = msg;
 }
 const tick = ms => new Promise(r => setTimeout(r, ms));
- 
+
 async function downloadPdf(fileName) {
   if (!window.html2canvas || !window.jspdf) {
     alert('Library PDF belum termuat. Periksa koneksi internet lalu coba lagi.');
@@ -520,22 +933,22 @@ async function downloadPdf(fileName) {
     render();
     await tick(60);
     await Promise.all([preload('villa-header.jpg'), preload('TTD%20NOVA.png')]);
- 
+
     // Render invoice di iframe lebar tetap 794px supaya hasil PDF selalu sama (desktop maupun HP)
     const css = document.querySelector('style').textContent;
     const html = '<!doctype html><html><head><meta charset="utf-8"><meta name="format-detection" content="telephone=no,address=no,email=no,date=no"><base href="' + document.baseURI + '"><style>' + css +
       'body{background:#fff!important;color:#171717}.invoice{width:' + PDF_W + 'px!important;max-width:none!important;margin:0!important;box-shadow:none!important}</style></head><body>' +
       $('invoice').outerHTML + '</body></html>';
- 
+
     frame = document.createElement('iframe');
     frame.setAttribute('aria-hidden', 'true');
     frame.style.cssText = 'position:fixed;left:-10000px;top:0;width:' + PDF_W + 'px;height:1123px;border:0;pointer-events:none';
     await new Promise(res => { frame.onload = res; frame.srcdoc = html; document.body.appendChild(frame); });
- 
+
     const doc = frame.contentDocument;
     await Promise.all([...doc.images].map(im => im.complete ? Promise.resolve() : new Promise(r => { im.onload = im.onerror = r; })));
     if (doc.fonts && doc.fonts.ready) await doc.fonts.ready;
- 
+
     setLoading(true, 'Merender invoice...');
     await tick(50);
     const inv = doc.getElementById('invoice');
@@ -543,7 +956,7 @@ async function downloadPdf(fileName) {
       scale: 2, useCORS: true, backgroundColor: '#ffffff',
       width: PDF_W, windowWidth: PDF_W, scrollX: 0, scrollY: 0
     });
- 
+
     setLoading(true, 'Menyusun PDF...');
     await tick(50);
     const { jsPDF } = window.jspdf;
@@ -568,7 +981,7 @@ async function downloadPdf(fileName) {
       pdf.addImage(part.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, Math.min(297, sliceH * 210 / canvas.width), undefined, 'FAST');
     }
     }
- 
+
     pdf.save(fileName);
     ok = true;
   } catch (err) {
@@ -580,8 +993,10 @@ async function downloadPdf(fileName) {
   }
   return ok;
 }
- 
-/* Cek status login saat halaman dibuka (di akhir, setelah semua fungsi siap) */
+
+/* Siapkan form saat halaman dibuka, lalu cek status login (di akhir, setelah semua fungsi siap) */
+setPreview(previewOn);
+resetForm();
 try {
   const t = localStorage.getItem('vm_token');
   if (t) { TOKEN = t; openMainApp(); }
@@ -589,4 +1004,3 @@ try {
 </script>
 </body>
 </html>
- 
