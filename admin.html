@@ -87,6 +87,45 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
 .hist tr.batal td{opacity:.5}.hist tr.batal td:last-child{opacity:1}
 .btn.danger{background:#7f2933;color:#fff}.btn.ok{background:#1fc66a;color:#fff}
 .muted{color:#8aa0bb}
+
+/* PENGELUARAN */
+#viewExp,#viewRep{display:none}
+.expgrid{display:grid;grid-template-columns:minmax(300px,420px) minmax(0,1fr);gap:28px;padding:28px 3%;align-items:start}
+.exp-filters{display:grid;grid-template-columns:minmax(150px,190px) auto minmax(130px,170px) 1fr;gap:10px;margin-bottom:12px;align-items:start}
+.exp-filters .btn{padding:11px 14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.chip{background:#101827;border:1px solid #3c4b61;border-radius:20px;padding:6px 12px;font-size:12px;color:#dce6f3}
+.chip b{color:#f2c34f}
+
+/* LAPORAN OWNER */
+.rep{padding:22px 3% 50px}
+.rep-bar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:end;margin-bottom:6px}
+.rep-bar h2{margin:0 16px 0 0;color:#f2c34f;font-size:clamp(19px,2.4vw,26px)}
+.rep-bar .field{margin:0;min-width:130px}
+.rep-bar .chk{display:flex;gap:8px;align-items:center;margin:0;padding-bottom:12px;cursor:pointer;color:#dce6f3;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0 20px}
+.hero{grid-column:1/-1;background:#202c40;border:1px solid #344155;border-radius:18px;padding:20px 22px}
+.hero .lbl{color:#a9bfd8;font-size:13px}.hero .val{font-size:clamp(36px,6vw,56px);font-weight:800;line-height:1.1;margin:6px 0;color:#fff}.hero .sub{color:#a9bfd8;font-size:12px}
+.tile{background:#202c40;border:1px solid #344155;border-radius:16px;padding:14px 16px;min-width:0}
+.tile .lbl{color:#a9bfd8;font-size:12px}.tile .val{font-size:20px;font-weight:800;margin-top:4px;white-space:nowrap;color:#fff}.tile .sub{color:#8aa0bb;font-size:11px;margin-top:2px}
+.repgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.repgrid .full{grid-column:1/-1}
+.panel{background:#202c40;border:1px solid #344155;border-radius:20px;padding:20px;min-width:0}
+.panel h3{margin:0 0 4px;color:#f4c95e;font-size:17px}.panel .psub{color:#8aa0bb;font-size:12px;margin:0 0 12px;line-height:1.5}
+.chwrap{overflow-x:auto}.chwrap svg{display:block;min-width:600px;width:100%;height:auto}
+.leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:#c3d1e3;margin:0 0 8px}.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.hb{display:grid;grid-template-columns:minmax(80px,32%) 1fr auto;gap:10px;align-items:center;margin:8px 0;font-size:13px}
+.hb-l{color:#dce6f3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb-t{height:16px}.hb-f{height:16px;border-radius:0 4px 4px 0;min-width:2px}
+.hb-v{color:#dce6f3;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}.tbl th,.tbl td{padding:8px;border-bottom:1px solid #344155;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:#dce6f3}
+.tbl th:first-child,.tbl td:first-child{text-align:left}.tbl th{color:#a9bfd8;font-weight:700}
+.tbl tr.tot td{font-weight:800;color:#f4c95e;border-top:2px solid #3c4b61}
+.tbl td.neg,.neg{color:#ff8f93}
+.tip{position:fixed;z-index:9500;pointer-events:none;background:#101827;border:1px solid #3c4b61;border-radius:10px;padding:8px 10px;font-size:12px;color:#edf2f7;box-shadow:0 6px 20px #0006;display:none;max-width:260px}
+.tip b{display:block;margin-bottom:4px}.tip span{display:flex;justify-content:space-between;gap:14px;line-height:1.6}.tip em{font-style:normal;color:#a9bfd8}
+@media(max-width:1000px){.expgrid,.repgrid{grid-template-columns:minmax(0,1fr)}.expgrid>*{min-width:0}.exp-filters{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.expgrid{padding:14px 10px}.rep{padding:14px 10px 40px}.exp-filters{grid-template-columns:1fr}.hb{grid-template-columns:minmax(70px,38%) 1fr auto}}
 input[type=date]{color-scheme:dark}
 .stamp{display:none;position:absolute;right:10px;bottom:2px;transform:rotate(-8deg);border:4px double #d12b2b;color:#d12b2b;font-weight:900;font-size:26px;font-family:Arial,sans-serif;letter-spacing:5px;padding:2px 14px;border-radius:8px;opacity:.88;pointer-events:none}
 @media(max-width:560px){.stamp{font-size:20px;letter-spacing:3px;border-width:3px;padding:2px 10px}}
@@ -142,7 +181,7 @@ input[type=date]{color-scheme:dark}
 @media(max-width:560px){.app{padding:14px 10px;gap:14px}.editor{padding:16px}.grid2{grid-template-columns:1fr}.items-head,.item-row{grid-template-columns:minmax(80px,1.4fr) 40px minmax(70px,1fr) 58px 28px;gap:4px}.item-row input,.item-row select{padding:9px 4px;font-size:13px}.preview-wrap{padding:6px}.paper{padding:18px 13px;margin-left:2%;margin-right:2%;border-radius:20px}.meta{font-size:11px}.detail-table{font-size:10px}.detail-table th{font-size:9px;padding:8px 3px}.detail-table td{padding:7px 4px}.summary{width:100%;min-width:0}.payrow{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.sign{border-left:0;border-top:1px solid #eed9a6;padding:16px 0}.invoice-header{height:190px}#viewCal{padding:14px 8px 40px}.cal{min-width:600px}.cal-head div{font-size:11px;padding:8px 2px}.topbar{padding:14px 4%}.tabs button{padding:10px 12px;font-size:13px}}
 @page{size:A4;margin:0}
 @media print{
- body{background:white;color:black}.topbar,#loginScreen,.editor,#viewCal,#detailModal{display:none!important}.app{display:block;padding:0}.preview-wrap{padding:0;background:white;border-radius:0;overflow:visible}.invoice{width:210mm;min-height:297mm;max-width:none;margin:0;box-shadow:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}.invoice-header{height:65mm}.paper{margin:-10mm 7mm 6mm;padding:7mm 7mm 8mm;border-width:1mm;border-radius:8mm}.invoice-title{font-size:48pt}.title-sub{margin-bottom:7mm}.meta{font-size:9pt;margin-bottom:7mm}.detail-table{font-size:8pt}.detail-table th{font-size:7.5pt}.detail-table td{padding:2.5mm 2mm}.summary{font-size:9pt;margin-bottom:6mm}.sumrow{padding:2.5mm 3mm}.sumrow.total{font-size:10pt}.bank{padding:3mm}.terms ol{font-size:7.5pt}.terms h3,.bank h3{font-size:9pt}.sign{font-size:8pt}.bca{font-size:22pt}.bank-no{font-size:13pt}.footer-note{font-size:7pt}
+ body{background:white;color:black}.topbar,#loginScreen,.editor,#viewCal,#detailModal,#komisiModal,#viewExp,#viewRep,#tip{display:none!important}.app{display:block;padding:0}.preview-wrap{padding:0;background:white;border-radius:0;overflow:visible}.invoice{width:210mm;min-height:297mm;max-width:none;margin:0;box-shadow:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}.invoice-header{height:65mm}.paper{margin:-10mm 7mm 6mm;padding:7mm 7mm 8mm;border-width:1mm;border-radius:8mm}.invoice-title{font-size:48pt}.title-sub{margin-bottom:7mm}.meta{font-size:9pt;margin-bottom:7mm}.detail-table{font-size:8pt}.detail-table th{font-size:7.5pt}.detail-table td{padding:2.5mm 2mm}.summary{font-size:9pt;margin-bottom:6mm}.sumrow{padding:2.5mm 3mm}.sumrow.total{font-size:10pt}.bank{padding:3mm}.terms ol{font-size:7.5pt}.terms h3,.bank h3{font-size:9pt}.sign{font-size:8pt}.bca{font-size:22pt}.bank-no{font-size:13pt}.footer-note{font-size:7pt}
 }
 </style>
 </head>
@@ -168,7 +207,7 @@ input[type=date]{color-scheme:dark}
 <div id="mainApp">
   <header class="topbar">
     <h1>▤ Admin Villa Malika</h1>
-    <nav class="tabs"><button type="button" data-tab="calendar" class="active">📅 Kalender</button><button type="button" data-tab="invoice">➕ Booking</button><button type="button" data-tab="receipt">✅ Kwitansi</button><button type="button" data-tab="history">📋 Riwayat</button></nav>
+    <nav class="tabs"><button type="button" data-tab="calendar" class="active">📅 Kalender</button><button type="button" data-tab="invoice">➕ Booking</button><button type="button" data-tab="receipt">✅ Kwitansi</button><button type="button" data-tab="history">📋 Riwayat</button><button type="button" data-tab="expense">💸 Pengeluaran</button><button type="button" data-tab="report">📊 Laporan</button></nav>
     <button class="logout" type="button" id="logoutBtn">🚪 Logout</button>
   </header>
 
@@ -299,6 +338,85 @@ input[type=date]{color-scheme:dark}
     </section>
   </main>
 
+  <!-- PENGELUARAN OPERASIONAL -->
+  <section id="viewExp">
+    <div class="expgrid">
+      <div class="editor" id="expForm">
+        <h2>Catat Pengeluaran</h2>
+        <div class="badgeRow"><span id="expBadge"></span><button class="btn secondary sm" id="expNew" type="button">＋ Pengeluaran Baru</button></div>
+        <div class="grid2">
+          <div class="field"><label for="expDate">Tanggal</label><input id="expDate" type="date"></div>
+          <div class="field"><label for="expAmount">Nominal (Rp)</label><input id="expAmount" type="number" min="0" inputmode="numeric" placeholder="0"></div>
+        </div>
+        <div class="field"><label for="expCat">Kategori</label><input id="expCat" list="catList" placeholder="Pilih dari daftar atau ketik sendiri" autocomplete="off"><datalist id="catList"></datalist></div>
+        <div class="field"><label for="expDesc">Keterangan</label><input id="expDesc" placeholder="mis. Token listrik Villa 3"></div>
+        <div class="grid2">
+          <div class="field"><label for="expVilla">Untuk villa</label><select id="expVilla"><option value="0">Umum (semua villa)</option><option value="1">Villa 1</option><option value="2">Villa 2</option><option value="3">Villa 3</option></select></div>
+          <div class="field"><label for="expMethod">Metode Pembayaran</label><select id="expMethod"><option>Transfer</option><option>Cash</option><option>QRIS</option><option>Lainnya</option></select></div>
+        </div>
+        <button class="btn print" type="button" id="expSave">💾 Simpan Pengeluaran</button>
+        <p class="hint">Pilih "Umum" untuk biaya bersama (misalnya gaji penjaga atau listrik umum). Pengeluaran yang salah tidak dihapus, tetapi dibatalkan, supaya laporan tetap bisa ditelusuri.</p>
+      </div>
+      <div class="editor" id="expList">
+        <h2>Riwayat Pengeluaran</h2>
+        <div class="exp-filters">
+          <input type="month" id="expMonth" aria-label="Filter bulan">
+          <button class="btn secondary" id="expAllMonths" type="button">Semua bulan</button>
+          <select id="expFilter" aria-label="Filter status"><option value="active">Aktif saja</option><option value="all">Semua</option><option value="cancel">Batal saja</option></select>
+          <input id="expSearch" placeholder="Cari kategori atau keterangan...">
+        </div>
+        <div class="chips" id="expChips"></div>
+        <div style="overflow:auto"><table class="hist"><thead><tr><th>ID</th><th>Tanggal</th><th>Kategori</th><th>Keterangan</th><th>Villa</th><th>Metode</th><th>Nominal</th><th>Aksi</th></tr></thead><tbody id="expBody"></tbody></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAPORAN OWNER -->
+  <section id="viewRep">
+    <div class="rep">
+      <div class="rep-bar">
+        <h2>📊 Laporan Keuangan</h2>
+        <div class="field"><label for="repYear">Tahun</label><select id="repYear"></select></div>
+        <div class="field"><label for="repMonth">Bulan</label><select id="repMonth"></select></div>
+        <label class="chk"><input type="checkbox" id="repSpread"> Bagi biaya umum rata ke 3 villa</label>
+        <button class="btn secondary" id="repRefresh" type="button">🔄 Muat ulang</button>
+      </div>
+      <p class="hint" id="repNote">Dasar perhitungan: pemasukan = nilai booking setelah diskon, dihitung pada bulan check-in. Pengeluaran dihitung pada bulan tanggal pengeluaran. Booking batal tidak dihitung. Sudah diterima = DP dan pelunasan; piutang = sisa yang belum lunas.</p>
+      <div class="cards" id="repCards"></div>
+      <div class="repgrid">
+        <div class="panel full">
+          <h3>Per Bulan</h3>
+          <p class="psub" id="chMonthSub"></p>
+          <div class="leg"><span><i style="background:#3987e5"></i>Pemasukan</span><span><i style="background:#d95926"></i>Biaya (komisi + pengeluaran)</span><span><i style="background:#199e70"></i>Keuntungan</span></div>
+          <div class="chwrap" id="chMonth"></div>
+          <div class="tblwrap" id="tblMonth"></div>
+        </div>
+        <div class="panel">
+          <h3>Per Villa</h3>
+          <p class="psub">Diskon dan komisi booking gabungan dibagi ke tiap villa sesuai porsi pemasukannya. Panjang bar = pemasukan.</p>
+          <div id="chVilla"></div>
+          <div class="tblwrap" id="tblVilla"></div>
+        </div>
+        <div class="panel">
+          <h3>Per Sumber Booking</h3>
+          <p class="psub">Booking langsung (Umum), VVIP, dan tiap agen / broker. Panjang bar = pemasukan.</p>
+          <div id="chSource"></div>
+          <div class="tblwrap" id="tblSource"></div>
+        </div>
+        <div class="panel">
+          <h3>Pengeluaran per Kategori</h3>
+          <p class="psub">Pengeluaran operasional pada periode terpilih.</p>
+          <div id="chCat"></div>
+        </div>
+        <div class="panel">
+          <h3>Pemesan Teratas</h3>
+          <p class="psub">10 pemesan dengan nilai booking terbesar pada periode terpilih.</p>
+          <div class="tblwrap" id="tblCust"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="viewHistory" style="display:none">
     <div class="editor" style="margin:28px 3%">
       <h2>Riwayat Booking</h2>
@@ -318,6 +436,8 @@ input[type=date]{color-scheme:dark}
     <div class="dbtns" id="dBtns"></div>
   </div>
 </div>
+
+<div class="tip" id="tip" role="tooltip"></div>
 
 <!-- POPUP KOMISI AGEN -->
 <div id="komisiModal" role="dialog" aria-modal="true" aria-label="Komisi agen">
@@ -534,9 +654,10 @@ async function openMainApp() {
 }
 async function refreshList() {
   const r = await api('list');
-  invoices = r.invoices; agents = r.agents || [];
+  invoices = r.invoices; agents = r.agents || []; expenses = r.expenses || [];
   fillAgentSelect(getAgent());
   renderHistory(); fillReceiptSelect(); renderCalendar(); render();
+  fillCatList(); renderExpenses(); renderReport();
 }
 
 /* ===== TAB ===== */
@@ -551,6 +672,10 @@ function showTab(t) {
   $('viewCal').style.display = t === 'calendar' ? 'block' : 'none';
   $('viewHistory').style.display = t === 'history' ? 'block' : 'none';
   $('viewApp').style.display = t === 'invoice' || t === 'receipt' ? '' : 'none';
+  $('viewExp').style.display = t === 'expense' ? 'block' : 'none';
+  $('viewRep').style.display = t === 'report' ? 'block' : 'none';
+  if (t === 'expense') { renderExpenses(); return; }
+  if (t === 'report') { renderReport(); return; }
   if (t === 'calendar') { renderCalendar(); return; }
   if (t === 'history') { renderHistory(); return; }
   mode = t === 'receipt' ? 'receipt' : 'invoice';
@@ -679,6 +804,7 @@ function renderHistory() {
       td.appendChild(mkBtn('Revisi', () => startRevision(i)));
       td.appendChild(mkBtn('Kwitansi', () => openReceipt(i.no)));
       if (i.type === 'Agen') td.appendChild(mkBtn('Komisi Agen', () => openKomisi(i)));
+      if (i.status === 'LUNAS') td.appendChild(mkBtn('Buka kunci', () => unlockBooking(i)));
       const bt = mkBtn('Batalkan', () => cancelBooking(i)); bt.classList.remove('secondary'); bt.classList.add('danger'); td.appendChild(bt);
     }
     tr.appendChild(td); tb.appendChild(tr);
@@ -870,6 +996,245 @@ function render() {
   $('conflictBox').style.whiteSpace = 'pre-line';
 }
 
+/* ===== PENGELUARAN ===== */
+let expenses = [], editingExp = '';
+const EXP_CATS = ['Listrik', 'Air', 'Internet / Wi-Fi', 'Kebersihan & laundry', 'Gaji penjaga / staff', 'Perawatan & perbaikan', 'Belanja kebutuhan villa', 'Perawatan kolam', 'Gas & BBM', 'Pajak & retribusi', 'Promosi / iklan', 'Lain-lain'];
+const canonCat = s => { s = String(s || '').replace(/\s+/g, ' ').trim(); const m = EXP_CATS.find(c => c.toLowerCase() === s.toLowerCase()); return m || s; };
+const villaTxt = v => v ? 'Villa ' + v : 'Umum';
+function fillCatList() {
+  const set = EXP_CATS.slice();
+  expenses.forEach(e => { if (e.category && !set.some(c => c.toLowerCase() === e.category.toLowerCase())) set.push(e.category); });
+  const dl = $('catList'); dl.innerHTML = '';
+  set.forEach(c => { const o = document.createElement('option'); o.value = c; dl.appendChild(o); });
+}
+function setExpBadge() { $('expBadge').textContent = editingExp ? '✏️ Revisi: ' + editingExp : '🆕 Pengeluaran baru'; }
+function resetExpForm() {
+  editingExp = ''; $('expDate').value = toISO(new Date()); $('expAmount').value = ''; $('expCat').value = ''; $('expDesc').value = '';
+  $('expVilla').value = '0'; $('expMethod').value = 'Transfer'; setExpBadge();
+}
+function startExpRevision(e) {
+  editingExp = e.id; $('expDate').value = e.date; $('expAmount').value = e.amount; $('expCat').value = e.category; $('expDesc').value = e.desc || '';
+  $('expVilla').value = String(e.villa || 0); $('expMethod').value = e.method || 'Transfer'; setExpBadge();
+  $('expForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+async function saveExp() {
+  const amount = Math.round(Number($('expAmount').value) || 0), cat = canonCat($('expCat').value);
+  if (!$('expDate').value) { alert('Isi tanggal pengeluaran.'); return; }
+  if (!cat) { alert('Isi kategori pengeluaran.'); return; }
+  if (!(amount > 0)) { alert('Nominal harus lebih dari 0.'); return; }
+  const payload = { id: editingExp, expense: { date: $('expDate').value, category: cat, desc: $('expDesc').value.trim(), amount: amount, villa: Number($('expVilla').value) || 0, method: $('expMethod').value } };
+  if (await runOp('saveExpense', payload, 'Menyimpan pengeluaran...')) resetExpForm();
+}
+function cancelExp(e) {
+  const reason = prompt('Batalkan pengeluaran ' + e.id + ' (' + e.category + ' ' + money(e.amount) + ')?\nTidak dihapus, hanya tidak dihitung di laporan.\n\nTulis alasan (boleh dikosongkan), lalu OK:', '');
+  if (reason === null) return;
+  runOp('cancelExpense', { id: e.id, reason: reason }, 'Membatalkan pengeluaran...');
+}
+function restoreExp(e) {
+  if (!confirm('Aktifkan lagi pengeluaran ' + e.id + '?')) return;
+  runOp('restoreExpense', { id: e.id }, 'Mengaktifkan pengeluaran...');
+}
+function renderExpenses() {
+  const m = $('expMonth').value, f = $('expFilter').value, q = $('expSearch').value.toLowerCase(), tb = $('expBody');
+  tb.innerHTML = '';
+  const rows = expenses.filter(e => (!m || String(e.date).slice(0, 7) === m) && (f === 'all' || (f === 'cancel') === (e.status === 'BATAL')) && ((e.category || '') + ' ' + (e.desc || '') + ' ' + e.id).toLowerCase().includes(q));
+  rows.sort((a, b) => String(b.date).localeCompare(String(a.date)) || String(b.id).localeCompare(String(a.id)));
+  rows.forEach(e => {
+    const batal = e.status === 'BATAL', tr = document.createElement('tr');
+    if (batal) tr.className = 'batal';
+    [e.id, fmtShort(e.date), e.category, e.desc || '-', villaTxt(e.villa), e.method, money(e.amount)].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+    if (batal && e.cancelReason) tr.children[3].textContent = (e.desc || '-') + ' · Batal: ' + e.cancelReason;
+    const td = document.createElement('td');
+    if (batal) td.appendChild(mkBtn('Aktifkan lagi', () => restoreExp(e)));
+    else {
+      td.appendChild(mkBtn('Revisi', () => startExpRevision(e)));
+      const bt = mkBtn('Batalkan', () => cancelExp(e)); bt.classList.remove('secondary'); bt.classList.add('danger'); td.appendChild(bt);
+    }
+    tr.appendChild(td); tb.appendChild(tr);
+  });
+  if (!rows.length) { const tr = document.createElement('tr'), td = document.createElement('td'); td.colSpan = 8; td.className = 'muted'; td.textContent = 'Belum ada pengeluaran pada filter ini.'; tr.appendChild(td); tb.appendChild(tr); }
+  const act = rows.filter(e => e.status !== 'BATAL'), tot = act.reduce((a, e) => a + e.amount, 0), byCat = {};
+  act.forEach(e => { byCat[e.category] = (byCat[e.category] || 0) + e.amount; });
+  const chips = $('expChips'); chips.innerHTML = '';
+  const chip = (t, v) => { const c = document.createElement('span'); c.className = 'chip'; c.appendChild(document.createTextNode(t + ' ')); const b = document.createElement('b'); b.textContent = v; c.appendChild(b); chips.appendChild(c); };
+  chip('Total aktif', money(tot));
+  Object.keys(byCat).sort((a, b) => byCat[b] - byCat[a]).forEach(k => chip(k, money(byCat[k])));
+}
+
+/* ===== LAPORAN ===== */
+const COL = { inc: '#3987e5', cost: '#d95926', prof: '#199e70' };
+const ymOf = s => { const m = /^(\d{4})-(\d{2})/.exec(String(s || '')); return m ? { y: +m[1], m: +m[2] - 1 } : null; };
+/* Bagi nilai satu booking ke tiap villa. Item villa 0 dibagi rata ke villa yang disewa; diskon dibagi rata; hasil diskalakan agar jumlah = total booking. */
+function bookingAlloc(b) {
+  const units = (b.units && b.units.length) ? b.units.slice() : [0], raw = {};
+  units.forEach(u => { raw[u] = 0; });
+  normalizeItems(b).forEach(i => {
+    const amt = (Number(i.qty) || 0) * (Number(i.price) || 0);
+    if (i.villa > 0) raw[i.villa] = (raw[i.villa] || 0) + amt;
+    else units.forEach(u => { raw[u] += amt / units.length; });
+  });
+  const disc = discountOf(b), keys = Object.keys(raw);
+  keys.forEach(k => { raw[k] -= disc / keys.length; });
+  const sum = keys.reduce((a, k) => a + raw[k], 0), total = Number(b.total) || 0, out = {};
+  keys.forEach(k => { out[k] = sum > 0 ? raw[k] * total / sum : total / keys.length; });
+  return out;
+}
+function buildReport(year, month, spread) {
+  const inPeriod = d => { const p = ymOf(d); return p && p.y === year && (month < 0 || p.m === month); };
+  const months = Array.from({ length: 12 }, () => ({ inc: 0, cost: 0, comm: 0, exp: 0 }));
+  const R = { inc: 0, comm: 0, exp: 0, recv: 0, nights: 0, count: 0, villa: { 1: { inc: 0, comm: 0, exp: 0 }, 2: { inc: 0, comm: 0, exp: 0 }, 3: { inc: 0, comm: 0, exp: 0 } }, umum: 0, src: {}, cat: {}, cust: {}, months: months };
+  invoices.forEach(b => {
+    if (b.status === 'BATAL') return;
+    const p = ymOf(b.checkin); if (!p || p.y !== year) return;
+    const total = Number(b.total) || 0, comm = b.type === 'Agen' ? Math.min(Number(b.commission) || 0, total) : 0;
+    months[p.m].inc += total; months[p.m].comm += comm; months[p.m].cost += comm;
+    if (month >= 0 && p.m !== month) return;
+    R.inc += total; R.comm += comm; R.count++; R.nights += nightsOf(b) * Math.max(1, (b.units || []).length);
+    R.recv += b.status === 'LUNAS' ? total : Math.min(Number(b.dp) || 0, total);
+    const al = bookingAlloc(b);
+    Object.keys(al).forEach(k => { if (R.villa[k]) { R.villa[k].inc += al[k]; R.villa[k].comm += total > 0 ? comm * al[k] / total : 0; } });
+    const sk = b.type === 'Agen' ? 'Agen: ' + (b.agent || '-') : b.type === 'VVIP' ? 'VVIP' : 'Booking langsung';
+    const s = R.src[sk] || (R.src[sk] = { n: 0, inc: 0, comm: 0 }); s.n++; s.inc += total; s.comm += comm;
+    const c = R.cust[b.name] || (R.cust[b.name] = { n: 0, inc: 0 }); c.n++; c.inc += total;
+  });
+  expenses.forEach(e => {
+    if (e.status === 'BATAL') return;
+    const p = ymOf(e.date); if (!p || p.y !== year) return;
+    months[p.m].exp += e.amount; months[p.m].cost += e.amount;
+    if (!inPeriod(e.date)) return;
+    R.exp += e.amount; R.cat[e.category] = (R.cat[e.category] || 0) + e.amount;
+    if (e.villa > 0) R.villa[e.villa].exp += e.amount; else R.umum += e.amount;
+  });
+  if (spread) { [1, 2, 3].forEach(v => { R.villa[v].exp += R.umum / 3; }); R.umumShown = 0; } else R.umumShown = R.umum;
+  R.profit = R.inc - R.comm - R.exp; R.recvable = R.inc - R.recv;
+  return R;
+}
+const shortRp = n => { const a = Math.abs(n), s = n < 0 ? '−' : ''; return a >= 1e6 ? s + (a / 1e6).toFixed(a >= 1e7 ? 0 : 1).replace('.', ',') + ' jt' : a >= 1e3 ? s + Math.round(a / 1e3) + ' rb' : s + Math.round(a); };
+function niceScale(min, max) {
+  min = Math.min(0, min); max = Math.max(0, max); if (max === min) max = min + 1;
+  const raw = (max - min) / 4, pow = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / pow, step = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * pow;
+  return { lo: Math.floor(min / step) * step, hi: Math.ceil(max / step) * step, step: step };
+}
+const SVGNS = 'http://www.w3.org/2000/svg';
+function svgEl(tag, attrs, text) { const e = document.createElementNS(SVGNS, tag); Object.keys(attrs || {}).forEach(k => e.setAttribute(k, attrs[k])); if (text != null) e.textContent = text; return e; }
+/* batang dengan sudut membulat 4px hanya di ujung data */
+function colPath(x, y0, y1, w, r) {
+  const h = Math.abs(y1 - y0); if (h < 0.5) return 'M' + x + ' ' + y0 + 'h' + w + 'v0.5h-' + w + 'z';
+  r = Math.min(r, h, w / 2);
+  if (y1 <= y0) return 'M' + x + ' ' + y0 + 'V' + (y1 + r) + 'Q' + x + ' ' + y1 + ' ' + (x + r) + ' ' + y1 + 'H' + (x + w - r) + 'Q' + (x + w) + ' ' + y1 + ' ' + (x + w) + ' ' + (y1 + r) + 'V' + y0 + 'Z';
+  return 'M' + x + ' ' + y0 + 'V' + (y1 - r) + 'Q' + x + ' ' + y1 + ' ' + (x + r) + ' ' + y1 + 'H' + (x + w - r) + 'Q' + (x + w) + ' ' + y1 + ' ' + (x + w) + ' ' + (y1 - r) + 'V' + y0 + 'Z';
+}
+const tip = $('tip');
+function showTip(ev, title, rows) {
+  tip.innerHTML = '';
+  const b = document.createElement('b'); b.textContent = title; tip.appendChild(b);
+  rows.forEach(r => { const s = document.createElement('span'), a = document.createElement('em'), v = document.createElement('i'); a.textContent = r[0]; v.textContent = r[1]; v.style.fontStyle = 'normal'; s.appendChild(a); s.appendChild(v); tip.appendChild(s); });
+  tip.style.display = 'block';
+  const t = ev.target.getBoundingClientRect(); let x = (ev.clientX || t.left + t.width / 2) + 14, y = (ev.clientY || t.top) + 14;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  if (x + w > innerWidth - 8) x = Math.max(8, x - w - 28); if (y + h > innerHeight - 8) y = Math.max(8, y - h - 28);
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+}
+const hideTip = () => { tip.style.display = 'none'; };
+function drawMonthChart(R, year) {
+  const W = 760, H = 280, L = 58, T = 12, B = 30, Rt = 10, host = $('chMonth'); host.innerHTML = '';
+  const vals = R.months.map(m => [m.inc, m.cost, m.inc - m.cost]);
+  const all = [].concat.apply([], vals), sc = niceScale(Math.min.apply(null, all), Math.max.apply(null, all));
+  const ih = H - T - B, y = v => T + (sc.hi - v) / (sc.hi - sc.lo) * ih, gw = (W - L - Rt) / 12, bw = 16, gap = 2;
+  const svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Grafik pemasukan, biaya, dan keuntungan per bulan tahun ' + year });
+  for (let v = sc.lo; v <= sc.hi + 1e-6; v += sc.step) {
+    svg.appendChild(svgEl('line', { x1: L, x2: W - Rt, y1: y(v), y2: y(v), stroke: v === 0 ? '#5b6b82' : '#344155', 'stroke-width': v === 0 ? 1.5 : 1 }));
+    svg.appendChild(svgEl('text', { x: L - 8, y: y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#a9bfd8' }, shortRp(v)));
+  }
+  const cols = [COL.inc, COL.cost, COL.prof], names = ['Pemasukan', 'Biaya', 'Keuntungan'];
+  R.months.forEach((m, i) => {
+    const gx = L + i * gw + (gw - (3 * bw + 2 * gap)) / 2, g = svgEl('g', { tabindex: 0, role: 'img', 'aria-label': BULAN[i] + ': pemasukan ' + money(vals[i][0]) + ', biaya ' + money(vals[i][1]) + ', keuntungan ' + money(vals[i][2]) });
+    g.appendChild(svgEl('rect', { x: L + i * gw, y: T, width: gw, height: ih, fill: 'transparent' }));
+    vals[i].forEach((v, k) => g.appendChild(svgEl('path', { d: colPath(gx + k * (bw + gap), y(0), y(v), bw, 4), fill: cols[k] })));
+    svg.appendChild(g);
+    svg.appendChild(svgEl('text', { x: L + i * gw + gw / 2, y: H - 10, 'text-anchor': 'middle', 'font-size': 11, fill: '#a9bfd8' }, BULAN[i].slice(0, 3)));
+    const rows = vals[i].map((v, k) => [names[k], money(v)]);
+    g.addEventListener('mousemove', ev => showTip(ev, BULAN[i] + ' ' + year, rows));
+    g.addEventListener('focus', ev => showTip(ev, BULAN[i] + ' ' + year, rows));
+    g.addEventListener('mouseleave', hideTip); g.addEventListener('blur', hideTip);
+  });
+  host.appendChild(svg);
+}
+function mkTable(host, head, rows, totalRow) {
+  host.innerHTML = '';
+  const t = document.createElement('table'); t.className = 'tbl';
+  const hr = document.createElement('tr'); head.forEach(h => { const th = document.createElement('th'); th.textContent = h; hr.appendChild(th); });
+  const th = document.createElement('thead'); th.appendChild(hr); t.appendChild(th);
+  const tb = document.createElement('tbody');
+  const add = (r, cls) => { const tr = document.createElement('tr'); if (cls) tr.className = cls; r.forEach(v => { const td = document.createElement('td'); const neg = typeof v === 'string' && v.charAt(0) === '−'; td.textContent = v; if (neg) td.className = 'neg'; tr.appendChild(td); }); tb.appendChild(tr); };
+  rows.forEach(r => add(r)); if (totalRow) add(totalRow, 'tot');
+  t.appendChild(tb); host.appendChild(t);
+}
+const rp = n => (n < 0 ? '−' : '') + money(Math.abs(n));
+function hbars(host, items, color) {
+  host.innerHTML = '';
+  const max = Math.max(1, ...items.map(i => i.v));
+  if (!items.length) { const p = document.createElement('p'); p.className = 'muted'; p.textContent = 'Belum ada data pada periode ini.'; host.appendChild(p); return; }
+  items.forEach(i => {
+    const r = document.createElement('div'); r.className = 'hb';
+    const l = document.createElement('div'); l.className = 'hb-l'; l.textContent = i.l; l.title = i.l;
+    const t = document.createElement('div'); t.className = 'hb-t'; const f = document.createElement('div'); f.className = 'hb-f'; f.style.width = Math.max(0, i.v / max * 100) + '%'; f.style.background = color; t.appendChild(f);
+    const v = document.createElement('div'); v.className = 'hb-v'; v.textContent = money(i.v);
+    r.appendChild(l); r.appendChild(t); r.appendChild(v); host.appendChild(r);
+  });
+}
+function fillRepSelectors() {
+  const ys = new Set([new Date().getFullYear()]);
+  invoices.forEach(b => { const p = ymOf(b.checkin); if (p) ys.add(p.y); });
+  expenses.forEach(e => { const p = ymOf(e.date); if (p) ys.add(p.y); });
+  const sel = $('repYear'), cur = sel.value || String(new Date().getFullYear());
+  sel.innerHTML = ''; [...ys].sort((a, b) => b - a).forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; sel.appendChild(o); });
+  sel.value = [...ys].some(y => String(y) === cur) ? cur : String(new Date().getFullYear());
+}
+function initRepMonth() {
+  const s = $('repMonth'); s.innerHTML = '';
+  const all = document.createElement('option'); all.value = '-1'; all.textContent = 'Setahun penuh'; s.appendChild(all);
+  BULAN.forEach((b, i) => { const o = document.createElement('option'); o.value = i; o.textContent = b; s.appendChild(o); });
+  s.value = String(new Date().getMonth());
+}
+function renderReport() {
+  fillRepSelectors();
+  const year = Number($('repYear').value), month = Number($('repMonth').value), spread = $('repSpread').checked;
+  const R = buildReport(year, month, spread), label = month < 0 ? 'tahun ' + year : BULAN[month] + ' ' + year;
+  const cards = $('repCards'); cards.innerHTML = '';
+  const hero = document.createElement('div'); hero.className = 'hero';
+  hero.innerHTML = '<div class="lbl"></div><div class="val"></div><div class="sub"></div>';
+  hero.children[0].textContent = 'Keuntungan bersih · ' + label; hero.children[1].textContent = rp(R.profit); if (R.profit < 0) hero.children[1].classList.add('neg');
+  hero.children[2].textContent = 'Pemasukan ' + money(R.inc) + ' − komisi ' + money(R.comm) + ' − pengeluaran ' + money(R.exp);
+  cards.appendChild(hero);
+  const tile = (l, v, s) => { const d = document.createElement('div'); d.className = 'tile'; d.innerHTML = '<div class="lbl"></div><div class="val"></div><div class="sub"></div>'; d.children[0].textContent = l; d.children[1].textContent = v; d.children[2].textContent = s || ''; cards.appendChild(d); };
+  tile('Pemasukan', money(R.inc), R.count + ' booking'); tile('Komisi agen', money(R.comm)); tile('Pengeluaran', money(R.exp));
+  tile('Sudah diterima', money(R.recv), 'DP + pelunasan'); tile('Piutang', money(R.recvable), 'sisa belum lunas'); tile('Malam terjual', String(R.nights), 'jumlah malam × villa');
+  $('chMonthSub').textContent = 'Seluruh bulan tahun ' + year + ' (pemasukan menurut bulan check-in).' + (month >= 0 ? ' Angka ringkasan di atas hanya untuk ' + BULAN[month] + '.' : '');
+  drawMonthChart(R, year);
+  mkTable($('tblMonth'), ['Bulan', 'Pemasukan', 'Komisi', 'Pengeluaran', 'Keuntungan'],
+    R.months.map((m, i) => [BULAN[i], money(m.inc), money(m.comm), money(m.exp), rp(m.inc - m.cost)]),
+    ['Total', money(R.months.reduce((a, m) => a + m.inc, 0)), money(R.months.reduce((a, m) => a + m.comm, 0)), money(R.months.reduce((a, m) => a + m.exp, 0)), rp(R.months.reduce((a, m) => a + m.inc - m.cost, 0))]);
+  const vr = [1, 2, 3].map(v => { const x = R.villa[v]; return { v: v, inc: x.inc, comm: x.comm, exp: x.exp, prof: x.inc - x.comm - x.exp }; });
+  hbars($('chVilla'), vr.map(x => ({ l: 'Villa ' + x.v, v: Math.max(0, x.inc) })), COL.inc);
+  const vrows = vr.map(x => ['Villa ' + x.v, money(x.inc), money(x.comm), money(x.exp), rp(x.prof)]);
+  if (!spread) vrows.push(['Biaya umum', money(0), money(0), money(R.umumShown), rp(-R.umumShown)]);
+  mkTable($('tblVilla'), ['', 'Pemasukan', 'Komisi', 'Biaya', 'Untung'], vrows, ['Total', money(R.inc), money(R.comm), money(R.exp), rp(R.profit)]);
+  const sk = Object.keys(R.src).sort((a, b) => R.src[b].inc - R.src[a].inc);
+  hbars($('chSource'), sk.map(k => ({ l: k, v: R.src[k].inc })), COL.inc);
+  mkTable($('tblSource'), ['Sumber', 'Booking', 'Pemasukan', 'Komisi', 'Bersih'], sk.map(k => [k, String(R.src[k].n), money(R.src[k].inc), money(R.src[k].comm), rp(R.src[k].inc - R.src[k].comm)]));
+  const ck = Object.keys(R.cat).sort((a, b) => R.cat[b] - R.cat[a]);
+  hbars($('chCat'), ck.map(k => ({ l: k, v: R.cat[k] })), COL.cost);
+  const cu = Object.keys(R.cust).sort((a, b) => R.cust[b].inc - R.cust[a].inc).slice(0, 10);
+  mkTable($('tblCust'), ['Pemesan', 'Booking', 'Nilai'], cu.map(k => [k, String(R.cust[k].n), money(R.cust[k].inc)]));
+}
+window._report = { buildReport, bookingAlloc };
+
+async function unlockBooking(b) {
+  if (!confirm('Buka kunci booking ' + b.no + ' (' + b.name + ')?\nStatus kembali ke "Belum lunas" supaya bisa direvisi, dan tanggal lunas dihapus.')) return;
+  runOp('unlock', { no: b.no }, 'Membuka kunci...');
+}
+
 /* EVENTS */
 $('loginForm').addEventListener('submit', e => { e.preventDefault(); checkLogin(); });
 $('logoutBtn').addEventListener('click', doLogout);
@@ -900,6 +1265,14 @@ $('histFilter').addEventListener('change', renderHistory);
 $('kAmount').addEventListener('input', updateKomisiNet);
 $('kSave').addEventListener('click', saveKomisi);
 $('kClose').addEventListener('click', closeKomisi);
+$('expSave').addEventListener('click', saveExp);
+$('expNew').addEventListener('click', resetExpForm);
+$('expMonth').addEventListener('input', renderExpenses);
+$('expAllMonths').addEventListener('click', () => { $('expMonth').value = ''; renderExpenses(); });
+$('expFilter').addEventListener('change', renderExpenses);
+$('expSearch').addEventListener('input', renderExpenses);
+['repYear', 'repMonth', 'repSpread'].forEach(id => $(id).addEventListener('change', renderReport));
+$('repRefresh').addEventListener('click', async () => { setLoading(true, 'Memuat ulang...'); try { await refreshList(); } catch (e) { alert(e.message); } finally { setLoading(false); } });
 $('komisiModal').addEventListener('click', e => { if (e.target === $('komisiModal')) closeKomisi(); });
 $('btype').addEventListener('change', () => { syncAgentUI(); render(); });
 $('agentSel').addEventListener('change', () => { syncAgentUI(); render(); });
@@ -997,6 +1370,7 @@ async function downloadPdf(fileName) {
 /* Siapkan form saat halaman dibuka, lalu cek status login (di akhir, setelah semua fungsi siap) */
 setPreview(previewOn);
 resetForm();
+initRepMonth(); resetExpForm(); $('expMonth').value = toISO(new Date()).slice(0, 7);
 try {
   const t = localStorage.getItem('vm_token');
   if (t) { TOKEN = t; openMainApp(); }
