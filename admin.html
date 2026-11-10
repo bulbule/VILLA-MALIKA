@@ -263,6 +263,7 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
 <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61M2 2l20 20"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
 <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
 <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
 <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
@@ -320,6 +321,7 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
       <div class="badgeRow"><span id="editBadge"></span><span><button class="btn secondary sm previewToggle" type="button"></button><button class="btn secondary sm" id="newInvBtn" type="button"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>Booking Baru</button></span></div>
       <div class="field"><label for="invNo">No. Invoice</label><input id="invNo" value="" placeholder="Otomatis saat disimpan" readonly></div>
       <div class="field"><label for="customer">Nama Pemesan</label><input id="customer" placeholder="Nama lengkap pemesan"></div>
+      <div class="field"><label for="custWa">Nomor WhatsApp (opsional)</label><input id="custWa" type="tel" inputmode="tel" autocomplete="off" placeholder="mis. 0812 3456 7890"><small class="muted" id="waHint"></small></div>
       <div class="grid2">
         <div class="field"><label for="btype">Status Booking</label><select id="btype"><option value="Umum">Umum</option><option value="VVIP">VVIP</option><option value="Agen">Agen / Broker</option></select></div>
         <div class="field"><label for="payMethod">Metode Pembayaran</label><select id="payMethod"><option>Transfer</option><option>Cash</option><option>QRIS</option><option>Lainnya</option></select></div>
@@ -505,7 +507,7 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
   <section id="viewHistory" style="display:none">
     <div class="editor" style="margin:28px 3%">
       <h2>Riwayat Booking</h2>
-      <div class="grid2"><div class="field"><input id="histSearch" placeholder="Cari nomor, nama, atau agen..."></div>
+      <div class="grid2"><div class="field"><input id="histSearch" placeholder="Cari nomor, nama, agen, atau WhatsApp..."></div>
         <div class="field"><select id="histFilter" aria-label="Filter status"><option value="all">Semua booking</option><option value="active">Aktif saja</option><option value="cancel">Batal saja</option></select></div></div>
       <div style="overflow:auto"><table class="hist"><thead><tr><th>No</th><th>Nama</th><th>Villa</th><th>Check-in</th><th>Total</th><th>Sisa</th><th>Status</th><th>Tipe</th><th>Komisi</th><th>Aksi</th></tr></thead><tbody id="histBody"></tbody></table></div>
     </div>
@@ -643,9 +645,31 @@ function syncSewaRows() {
   units.forEach(u => box.insertBefore(rows[u], box.querySelector('.item-row:not(.sewa)')));
 }
 function refreshBooking(autoCheck) { syncSewaRows(); updateBundleUI(!!autoCheck); render(); }
+/* ===== WHATSAPP ===== */
+function waNorm(v) {
+  let d = String(v || '').replace(/\D/g, '');
+  if (!d) return '';
+  if (d.indexOf('00') === 0) d = d.slice(2);
+  if (d.charAt(0) === '0') d = '62' + d.slice(1); else if (d.charAt(0) === '8') d = '62' + d;
+  return d.length >= 9 && d.length <= 15 ? d : null;   // null = tidak valid
+}
+const waShow = d => d ? '+' + d.replace(/^(62)(\d{3})(\d{4})(\d*)$/, '$1 $2-$3-$4').replace(/-$/, '') : '';
+function waLink(b) {
+  const sisa = Math.max(0, b.total - b.dp);
+  const msg = 'Halo kak ' + b.name + ', kami dari Villa Malika. ' + (b.status === 'LUNAS'
+    ? 'Booking ' + b.no + ' (' + fmtShort(b.checkin) + ' - ' + fmtShort(b.checkout) + ') sudah lunas. Terima kasih, kami tunggu kedatangannya.'
+    : 'Booking ' + b.no + ' (' + fmtShort(b.checkin) + ' - ' + fmtShort(b.checkout) + '), sisa pembayaran ' + money(sisa) + '. Mohon konfirmasinya ya, terima kasih.');
+  return 'https://wa.me/' + b.wa + '?text=' + encodeURIComponent(msg);
+}
+function openWa(b) { window.open(waLink(b), '_blank', 'noopener'); }
+function updateWaHint() {
+  const v = $('custWa').value.trim(), n = waNorm(v), h = $('waHint');
+  h.textContent = !v ? '' : n === null ? 'Nomor belum valid.' : 'Disimpan sebagai ' + waShow(n);
+  h.style.color = n === null ? 'var(--bad)' : '';
+}
 function collect() {
   return {
-    no: $('invNo').value, name: $('customer').value.trim(), type: $('btype').value, agent: getAgent(), units: selectedUnits(),
+    no: $('invNo').value, name: $('customer').value.trim(), wa: $('custWa').value.trim(), type: $('btype').value, agent: getAgent(), units: selectedUnits(),
     unit: unitLabel(selectedUnits()), invDate: $('invDate').value, dueDate: $('dueDate').value,
     duration: $('duration').value, checkin: $('checkin').value, checkout: $('checkout').value, payMethod: $('payMethod').value,
     dp: Number($('dp').value) || 0,
@@ -663,7 +687,7 @@ function normalizeItems(v) {
   return items;
 }
 function loadInvoice(v) {
-  $('invNo').value = v.no; $('customer').value = v.name; $('invDate').value = v.invDate; $('dueDate').value = v.dueDate;
+  $('invNo').value = v.no; $('customer').value = v.name; $('custWa').value = v.wa ? waShow(v.wa) : ''; updateWaHint(); $('invDate').value = v.invDate; $('dueDate').value = v.dueDate;
   $('duration').value = v.duration; $('checkin').value = v.checkin; $('checkout').value = v.checkout;
   $('btype').value = v.type || 'Umum';
   [1, 2, 3].forEach(n => { $('v' + n).checked = (v.units || []).indexOf(n) >= 0; });
@@ -676,7 +700,7 @@ function loadInvoice(v) {
 }
 function setBadge() { editingNo ? setIconText($('editBadge'), 'edit', 'Revisi: ' + editingNo) : setIconText($('editBadge'), 'plus', 'Booking baru'); }
 function resetForm() {
-  editingNo = ''; paidISO = ''; $('invNo').value = ''; $('customer').value = '';
+  editingNo = ''; paidISO = ''; $('invNo').value = ''; $('customer').value = ''; $('custWa').value = ''; updateWaHint();
   const t = toISO(new Date());
   $('invDate').value = t; $('dueDate').value = ''; $('checkin').value = t; $('checkout').value = addDays(t, 1);
   $('btype').value = 'Umum'; [1, 2, 3].forEach(n => { $('v' + n).checked = false; });
@@ -862,6 +886,7 @@ function showDetail(b) {
   const rows = [['Check-in', fmtDate(b.checkin)], ['Check-out', fmtDate(b.checkout)], ['Lama menginap', nightsOf(b) + ' malam'],
     ['Status', b.status === 'LUNAS' ? 'LUNAS' + (b.paidDate ? ' (' + fmtShort(b.paidDate) + ')' : '') : 'DP (belum lunas)'],
     ['Tipe booking', b.type === 'Agen' ? 'Agen · ' + (b.agent || '-') : b.type]];
+  if (b.wa) rows.push(['WhatsApp', waShow(b.wa)]);
   if (b.payMethod) rows.push(['Metode bayar', b.payMethod]);
   if (d.bundling) rows.push(['Diskon bundling', '−' + money(d.bundling)]);
   if (d.special) rows.push(['Diskon' + (d.specialDesc ? ' (' + d.specialDesc + ')' : ''), '−' + money(d.special)]);
@@ -870,6 +895,7 @@ function showDetail(b) {
   rows.forEach(r => body.appendChild(drow(r[0], r[1])));
   const btns = $('dBtns'); btns.innerHTML = '';
   const mk = (t, cls, fn, icn) => { const x = document.createElement('button'); x.type = 'button'; x.className = 'btn ' + cls; if (icn) setIconText(x, icn, t); else x.textContent = t; x.onclick = fn; btns.appendChild(x); };
+  if (b.wa) mk('WhatsApp', 'secondary', () => openWa(b), 'chat');
   if (b.status !== 'LUNAS') mk('Revisi', 'secondary', () => { closeDetail(); startRevision(b); }, 'edit');
   mk('Kwitansi', 'secondary', () => { closeDetail(); openReceipt(b.no); }, 'receipt');
   if (b.type === 'Agen') mk('Komisi Agen', 'secondary', () => { closeDetail(); openKomisi(b); }, 'banknote');
@@ -887,7 +913,7 @@ function tagEl(txt, cls) { const s = document.createElement('span'); s.className
 function renderHistory() {
   const q = $('histSearch').value.toLowerCase(), f = $('histFilter').value, tb = $('histBody');
   tb.innerHTML = '';
-  invoices.filter(i => (f === 'all' || (f === 'cancel') === (i.status === 'BATAL')) && (i.no + ' ' + i.name + ' ' + (i.agent || '')).toLowerCase().includes(q)).forEach(i => {
+  invoices.filter(i => (f === 'all' || (f === 'cancel') === (i.status === 'BATAL')) && ((i.no + ' ' + i.name + ' ' + (i.agent || '')).toLowerCase().includes(q) || (i.wa || '').includes(q.replace(/\D/g, '').replace(/^0/, '62') || '\u0000'))).forEach(i => {
     const batal = i.status === 'BATAL', tr = document.createElement('tr');
     if (batal) tr.className = 'batal';
     [i.no, i.name, unitLabel(i.units), fmtDate(i.checkin), money(i.total), batal ? '-' : money(Math.max(0, i.total - i.dp))].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
@@ -910,6 +936,7 @@ function renderHistory() {
       td.appendChild(mkBtn('Revisi', () => startRevision(i)));
       td.appendChild(mkBtn('Kwitansi', () => openReceipt(i.no)));
       if (i.type === 'Agen') td.appendChild(mkBtn('Komisi Agen', () => openKomisi(i)));
+      if (i.wa) td.appendChild(mkBtn('WhatsApp', () => openWa(i)));
       if (i.status === 'LUNAS') td.appendChild(mkBtn('Buka kunci', () => unlockBooking(i)));
       const bt = mkBtn('Batalkan', () => cancelBooking(i)); bt.classList.remove('secondary'); bt.classList.add('danger'); td.appendChild(bt);
     }
@@ -961,6 +988,7 @@ async function saveKomisi() {
 /* ===== SIMPAN BOOKING ===== */
 function validateBooking(inv) {
   if (!inv.name) return 'Isi Nama Pemesan dulu.';
+  if (inv.wa && waNorm(inv.wa) === null) return 'Nomor WhatsApp belum valid (contoh: 0812 3456 7890), atau kosongkan.';
   if (!inv.units.length) return 'Pilih minimal 1 villa.';
   if (!inv.checkin || !inv.checkout || nightsCount() < 1) return 'Isi tanggal check-in dan check-out (check-out harus setelah check-in).';
   if (inv.type === 'Agen' && !inv.agent) return 'Pilih atau isi nama agen.';
@@ -1369,6 +1397,8 @@ $('rcpSearch').addEventListener('input', fillReceiptSelect);
 $('rcpSelect').addEventListener('change', () => pickReceipt($('rcpSelect').value));
 $('rcpDate').addEventListener('input', () => { paidISO = $('rcpDate').value; render(); });
 $('histSearch').addEventListener('input', renderHistory);
+$('custWa').addEventListener('input', updateWaHint);
+$('custWa').addEventListener('blur', () => { const n = waNorm($('custWa').value); if (n) $('custWa').value = waShow(n); updateWaHint(); });
 $('histFilter').addEventListener('change', renderHistory);
 $('kAmount').addEventListener('input', updateKomisiNet);
 $('kSave').addEventListener('click', saveKomisi);
