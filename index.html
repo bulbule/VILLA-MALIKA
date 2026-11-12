@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Villa Malika - Modern Private Booking</title>
   
-  <link rel="icon" type="image/x-icon" href="logo villa.ico">
-  <link rel="shortcut icon" type="image/x-icon" href="logo villa.ico">
+  <link rel="icon" type="image/x-icon" href="images/logo villa.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="images/logo villa.ico">
 
   <meta property="og:title" content="Villa Malika - Private Villa Collection">
   <meta property="og:description" content="Sewa Villa Mewah di Cisarua, Bogor. Fasilitas Private Pool, Meja Biliar, Kamar Mandi Air Hangat, & Halaman Luas.">
-  <meta property="og:image" content="https://bulbule.github.io/VILLA-MALIKA/flayer%20villa%201%20copy.jpg">
+  <meta property="og:image" content="https://bulbule.github.io/VILLA-MALIKA/images/flayer%20villa%201%20copy.jpg">
   <meta property="og:url" content="https://bulbule.github.io/VILLA-MALIKA/">
   <meta property="og:type" content="website">
 
@@ -75,7 +75,7 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 25px; }
-    .gallery-item { height: 180px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .gallery-item { height: 180px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: zoom-in; }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
     .gallery-item:hover img { transform: scale(1.05); }
 
@@ -119,15 +119,27 @@
     .btn-share-action { flex: 1; padding: 12px; border-radius: 14px; font-size: 0.85rem; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; }
     .btn-copy-link { background: var(--navy-dark); color: #ffffff; }
     .btn-download-img { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-light); }
+
+    /* ===== LIGHTBOX GAMBAR ===== */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.92); z-index: 2000; align-items: center; justify-content: center; touch-action: pan-y; }
+    .lightbox.show { display: flex; }
+    .lightbox-img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 10px; user-select: none; -webkit-user-drag: none; }
+    .lb-btn { position: absolute; background: rgba(255, 255, 255, 0.15); color: #fff; border: none; width: 46px; height: 46px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .lb-btn:hover { background: rgba(255, 255, 255, 0.3); }
+    .lb-close { top: 16px; right: 16px; }
+    .lb-prev { left: 14px; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 14px; top: 50%; transform: translateY(-50%); }
+    .lb-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: #e2e8f0; font-size: 0.85rem; font-weight: 600; background: rgba(0, 0, 0, 0.4); padding: 5px 14px; border-radius: 20px; }
+    @media (max-width: 600px) { .lb-prev, .lb-next { width: 38px; height: 38px; } }
   </style>
 </head>
 <body>
 
   <section class="hero">
     <div class="hero-slides">
-      <div class="slide active" style="background-image: url('Vila Modern di Tengah Hutan Saat Senja.webp');"></div>
-      <div class="slide" style="background-image: url('WhatsApp Image 2026-10-14 at 11.04.21.webp');"></div>
-      <div class="slide" style="background-image: url('bgweb.webp');"></div>
+      <div class="slide active" style="background-image: url('images/Vila Modern di Tengah Hutan Saat Senja.webp');"></div>
+      <div class="slide" style="background-image: url('images/WhatsApp Image 2026-10-14 at 11.04.21.webp');"></div>
+      <div class="slide" style="background-image: url('images/bgweb.webp');"></div>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -153,10 +165,10 @@
     <!-- VILLA 3 -->
     <div id="villa3" class="villa-content active">
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="VILLA 3.5.webp" alt="Villa 3 Facade"></div>
-        <div class="gallery-item"><img src="VILLA 3 RUANG TAMU.webp" alt="Mewah Living Room"></div>
-        <div class="gallery-item"><img src="VILLA 3.6.webp" alt="Kitchen Island"></div>
-        <div class="gallery-item"><img src="VILLA 3.3.webp" alt="Kamar Tidur Mewah"></div>
+        <div class="gallery-item"><img src="images/VILLA 3.5.webp" alt="Villa 3 Facade"></div>
+        <div class="gallery-item"><img src="images/VILLA 3 RUANG TAMU.webp" alt="Mewah Living Room"></div>
+        <div class="gallery-item"><img src="images/VILLA 3.6.webp" alt="Kitchen Island"></div>
+        <div class="gallery-item"><img src="images/VILLA 3.3.webp" alt="Kamar Tidur Mewah"></div>
       </div>
 
       <div class="details-card">
@@ -190,10 +202,10 @@
     <!-- VILLA 2 -->
     <div id="villa2" class="villa-content">
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="VILLA 2.8.webp" alt="Ruang Makan"></div>
-        <div class="gallery-item"><img src="VILLA 2.6.webp" alt="Living Room"></div>
-        <div class="gallery-item"><img src="VILLA 2.webp" alt="Kamar Utama"></div>
-        <div class="gallery-item"><img src="VILLA 2.4.webp" alt="Kamar Mandi"></div>
+        <div class="gallery-item"><img src="images/VILLA 2.8.webp" alt="Ruang Makan"></div>
+        <div class="gallery-item"><img src="images/VILLA 2.6.webp" alt="Living Room"></div>
+        <div class="gallery-item"><img src="images/VILLA 2.webp" alt="Kamar Utama"></div>
+        <div class="gallery-item"><img src="images/VILLA 2.4.webp" alt="Kamar Mandi"></div>
       </div>
 
       <div class="details-card">
@@ -226,10 +238,10 @@
     <!-- VILLA 1 -->
     <div id="villa1" class="villa-content">
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="VILLA 1.1_17_11zon.webp" alt="Ruang Santai"></div>
-        <div class="gallery-item"><img src="VILLA 1.2_16_11zon.webp" alt="Ruang Tamu Kayu"></div>
-        <div class="gallery-item"><img src="VILLA 1.3_15_11zon.webp" alt="Kamar Utama"></div>
-        <div class="gallery-item"><img src="VILLA 1.5_13_11zon.webp" alt="Ruang Keluarga"></div>
+        <div class="gallery-item"><img src="images/VILLA 1.1_17_11zon.webp" alt="Ruang Santai"></div>
+        <div class="gallery-item"><img src="images/VILLA 1.2_16_11zon.webp" alt="Ruang Tamu Kayu"></div>
+        <div class="gallery-item"><img src="images/VILLA 1.3_15_11zon.webp" alt="Kamar Utama"></div>
+        <div class="gallery-item"><img src="images/VILLA 1.5_13_11zon.webp" alt="Ruang Keluarga"></div>
       </div>
 
       <div class="details-card">
@@ -283,12 +295,21 @@
     <div class="modal-box">
       <span class="close-modal" onclick="closeShareModal()">&times;</span>
       <h3 style="font-size: 1.1rem; color: var(--navy-dark);">Brosur Villa Malika</h3>
-      <img src="flayer villa 1 copy.jpg" alt="Brosur Villa Malika" class="brochure-img-preview">
+      <img src="images/flayer villa 1 copy.jpg" alt="Brosur Villa Malika" class="brochure-img-preview">
       <div class="share-action-btns">
         <button class="btn-share-action btn-copy-link" onclick="copyWebLink()"><i class="fa-regular fa-copy"></i> Salin Link</button>
-        <a href="flayer villa 1 copy.jpg" download="Brosur-Villa-Malika.jpg" class="btn-share-action btn-download-img"><i class="fa-solid fa-download"></i> Unduh Foto</a>
+        <a href="images/flayer villa 1 copy.jpg" download="Brosur-Villa-Malika.jpg" class="btn-share-action btn-download-img"><i class="fa-solid fa-download"></i> Unduh Foto</a>
       </div>
     </div>
+  </div>
+
+  <!-- Lightbox galeri -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lb-btn lb-close" onclick="closeLightbox()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    <button class="lb-btn lb-prev" onclick="lbStep(-1)" aria-label="Sebelumnya"><i class="fa-solid fa-chevron-left"></i></button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="">
+    <button class="lb-btn lb-next" onclick="lbStep(1)" aria-label="Berikutnya"><i class="fa-solid fa-chevron-right"></i></button>
+    <div id="lbCounter" class="lb-counter"></div>
   </div>
 
   <script>
@@ -329,7 +350,7 @@
       const shareData = { title: 'Villa Malika - Private Villa Collection', text: 'Dapatkan penawaran dan brosur sewa Villa Malika Cisarua, Bogor:', url: window.location.href };
       if (navigator.canShare && navigator.canShare({ files: [new File([], '')] })) {
         try {
-          const response = await fetch('flayer villa 1 copy.jpg');
+          const response = await fetch('images/flayer villa 1 copy.jpg');
           const blob = await response.blob();
           const file = new File([blob], 'Brosur-Villa-Malika.jpg', { type: blob.type });
           await navigator.share({ ...shareData, files: [file] });
@@ -341,6 +362,66 @@
 
     function copyWebLink() { navigator.clipboard.writeText(window.location.href); alert('Link website berhasil disalin!'); }
     function closeShareModal() { document.getElementById('shareModal').classList.remove('show'); }
+
+    // ===== LIGHTBOX: klik foto -> popup besar, bisa geser =====
+    let lbImages = [];
+    let lbIndex = 0;
+    const lbEl = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    const lbCounter = document.getElementById('lbCounter');
+
+    document.querySelectorAll('.gallery-grid').forEach(grid => {
+      const imgs = Array.from(grid.querySelectorAll('img'));
+      imgs.forEach((img, i) => {
+        img.addEventListener('click', () => openLightbox(imgs, i));
+      });
+    });
+
+    function openLightbox(imgs, index) {
+      lbImages = imgs;
+      lbIndex = index;
+      showLbImage();
+      lbEl.classList.add('show');
+      lbEl.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lbEl.classList.remove('show');
+      lbEl.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function showLbImage() {
+      const img = lbImages[lbIndex];
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCounter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    }
+
+    function lbStep(dir) {
+      lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+      showLbImage();
+    }
+
+    // klik area gelap = tutup
+    lbEl.addEventListener('click', e => { if (e.target === lbEl) closeLightbox(); });
+
+    // keyboard
+    document.addEventListener('keydown', e => {
+      if (!lbEl.classList.contains('show')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbStep(-1);
+      if (e.key === 'ArrowRight') lbStep(1);
+    });
+
+    // geser (swipe) di HP
+    let touchStartX = 0;
+    lbEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+    lbEl.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(diff) > 50) lbStep(diff < 0 ? 1 : -1);
+    }, { passive: true });
 </script>
 
   <!-- Tombol Portal Admin -->
