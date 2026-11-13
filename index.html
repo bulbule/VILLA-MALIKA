@@ -353,7 +353,9 @@
           <button type="button" class="bk-chip" data-v="Website">Website</button>
           <button type="button" class="bk-chip" data-v="Iklan / brosur">Iklan / brosur</button>
           <button type="button" class="bk-chip" data-v="Kerabat">Kerabat</button>
+          <button type="button" class="bk-chip" data-v="__lain">Lainnya (ketik sendiri)</button>
         </div>
+        <input class="bk-input" id="bkSrcOther" maxlength="80" placeholder="mis. Instagram, TikTok, Google, teman kantor..." style="display:none; margin-top:10px" aria-label="Sumber informasi lainnya">
       </div>
 
       <a id="bkGo" href="#" target="_blank" rel="noopener" class="btn-book bk-go disabled" aria-disabled="true"><i class="fa-brands fa-whatsapp"></i> Booking Sekarang</a>
@@ -552,7 +554,8 @@
         'Check-in: ' + longDate(start) + '\n' +
         'Check-out: ' + longDate(end) + ' (' + nights + ' malam)';
       if (name) msg += '\nNama: ' + name;
-      if (src) msg += '\nInfo Villa Malika dari: ' + src;
+      const so = src === '__lain' ? $('bkSrcOther').value.trim() : src;
+      if (so) msg += '\nInfo Villa Malika dari: ' + so;
       msg += '\n\nMohon info ketersediaan dan prosedurnya. Terima kasih!';
       go.className = 'btn-book bk-go'; go.setAttribute('aria-disabled', 'false');
       go.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
@@ -576,10 +579,12 @@
     $('bkPrev').addEventListener('click', () => { if (vi > minIdx) { vi--; renderCal(); } });
     $('bkNext').addEventListener('click', () => { if (vi < maxIdx) { vi++; renderCal(); } });
     $('bkName').addEventListener('input', updateGo);
+    $('bkSrcOther').addEventListener('input', updateGo);
     $('bkSrc').addEventListener('click', e => {
       const c = e.target.closest('.bk-chip'); if (!c) return;
       const on = c.classList.contains('on'); document.querySelectorAll('#bkSrc .bk-chip').forEach(x => x.classList.remove('on'));
-      src = on ? '' : c.dataset.v; if (!on) c.classList.add('on'); updateGo();
+      src = on ? '' : c.dataset.v; if (!on) c.classList.add('on');
+      const oi = $('bkSrcOther'); oi.style.display = src === '__lain' ? '' : 'none'; if (src === '__lain') oi.focus(); updateGo();
     });
     $('bkGo').addEventListener('click', e => { if ($('bkGo').getAttribute('aria-disabled') === 'true') e.preventDefault(); });
 
