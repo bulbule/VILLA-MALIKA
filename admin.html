@@ -5,16 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
 <title>Admin Villa Malika</title>
-<link rel="apple-touch-icon" sizes="180x180" href="images/admin-apple-touch-icon.png">
-<meta name="apple-mobile-web-app-title" content="Admin Villa">
 <meta name="theme-color" content="#eeeeee">
 <script>(function(){var t;try{t=localStorage.getItem("vm_theme")}catch(e){}if(t!=="dark"&&t!=="light")t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";document.documentElement.setAttribute("data-theme",t)})()</script>
 <style>
-:root{color-scheme:light;--bg:#eeeeee;--surface:#fff;--surface2:#f6f7f9;--field:#fff;--line:#dcdfe5;--line2:#c9d0da;--text:#1b2638;--muted:#5f6f86;--head:#14284b;--btn:#14284b;--btn2:#1d3a6b;--blue:#2a6fdb;--soft:#eaf0fa;--soft2:#dde8f8;--sline:#cddcf3;--acc:#1f56b3;--ink:#171717;--ok:#17824f;--bad:#b42329;--negc:#c0262d;--ring:rgba(42,111,219,.28);--dbg:#fdecec;--dbg2:#fbd6d8;--dbd:#f1b9bc;--ph:#8f9bad;--pv:#dfe3ea;--track:#eceff4;--faint:#a3aebf;--topbg:rgba(255,255,255,.97);--ovl:rgba(20,40,75,.45);--ovl2:rgba(238,238,238,.93);--shd:var(--shd);--t-ok-b:#e0f5ea;--t-ok:#11703f;--t-wn-b:#fff1cc;--t-wn:#8a5a00;--t-vv-b:#fde6e7;--t-vv:#b42329;--t-ag-b:#e3edfd;--t-bt-b:#e9edf3;--t-bt:#526075}
-:root[data-theme=dark]{color-scheme:dark;--bg:#0e131a;--surface:#161d27;--surface2:#1b2330;--field:#111822;--line:#273142;--line2:#38455a;--text:#e5eaf2;--muted:#9aa8bc;--head:#dce7fb;--btn:#2b5db0;--btn2:#3a6cc2;--blue:#6aa0f0;--soft:#1d2a3f;--soft2:#25354f;--sline:#2f4262;--acc:#8db4f2;--ok:#1d8a58;--bad:#ff8f93;--negc:#ff8f93;--ring:rgba(106,160,240,.38);--dbg:#3a1c20;--dbg2:#4a2328;--dbd:#6b2a30;--ph:#66758b;--pv:#0b1017;--track:#222c3a;--faint:#56647a;--topbg:rgba(22,29,39,.97);--ovl:rgba(0,0,0,.62);--ovl2:rgba(14,19,26,.93);--shd:rgba(0,0,0,.25);--t-ok-b:#12372a;--t-ok:#6fdba5;--t-wn-b:#3b2f10;--t-wn:#f2c95c;--t-vv-b:#3d1d21;--t-vv:#ff9a9f;--t-ag-b:#1b2c4a;--t-bt-b:#263041;--t-bt:#9aa8bc}
+:root{color-scheme:light;--bg:#eeeeee;--surface:#fff;--surface2:#f6f7f9;--field:#fff;--line:#dcdfe5;--line2:#c9d0da;--text:#1b2638;--muted:#5f6f86;--head:#14284b;--btn:#14284b;--btn2:#1d3a6b;--blue:#2a6fdb;--soft:#eaf0fa;--soft2:#dde8f8;--sline:#cddcf3;--acc:#1f56b3;--ink:#171717;--ok:#17824f;--bad:#b42329;--negc:#c0262d;--ring:rgba(42,111,219,.28);--dbg:#fdecec;--dbg2:#fbd6d8;--dbd:#f1b9bc;--ph:#8f9bad;--pv:#dfe3ea;--track:#eceff4;--faint:#a3aebf;--topbg:rgba(255,255,255,.97);--ovl:rgba(20,40,75,.45);--ovl2:rgba(238,238,238,.93);--shd:rgba(20,40,75,.06);--wk:#fde4e4;--wkt:#b42329;--t-ok-b:#e0f5ea;--t-ok:#11703f;--t-wn-b:#fff1cc;--t-wn:#8a5a00;--t-vv-b:#fde6e7;--t-vv:#b42329;--t-ag-b:#e3edfd;--t-bt-b:#e9edf3;--t-bt:#526075}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0e131a;--surface:#161d27;--surface2:#1b2330;--field:#111822;--line:#273142;--line2:#38455a;--text:#e5eaf2;--muted:#9aa8bc;--head:#dce7fb;--btn:#2b5db0;--btn2:#3a6cc2;--blue:#6aa0f0;--soft:#1d2a3f;--soft2:#25354f;--sline:#2f4262;--acc:#8db4f2;--ok:#1d8a58;--bad:#ff8f93;--negc:#ff8f93;--ring:rgba(106,160,240,.38);--dbg:#3a1c20;--dbg2:#4a2328;--dbd:#6b2a30;--ph:#66758b;--pv:#0b1017;--track:#222c3a;--faint:#56647a;--topbg:rgba(22,29,39,.97);--ovl:rgba(0,0,0,.62);--ovl2:rgba(14,19,26,.93);--shd:rgba(0,0,0,.25);--wk:#3a1e24;--wkt:#ff9a9f;--t-ok-b:#12372a;--t-ok:#6fdba5;--t-wn-b:#3b2f10;--t-wn:#f2c95c;--t-vv-b:#3d1d21;--t-vv:#ff9a9f;--t-ag-b:#1b2c4a;--t-bt-b:#263041;--t-bt:#9aa8bc}
 :root[data-theme=dark] .invoice-header{filter:none}
 :root[data-theme=dark] .logout:hover{background:var(--dbg);border-color:var(--dbd)!important}
-.invoice,.sumwrap{color-scheme:light;--bg:#eeeeee;--surface:#fff;--surface2:#f6f7f9;--field:#fff;--line:#dcdfe5;--line2:#c9d0da;--text:#1b2638;--muted:#5f6f86;--head:#14284b;--btn:#14284b;--btn2:#1d3a6b;--blue:#2a6fdb;--soft:#eaf0fa;--soft2:#dde8f8;--sline:#cddcf3;--acc:#1f56b3;--ink:#171717;--ok:#17824f;--bad:#b42329;--negc:#c0262d;--ring:rgba(42,111,219,.28);--dbg:#fdecec;--dbg2:#fbd6d8;--dbd:#f1b9bc;--ph:#8f9bad;--pv:#dfe3ea;--track:#eceff4;--faint:#a3aebf;--topbg:rgba(255,255,255,.97);--ovl:rgba(20,40,75,.45);--ovl2:rgba(238,238,238,.93);--shd:var(--shd);--t-ok-b:#e0f5ea;--t-ok:#11703f;--t-wn-b:#fff1cc;--t-wn:#8a5a00;--t-vv-b:#fde6e7;--t-vv:#b42329;--t-ag-b:#e3edfd;--t-bt-b:#e9edf3;--t-bt:#526075}
+.invoice,.sumwrap{color-scheme:light;--bg:#eeeeee;--surface:#fff;--surface2:#f6f7f9;--field:#fff;--line:#dcdfe5;--line2:#c9d0da;--text:#1b2638;--muted:#5f6f86;--head:#14284b;--btn:#14284b;--btn2:#1d3a6b;--blue:#2a6fdb;--soft:#eaf0fa;--soft2:#dde8f8;--sline:#cddcf3;--acc:#1f56b3;--ink:#171717;--ok:#17824f;--bad:#b42329;--negc:#c0262d;--ring:rgba(42,111,219,.28);--dbg:#fdecec;--dbg2:#fbd6d8;--dbd:#f1b9bc;--ph:#8f9bad;--pv:#dfe3ea;--track:#eceff4;--faint:#a3aebf;--topbg:rgba(255,255,255,.97);--ovl:rgba(20,40,75,.45);--ovl2:rgba(238,238,238,.93);--shd:rgba(20,40,75,.06);--wk:#fde4e4;--wkt:#b42329;--t-ok-b:#e0f5ea;--t-ok:#11703f;--t-wn-b:#fff1cc;--t-wn:#8a5a00;--t-vv-b:#fde6e7;--t-vv:#b42329;--t-ag-b:#e3edfd;--t-bt-b:#e9edf3;--t-bt:#526075}
 .gl{stroke:var(--line)}.gl0{stroke:var(--faint)}.ax{fill:var(--muted)}
 .themebar{display:flex;justify-content:center;padding:6px 3% 34px}
 .theme-sw{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line2);color:var(--muted);border-radius:30px;padding:6px 8px 6px 14px;font:inherit;font-size:13px;font-weight:650;cursor:pointer}
@@ -82,7 +80,7 @@ input[type=date],input[type=month]{color-scheme:inherit}
 .lunasbtn{background:var(--ok);color:#fff}.lunasbtn:hover{background:#126b41}
 .preview-wrap{background:var(--pv);border-radius:18px;padding:22px;min-width:0;overflow:auto}
 .invoice{background:white;color:var(--ink);width:100%;max-width:794px;margin:0 auto;min-height:1123px;box-shadow:0 10px 30px #0003;position:relative;overflow:hidden}
-.invoice-header{height:245px;background-color:#161616;background-image:url('images/villa-header.jpg');position:relative;background-size:cover;background-position:center 40%;color:white}
+.invoice-header{height:245px;background-color:#161616;background-image:url('villa-header.jpg');position:relative;background-size:cover;background-position:center 40%;color:white}
 .invoice-header:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.62) 0%,rgba(10,10,10,.28) 45%,rgba(10,10,10,.04) 100%)}
 .brand-overlay{position:absolute;z-index:1;left:5%;bottom:25px;color:#f3c65d;text-shadow:0 2px 8px #0008}
 .brand-overlay .brand{font-family:Georgia,serif;font-size:clamp(25px,3vw,38px);letter-spacing:2px}
@@ -202,6 +200,7 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
 .day{border-right:1px solid var(--line);padding:5px 7px;font-size:12px;color:var(--text);min-width:0}
 .day:last-child{border-right:0}
 .day.other{color:var(--faint);background:var(--surface2)}
+.day.we{background:var(--wk)}.day.we .dn{color:var(--wkt)}
 .day .dn{display:inline-block;min-width:22px;height:22px;line-height:22px;text-align:center;border-radius:11px;padding:0 4px;font-weight:600}
 .day.today .dn{background:var(--btn);color:#fff;font-weight:800}
 .bars{position:absolute;inset:0;pointer-events:none}
@@ -414,8 +413,8 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
             </div>
             <div class="sign">
               <div class="sign-note" id="signNote">Saya telah setuju dengan syarat dan ketentuan yang berlaku.<br>Terima kasih telah menginap dan berkunjung di villa kami.</div>
-              <!-- Tanda tangan: file 'TTD NOVA.png' di folder images -->
-              <img class="signature-img" alt="Tanda tangan Miss Nova" src="images/TTD%20NOVA.png" onerror="this.style.visibility='hidden'">
+              <!-- Tanda tangan: file 'TTD NOVA.png' di folder yang sama dengan index.html -->
+              <img class="signature-img" alt="Tanda tangan Miss Nova" src="TTD%20NOVA.png" onerror="this.style.visibility='hidden'">
               <div class="sign-line"></div>
               <div class="sign-name">Miss Nova</div>
               <div class="sign-brand">VILLA MALIKA</div>
@@ -658,9 +657,10 @@ function waNorm(v) {
 const waShow = d => d ? '+' + d.replace(/^(62)(\d{3})(\d{4})(\d*)$/, '$1 $2-$3-$4').replace(/-$/, '') : '';
 function waLink(b) {
   const sisa = Math.max(0, b.total - b.dp);
-  const msg = 'Halo kak ' + b.name + ', kami dari Villa Malika. ' + (b.status === 'LUNAS'
-    ? 'Booking ' + b.no + ' (' + fmtShort(b.checkin) + ' - ' + fmtShort(b.checkout) + ') sudah lunas. Terima kasih, kami tunggu kedatangannya.'
-    : 'Booking ' + b.no + ' (' + fmtShort(b.checkin) + ' - ' + fmtShort(b.checkout) + '), sisa pembayaran ' + money(sisa) + '. Mohon konfirmasinya ya, terima kasih.');
+  const tgl = fmtShort(b.checkin) + ' - ' + fmtShort(b.checkout);
+  const msg = 'Halo kak, kami dari Villa Malika. Untuk booking atas nama ' + b.name + ' (' + b.no + ', ' + tgl + ') ' + (b.status === 'LUNAS'
+    ? 'sudah lunas. Terima kasih, kami tunggu kedatangannya.'
+    : 'sisa pembayaran ' + money(sisa) + '. Mohon konfirmasinya ya, terima kasih.');
   return 'https://wa.me/' + b.wa + '?text=' + encodeURIComponent(msg);
 }
 function openWa(b) { window.open(waLink(b), '_blank', 'noopener'); }
@@ -854,7 +854,7 @@ function renderCalendar() {
     for (let k = 0; k < 7; k++) {
       const d = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate() + w * 7 + k);
       const c = document.createElement('div');
-      c.className = 'day' + (d.getMonth() !== calM ? ' other' : '') + (dayIdx(d) === today ? ' today' : '');
+      c.className = 'day' + (d.getMonth() !== calM ? ' other' : '') + (dayIdx(d) === today ? ' today' : '') + ((d.getDay() === 0 || d.getDay() === 6) && d.getMonth() === calM ? ' we' : '');
       const n = document.createElement('span'); n.className = 'dn';
       n.textContent = d.getDate() === 1 ? d.getDate() + ' ' + BULAN[d.getMonth()].slice(0, 3) : d.getDate();
       c.appendChild(n); days.appendChild(c);
@@ -996,7 +996,7 @@ function validateBooking(inv) {
   if (inv.type === 'Agen' && !inv.agent) return 'Pilih atau isi nama agen.';
   if (!inv.items.some(i => i.qty * i.price > 0)) return 'Isi minimal 1 item dengan qty dan harga.';
   const t = totalOf(inv);
-  if (t <= 0) return 'Total setelah diskon harus lebih dari 0.';
+  if (t < 0) return 'Diskon melebihi total harga. Kurangi diskon (total boleh Rp0, tidak boleh minus).';
   if (inv.dp > t) return 'DP tidak boleh melebihi total.';
   return '';
 }
@@ -1456,7 +1456,7 @@ async function downloadPdf(fileName) {
   try {
     render();
     await tick(60);
-    await Promise.all([preload('images/villa-header.jpg'), preload('images/TTD%20NOVA.png')]);
+    await Promise.all([preload('villa-header.jpg'), preload('TTD%20NOVA.png')]);
 
     // Render invoice di iframe lebar tetap 794px supaya hasil PDF selalu sama (desktop maupun HP)
     const css = document.querySelector('style').textContent;
@@ -1510,7 +1510,7 @@ async function downloadPdf(fileName) {
     ok = true;
   } catch (err) {
     console.error(err);
-    alert('Gagal membuat PDF. Pastikan halaman dibuka lewat GitHub Pages / server (bukan file lokal) dan file images/villa-header.jpg & images/TTD NOVA.png ada.');
+    alert('Gagal membuat PDF. Pastikan halaman dibuka lewat GitHub Pages / server (bukan file lokal) dan file villa-header.jpg & TTD NOVA.png ada di folder yang sama.');
   } finally {
     if (frame && frame.parentNode) frame.parentNode.removeChild(frame);
     setLoading(false);
