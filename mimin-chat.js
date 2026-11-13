@@ -26,7 +26,7 @@
 
   /* ===== STYLE ===== */
   var css = [
-    '.mimin-launcher{position:fixed;right:14px;bottom:88px;z-index:950;width:70px;height:70px;border-radius:50%;border:3px solid var(--gold-accent,#d4af37);background:#fff;padding:0;cursor:pointer;box-shadow:0 8px 24px rgba(11,19,41,.28);animation:miminFloat 3.4s ease-in-out infinite;-webkit-tap-highlight-color:transparent}',
+    '.mimin-launcher{position:fixed;right:14px;bottom:66px;z-index:950;width:70px;height:70px;border-radius:50%;border:3px solid var(--gold-accent,#d4af37);background:#fff;padding:0;cursor:pointer;box-shadow:0 8px 24px rgba(11,19,41,.28);animation:miminFloat 3.4s ease-in-out infinite;-webkit-tap-highlight-color:transparent}',
     '.mimin-launcher::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--gold-accent,#d4af37);opacity:0;animation:miminPulse 3.4s ease-out infinite;pointer-events:none}',
     '.mimin-launcher:focus-visible{outline:3px solid #0b1329;outline-offset:3px}',
     '.mimin-face{position:absolute;inset:0;border-radius:50%;overflow:hidden;transition:transform .35s ease;display:flex;align-items:center;justify-content:center;color:var(--navy-dark,#0b1329);font-size:1.6rem}',
@@ -37,10 +37,10 @@
     '.mimin-launcher.smile .mimin-face{transform:scale(1.07) rotate(-5deg)}',
     '.mimin-dot{position:absolute;top:0;right:0;width:15px;height:15px;border-radius:50%;background:#ef4444;border:2px solid #fff}',
 
-    '.mimin-bubble{position:fixed;right:96px;bottom:104px;z-index:950;max-width:210px;background:#fff;color:var(--text-main,#0f172a);font-size:.86rem;font-weight:600;line-height:1.35;padding:10px 14px;border-radius:16px 16px 4px 16px;box-shadow:0 8px 24px rgba(11,19,41,.18);border:1px solid #e2e8f0;cursor:pointer;opacity:0;transform:translateY(8px) scale(.96);pointer-events:none;transition:opacity .3s ease,transform .3s ease}',
+    '.mimin-bubble{position:fixed;right:96px;bottom:82px;z-index:950;max-width:210px;background:#fff;color:var(--text-main,#0f172a);font-size:.86rem;font-weight:600;line-height:1.35;padding:10px 14px;border-radius:16px 16px 4px 16px;box-shadow:0 8px 24px rgba(11,19,41,.18);border:1px solid #e2e8f0;cursor:pointer;opacity:0;transform:translateY(8px) scale(.96);pointer-events:none;transition:opacity .3s ease,transform .3s ease}',
     '.mimin-bubble.show{opacity:1;transform:none;pointer-events:auto}',
 
-    '.mimin-win{position:fixed;right:14px;bottom:88px;z-index:950;width:360px;max-width:calc(100vw - 28px);height:540px;max-height:calc(100vh - 110px);max-height:calc(100dvh - 110px);background:#f8fafc;border-radius:24px;box-shadow:0 20px 50px rgba(11,19,41,.35);border:1px solid #e2e8f0;display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transform:translateY(16px) scale(.97);transform-origin:bottom right;pointer-events:none;transition:opacity .25s ease,transform .25s ease,visibility .25s}',
+    '.mimin-win{position:fixed;right:14px;bottom:66px;z-index:950;width:360px;max-width:calc(100vw - 28px);height:540px;max-height:calc(100vh - 110px);max-height:calc(100dvh - 110px);background:#f8fafc;border-radius:24px;box-shadow:0 20px 50px rgba(11,19,41,.35);border:1px solid #e2e8f0;display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transform:translateY(16px) scale(.97);transform-origin:bottom right;pointer-events:none;transition:opacity .25s ease,transform .25s ease,visibility .25s}',
     '.mimin-win.open{opacity:1;visibility:visible;transform:none;pointer-events:auto}',
     '.mimin-win:focus{outline:none}',
     '.mimin-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(135deg,#0b1329,#1e293b);color:#fff;flex-shrink:0}',
@@ -74,7 +74,7 @@
     '@keyframes miminIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}',
     '@keyframes miminDot{0%,80%,100%{transform:translateY(0);opacity:.5}40%{transform:translateY(-4px);opacity:1}}',
 
-    '@media(max-width:480px){.mimin-win{left:8px;right:8px;width:auto;max-width:none;bottom:80px;max-height:calc(100vh - 96px);max-height:calc(100dvh - 96px)}}',
+    '@media(max-width:480px){.mimin-win{left:8px;right:8px;width:auto;max-width:none;bottom:62px;max-height:calc(100vh - 80px);max-height:calc(100dvh - 96px)}}',
     '@media(prefers-reduced-motion:reduce){.mimin-launcher,.mimin-launcher::after,.mimin-typing i{animation:none}.mimin-face,.mimin-face img,.mimin-win,.mimin-bubble{transition:none}}'
   ].join('\n');
 
