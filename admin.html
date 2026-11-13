@@ -80,7 +80,7 @@ input[type=date],input[type=month]{color-scheme:inherit}
 .lunasbtn{background:var(--ok);color:#fff}.lunasbtn:hover{background:#126b41}
 .preview-wrap{background:var(--pv);border-radius:18px;padding:22px;min-width:0;overflow:auto}
 .invoice{background:white;color:var(--ink);width:100%;max-width:794px;margin:0 auto;min-height:1123px;box-shadow:0 10px 30px #0003;position:relative;overflow:hidden}
-.invoice-header{height:245px;background-color:#161616;background-image:url('villa-header.jpg');position:relative;background-size:cover;background-position:center 40%;color:white}
+.invoice-header{height:245px;background-color:#161616;background-image:url('images/villa-header.jpg');position:relative;background-size:cover;background-position:center 40%;color:white}
 .invoice-header:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.62) 0%,rgba(10,10,10,.28) 45%,rgba(10,10,10,.04) 100%)}
 .brand-overlay{position:absolute;z-index:1;left:5%;bottom:25px;color:#f3c65d;text-shadow:0 2px 8px #0008}
 .brand-overlay .brand{font-family:Georgia,serif;font-size:clamp(25px,3vw,38px);letter-spacing:2px}
@@ -413,8 +413,8 @@ a,a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!importa
             </div>
             <div class="sign">
               <div class="sign-note" id="signNote">Saya telah setuju dengan syarat dan ketentuan yang berlaku.<br>Terima kasih telah menginap dan berkunjung di villa kami.</div>
-              <!-- Tanda tangan: file 'TTD NOVA.png' di folder yang sama dengan index.html -->
-              <img class="signature-img" alt="Tanda tangan Miss Nova" src="TTD%20NOVA.png" onerror="this.style.visibility='hidden'">
+              <!-- Tanda tangan: file 'images/TTD NOVA.png' -->
+              <img class="signature-img" alt="Tanda tangan Miss Nova" src="images/TTD%20NOVA.png" onerror="this.style.visibility='hidden'">
               <div class="sign-line"></div>
               <div class="sign-name">Miss Nova</div>
               <div class="sign-brand">VILLA MALIKA</div>
@@ -1456,7 +1456,7 @@ async function downloadPdf(fileName) {
   try {
     render();
     await tick(60);
-    await Promise.all([preload('villa-header.jpg'), preload('TTD%20NOVA.png')]);
+    await Promise.all([preload('images/villa-header.jpg'), preload('images/TTD%20NOVA.png')]);
 
     // Render invoice di iframe lebar tetap 794px supaya hasil PDF selalu sama (desktop maupun HP)
     const css = document.querySelector('style').textContent;
@@ -1510,7 +1510,7 @@ async function downloadPdf(fileName) {
     ok = true;
   } catch (err) {
     console.error(err);
-    alert('Gagal membuat PDF. Pastikan halaman dibuka lewat GitHub Pages / server (bukan file lokal) dan file villa-header.jpg & TTD NOVA.png ada di folder yang sama.');
+    alert('Gagal membuat PDF. Pastikan halaman dibuka lewat GitHub Pages / server (bukan file lokal) dan file images/villa-header.jpg & images/TTD NOVA.png ada.');
   } finally {
     if (frame && frame.parentNode) frame.parentNode.removeChild(frame);
     setLoading(false);
