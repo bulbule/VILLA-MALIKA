@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Villa Malika - Modern Private Booking</title>
   
-  <link rel="icon" type="image/x-icon" href="images/logo villa.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-title" content="Villa Malika">
-  <link rel="shortcut icon" type="image/x-icon" href="images/logo villa.ico">
+  <link rel="icon" type="image/x-icon" href="logo villa.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="logo villa.ico">
 
   <meta property="og:title" content="Villa Malika - Private Villa Collection">
   <meta property="og:description" content="Sewa Villa Mewah di Cisarua, Bogor. Fasilitas Private Pool, Meja Biliar, Kamar Mandi Air Hangat, & Halaman Luas.">
-  <meta property="og:image" content="https://bulbule.github.io/VILLA-MALIKA/images/flayer%20villa%201%20copy.jpg">
+  <meta property="og:image" content="https://bulbule.github.io/VILLA-MALIKA/flayer%20villa%201%20copy.jpg">
   <meta property="og:url" content="https://bulbule.github.io/VILLA-MALIKA/">
   <meta property="og:type" content="website">
 
@@ -77,7 +75,7 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 25px; }
-    .gallery-item { height: 180px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: zoom-in; }
+    .gallery-item { height: 180px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
     .gallery-item:hover img { transform: scale(1.05); }
 
@@ -122,26 +120,61 @@
     .btn-copy-link { background: var(--navy-dark); color: #ffffff; }
     .btn-download-img { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-light); }
 
-    /* ===== LIGHTBOX GAMBAR ===== */
-    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.92); z-index: 2000; align-items: center; justify-content: center; touch-action: pan-y; }
-    .lightbox.show { display: flex; }
-    .lightbox-img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 10px; user-select: none; -webkit-user-drag: none; }
-    .lb-btn { position: absolute; background: rgba(255, 255, 255, 0.15); color: #fff; border: none; width: 46px; height: 46px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .lb-btn:hover { background: rgba(255, 255, 255, 0.3); }
-    .lb-close { top: 16px; right: 16px; }
-    .lb-prev { left: 14px; top: 50%; transform: translateY(-50%); }
-    .lb-next { right: 14px; top: 50%; transform: translateY(-50%); }
-    .lb-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: #e2e8f0; font-size: 0.85rem; font-weight: 600; background: rgba(0, 0, 0, 0.4); padding: 5px 14px; border-radius: 20px; }
-    @media (max-width: 600px) { .lb-prev, .lb-next { width: 38px; height: 38px; } }
+    /* ===== Kalender pilih tanggal ===== */
+    .book-card { background: var(--card-white); border-radius: 24px; padding: 20px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-light); margin-bottom: 30px; }
+    .bk-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .bk-month { font-size: 1.15rem; font-weight: 800; color: var(--navy-dark); }
+    .bk-nav { display: flex; gap: 6px; }
+    .bk-nav button { width: 36px; height: 36px; border-radius: 12px; border: 1px solid var(--border-light); background: #fff; color: var(--navy-dark); cursor: pointer; font-size: 0.95rem; }
+    .bk-nav button:disabled { opacity: .35; cursor: default; }
+    .bk-dow, .bk-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .bk-dow span { text-align: center; font-size: 0.78rem; font-weight: 700; color: var(--navy-primary); padding: 8px 0; border-bottom: 1px solid var(--border-light); }
+    .bk-dow span:last-child { color: #be123c; }
+    .bk-day { position: relative; height: 54px; border: 0; background: transparent; font: inherit; font-weight: 700; font-size: 0.95rem; color: var(--navy-primary); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 7px; border-bottom: 1px solid #f1f5f9; }
+    .bk-day.we { background: #fff1f2; }
+    .bk-day.we .bn { color: #be123c; }
+    .bk-day .bn { width: 32px; height: 28px; line-height: 28px; border-radius: 14px; }
+    .bk-day.empty { cursor: default; background: transparent; }
+    .bk-day.past { color: #cbd5e1; cursor: default; }
+    .bk-day.past .bn { color: #cbd5e1; }
+    .bk-day.full .bn { color: #94a3b8; text-decoration: line-through; }
+    .bk-day.today .bn { box-shadow: inset 0 -2px 0 var(--navy-dark); }
+    .bk-day.inr { background: #bbf7d0; }
+    .bk-day.sel .bn { background: #ecfdf5; color: #14532d; box-shadow: inset 0 0 0 2px #22c55e; width: 40px; }
+    .bk-day:focus-visible { outline: 2px solid var(--navy-dark); outline-offset: -2px; z-index: 1; }
+    .bk-bars { position: absolute; left: 0; right: 0; bottom: 6px; display: flex; justify-content: center; gap: 3px; }
+    .bk-bars i { width: 12px; height: 4px; border-radius: 3px; }
+    .b1 { background: #16a34a; } .b2 { background: #eab308; } .b3 { background: #ef4444; }
+    .bk-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 12px 0 4px; font-size: 0.78rem; color: var(--text-muted); }
+    .bk-legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .bk-legend i { width: 14px; height: 4px; border-radius: 3px; display: inline-block; }
+    .bk-note { font-size: 0.8rem; color: var(--text-muted); margin: 6px 0 0; min-height: 1.1em; }
+    .bk-note.warn { color: #b45309; font-weight: 600; }
+    .bk-sum { margin: 14px 0 4px; padding: 12px 14px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; font-size: 0.9rem; color: #14532d; font-weight: 600; display: none; }
+    .bk-sec { margin-top: 16px; }
+    .bk-sec h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+    .bk-sec h4 small { font-weight: 500; color: var(--text-muted); }
+    .bk-villas { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+    .bk-villa { white-space: nowrap; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: 14px; background: #fff; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+    .bk-villa input { width: 18px; height: 18px; accent-color: var(--navy-dark); }
+    .bk-villa.off { opacity: .5; cursor: not-allowed; background: #f8fafc; }
+    .bk-villa em { margin-left: auto; padding-left: 6px; font-style: normal; font-size: 0.72rem; color: #be123c; font-weight: 700; }
+    .bk-villa i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .bk-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: 14px; font-size: 0.92rem; background: #fff; color: var(--text-main); }
+    .bk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .bk-chip { padding: 9px 16px; border-radius: 20px; border: 1px solid var(--border-light); background: #fff; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; }
+    .bk-chip.on { background: var(--navy-dark); color: #fff; border-color: var(--navy-dark); }
+    .bk-go { margin-top: 18px; width: 100%; justify-content: center; padding: 14px 22px; }
+    .bk-go.disabled { opacity: .45; pointer-events: none; box-shadow: none; }
   </style>
 </head>
 <body>
 
   <section class="hero">
     <div class="hero-slides">
-      <div class="slide active" style="background-image: url('images/Vila Modern di Tengah Hutan Saat Senja.webp');"></div>
-      <div class="slide" style="background-image: url('images/WhatsApp Image 2026-10-14 at 11.04.21.webp');"></div>
-      <div class="slide" style="background-image: url('images/bgweb.webp');"></div>
+      <div class="slide active" style="background-image: url('Vila Modern di Tengah Hutan Saat Senja.webp');"></div>
+      <div class="slide" style="background-image: url('WhatsApp Image 2026-10-14 at 11.04.21.webp');"></div>
+      <div class="slide" style="background-image: url('bgweb.webp');"></div>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -167,10 +200,10 @@
     <!-- VILLA 3 -->
     <div id="villa3" class="villa-content active">
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="images/VILLA 3.5.webp" alt="Villa 3 Facade"></div>
-        <div class="gallery-item"><img src="images/VILLA 3 RUANG TAMU.webp" alt="Mewah Living Room"></div>
-        <div class="gallery-item"><img src="images/VILLA 3.6.webp" alt="Kitchen Island"></div>
-        <div class="gallery-item"><img src="images/VILLA 3.3.webp" alt="Kamar Tidur Mewah"></div>
+        <div class="gallery-item"><img src="VILLA 3.5.webp" alt="Villa 3 Facade"></div>
+        <div class="gallery-item"><img src="VILLA 3 RUANG TAMU.webp" alt="Mewah Living Room"></div>
+        <div class="gallery-item"><img src="VILLA 3.6.webp" alt="Kitchen Island"></div>
+        <div class="gallery-item"><img src="VILLA 3.3.webp" alt="Kamar Tidur Mewah"></div>
       </div>
 
       <div class="details-card">
@@ -195,7 +228,6 @@
           <div class="rate-row"><span class="rate-label">Weekday</span><span class="rate-price">Rp5.000.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Friday</span><span class="rate-price">Rp5.500.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Weekend</span><span class="rate-price">Rp7.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">High Season</span><span class="rate-price">Rp8.000.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Bundling Villa 2 & 3</span><span class="rate-price">Mulai Rp7.000.000</span></div>
         </div>
       </div>
@@ -204,10 +236,10 @@
     <!-- VILLA 2 -->
     <div id="villa2" class="villa-content">
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="images/VILLA 2.8.webp" alt="Ruang Makan"></div>
-        <div class="gallery-item"><img src="images/VILLA 2.6.webp" alt="Living Room"></div>
-        <div class="gallery-item"><img src="images/VILLA 2.webp" alt="Kamar Utama"></div>
-        <div class="gallery-item"><img src="images/VILLA 2.4.webp" alt="Kamar Mandi"></div>
+        <div class="gallery-item"><img src="VILLA 2.8.webp" alt="Ruang Makan"></div>
+        <div class="gallery-item"><img src="VILLA 2.6.webp" alt="Living Room"></div>
+        <div class="gallery-item"><img src="VILLA 2.webp" alt="Kamar Utama"></div>
+        <div class="gallery-item"><img src="VILLA 2.4.webp" alt="Kamar Mandi"></div>
       </div>
 
       <div class="details-card">
@@ -231,7 +263,6 @@
           <div class="rate-row"><span class="rate-label">Weekday</span><span class="rate-price">Rp3.000.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Friday</span><span class="rate-price">Rp3.500.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Weekend</span><span class="rate-price">Rp4.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">High Season</span><span class="rate-price">Rp5.000.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Bundling Villa 2 & 3</span><span class="rate-price">Mulai Rp7.000.000</span></div>
         </div>
       </div>
@@ -240,10 +271,10 @@
     <!-- VILLA 1 -->
     <div id="villa1" class="villa-content">
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="images/VILLA 1.1_17_11zon.webp" alt="Ruang Santai"></div>
-        <div class="gallery-item"><img src="images/VILLA 1.2_16_11zon.webp" alt="Ruang Tamu Kayu"></div>
-        <div class="gallery-item"><img src="images/VILLA 1.3_15_11zon.webp" alt="Kamar Utama"></div>
-        <div class="gallery-item"><img src="images/VILLA 1.5_13_11zon.webp" alt="Ruang Keluarga"></div>
+        <div class="gallery-item"><img src="VILLA 1.1_17_11zon.webp" alt="Ruang Santai"></div>
+        <div class="gallery-item"><img src="VILLA 1.2_16_11zon.webp" alt="Ruang Tamu Kayu"></div>
+        <div class="gallery-item"><img src="VILLA 1.3_15_11zon.webp" alt="Kamar Utama"></div>
+        <div class="gallery-item"><img src="VILLA 1.5_13_11zon.webp" alt="Ruang Keluarga"></div>
       </div>
 
       <div class="details-card">
@@ -267,10 +298,40 @@
           <div class="rate-row"><span class="rate-label">Weekday</span><span class="rate-price">Rp3.000.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Friday</span><span class="rate-price">Rp3.500.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Weekend</span><span class="rate-price">Rp4.000.000 / malam</span></div>
-          <div class="rate-row"><span class="rate-label">High Season</span><span class="rate-price">Rp5.000.000 / malam</span></div>
           <div class="rate-row"><span class="rate-label">Paket Natal & Tahun Baru (3H2M)</span><span class="rate-price">Rp8.000.000</span></div>
         </div>
       </div>
+    </div>
+
+    <div class="section-header"><h2>Pilih Tanggal Menginap</h2></div>
+    <div class="book-card" id="bookCard">
+      <div class="bk-head">
+        <div class="bk-month" id="bkMonth"></div>
+        <div class="bk-nav"><button type="button" id="bkPrev" aria-label="Bulan sebelumnya"><i class="fa-solid fa-chevron-left"></i></button><button type="button" id="bkNext" aria-label="Bulan berikutnya"><i class="fa-solid fa-chevron-right"></i></button></div>
+      </div>
+      <div class="bk-dow"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div>
+      <div class="bk-grid" id="bkGrid"></div>
+      <div class="bk-legend"><span><i class="b1"></i>Villa 1 terisi</span><span><i class="b2"></i>Villa 2 terisi</span><span><i class="b3"></i>Villa 3 terisi</span></div>
+      <p class="bk-note" id="bkNote">Pilih tanggal check-in, lalu tanggal check-out. Tanggal yang dicoret sudah penuh (ketiga villa terisi).</p>
+      <div class="bk-sum" id="bkSum"></div>
+
+      <div class="bk-sec" id="bkVillaSec" style="display:none">
+        <h4>Pilih villa</h4>
+        <div class="bk-villas" id="bkVillas"></div>
+      </div>
+
+      <div class="bk-sec" id="bkOptSec" style="display:none">
+        <h4>Nama Anda <small>(opsional)</small></h4>
+        <input class="bk-input" id="bkName" maxlength="60" placeholder="mis. Bapak Budi" autocomplete="name">
+        <h4 style="margin-top:16px">Dari mana Anda dapat informasi Villa Malika ini? &#128522; <small>(opsional)</small></h4>
+        <div class="bk-chips" id="bkSrc">
+          <button type="button" class="bk-chip" data-v="Website">Website</button>
+          <button type="button" class="bk-chip" data-v="Iklan / brosur">Iklan / brosur</button>
+          <button type="button" class="bk-chip" data-v="Kerabat">Kerabat</button>
+        </div>
+      </div>
+
+      <a id="bkGo" href="#" target="_blank" rel="noopener" class="btn-book bk-go disabled" aria-disabled="true"><i class="fa-brands fa-whatsapp"></i> Booking Sekarang</a>
     </div>
 
     <div class="section-header"><h2>Lokasi Villa</h2></div>
@@ -297,21 +358,12 @@
     <div class="modal-box">
       <span class="close-modal" onclick="closeShareModal()">&times;</span>
       <h3 style="font-size: 1.1rem; color: var(--navy-dark);">Brosur Villa Malika</h3>
-      <img src="images/flayer villa 1 copy.jpg" alt="Brosur Villa Malika" class="brochure-img-preview">
+      <img src="flayer villa 1 copy.jpg" alt="Brosur Villa Malika" class="brochure-img-preview">
       <div class="share-action-btns">
         <button class="btn-share-action btn-copy-link" onclick="copyWebLink()"><i class="fa-regular fa-copy"></i> Salin Link</button>
-        <a href="images/flayer villa 1 copy.jpg" download="Brosur-Villa-Malika.jpg" class="btn-share-action btn-download-img"><i class="fa-solid fa-download"></i> Unduh Foto</a>
+        <a href="flayer villa 1 copy.jpg" download="Brosur-Villa-Malika.jpg" class="btn-share-action btn-download-img"><i class="fa-solid fa-download"></i> Unduh Foto</a>
       </div>
     </div>
-  </div>
-
-  <!-- Lightbox galeri -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lb-btn lb-close" onclick="closeLightbox()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
-    <button class="lb-btn lb-prev" onclick="lbStep(-1)" aria-label="Sebelumnya"><i class="fa-solid fa-chevron-left"></i></button>
-    <img id="lightboxImg" class="lightbox-img" src="" alt="">
-    <button class="lb-btn lb-next" onclick="lbStep(1)" aria-label="Berikutnya"><i class="fa-solid fa-chevron-right"></i></button>
-    <div id="lbCounter" class="lb-counter"></div>
   </div>
 
   <script>
@@ -352,7 +404,7 @@
       const shareData = { title: 'Villa Malika - Private Villa Collection', text: 'Dapatkan penawaran dan brosur sewa Villa Malika Cisarua, Bogor:', url: window.location.href };
       if (navigator.canShare && navigator.canShare({ files: [new File([], '')] })) {
         try {
-          const response = await fetch('images/flayer villa 1 copy.jpg');
+          const response = await fetch('flayer villa 1 copy.jpg');
           const blob = await response.blob();
           const file = new File([blob], 'Brosur-Villa-Malika.jpg', { type: blob.type });
           await navigator.share({ ...shareData, files: [file] });
@@ -364,67 +416,151 @@
 
     function copyWebLink() { navigator.clipboard.writeText(window.location.href); alert('Link website berhasil disalin!'); }
     function closeShareModal() { document.getElementById('shareModal').classList.remove('show'); }
-
-    // ===== LIGHTBOX: klik foto -> popup besar, bisa geser =====
-    let lbImages = [];
-    let lbIndex = 0;
-    const lbEl = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightboxImg');
-    const lbCounter = document.getElementById('lbCounter');
-
-    document.querySelectorAll('.gallery-grid').forEach(grid => {
-      const imgs = Array.from(grid.querySelectorAll('img'));
-      imgs.forEach((img, i) => {
-        img.addEventListener('click', () => openLightbox(imgs, i));
-      });
-    });
-
-    function openLightbox(imgs, index) {
-      lbImages = imgs;
-      lbIndex = index;
-      showLbImage();
-      lbEl.classList.add('show');
-      lbEl.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lbEl.classList.remove('show');
-      lbEl.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    function showLbImage() {
-      const img = lbImages[lbIndex];
-      lbImg.src = img.src;
-      lbImg.alt = img.alt;
-      lbCounter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
-    }
-
-    function lbStep(dir) {
-      lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
-      showLbImage();
-    }
-
-    // klik area gelap = tutup
-    lbEl.addEventListener('click', e => { if (e.target === lbEl) closeLightbox(); });
-
-    // keyboard
-    document.addEventListener('keydown', e => {
-      if (!lbEl.classList.contains('show')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') lbStep(-1);
-      if (e.key === 'ArrowRight') lbStep(1);
-    });
-
-    // geser (swipe) di HP
-    let touchStartX = 0;
-    lbEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
-    lbEl.addEventListener('touchend', e => {
-      const diff = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(diff) > 50) lbStep(diff < 0 ? 1 : -1);
-    }, { passive: true });
 </script>
+
+  <script>
+  /* ===== Kalender ketersediaan & booking ke WhatsApp ===== */
+  (function () {
+    const API = 'https://script.google.com/macros/s/AKfycbxu3_J0EL1z5MMOoPoYng7LFMCfnsywHSJlCA72XZTfP5-Wr945e5OgCZqIMK4wHSlcxw/exec';
+    const WA = '6281315265266';
+    const BLN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const HR = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const $ = id => document.getElementById(id);
+    const pad = n => (n < 10 ? '0' : '') + n;
+    const iso = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    const parse = s => { const p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); };
+    const addDays = (s, n) => { const d = parse(s); d.setDate(d.getDate() + n); return iso(d); };
+    const longDate = s => { const d = parse(s); return HR[d.getDay()] + ', ' + d.getDate() + ' ' + BLN[d.getMonth()] + ' ' + d.getFullYear(); };
+    const todayISO = iso(new Date());
+    const now = new Date();
+    const minIdx = now.getFullYear() * 12 + now.getMonth(), maxIdx = minIdx + 12;
+    let vi = minIdx;                      // bulan yang tampil (tahun*12+bulan)
+    let booked = {};                      // 'YYYY-MM-DD' (malam) -> [villa,...]
+    let loadFailed = false;
+    let start = '', end = '', picked = {}, src = '';
+
+    function buildBooked(list) {
+      const m = {};
+      list.forEach(b => {
+        for (let d = b.i; d < b.o; d = addDays(d, 1)) { (m[d] = m[d] || []); b.u.forEach(u => { if (m[d].indexOf(u) < 0) m[d].push(u); }); }
+      });
+      booked = m;
+    }
+    const isFull = d => (booked[d] || []).length >= 3;
+    function freeVillas(a, b) {            // villa kosong untuk SEMUA malam [a, b)
+      const f = [1, 2, 3];
+      for (let d = a; d < b; d = addDays(d, 1)) { const t = booked[d] || []; for (let i = f.length - 1; i >= 0; i--) if (t.indexOf(f[i]) >= 0) f.splice(i, 1); }
+      return f;
+    }
+    function note(t, warn) { const n = $('bkNote'); n.textContent = t; n.className = 'bk-note' + (warn ? ' warn' : ''); }
+
+    function renderCal() {
+      const y = Math.floor(vi / 12), m = vi % 12;
+      $('bkMonth').textContent = BLN[m] + ' ' + y;
+      $('bkPrev').disabled = vi <= minIdx; $('bkNext').disabled = vi >= maxIdx;
+      const g = $('bkGrid'); g.innerHTML = '';
+      const first = new Date(y, m, 1), off = (first.getDay() + 6) % 7, nd = new Date(y, m + 1, 0).getDate();
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < off; i++) { const e = document.createElement('div'); e.className = 'bk-day empty'; frag.appendChild(e); }
+      for (let day = 1; day <= nd; day++) {
+        const d = y + '-' + pad(m + 1) + '-' + pad(day), dt = new Date(y, m, day), dow = dt.getDay();
+        const b = document.createElement('button'); b.type = 'button'; b.dataset.d = d;
+        let cls = 'bk-day'; const past = d < todayISO, full = isFull(d);
+        if (dow === 0 || dow === 6) cls += ' we';
+        if (past) cls += ' past'; if (full && !past) cls += ' full'; if (d === todayISO) cls += ' today';
+        if (start && end && d > start && d < end) cls += ' inr';
+        if (d === start || d === end) cls += ' sel';
+        b.className = cls;
+        const n = document.createElement('span'); n.className = 'bn'; n.textContent = day; b.appendChild(n);
+        const t = booked[d];
+        if (t && t.length && !past) { const bars = document.createElement('span'); bars.className = 'bk-bars'; [1, 2, 3].forEach(v => { if (t.indexOf(v) >= 0) { const i = document.createElement('i'); i.className = 'b' + v; bars.appendChild(i); } }); b.appendChild(bars); }
+        b.setAttribute('aria-label', longDate(d) + (past ? ', sudah lewat' : full ? ', penuh' : t && t.length ? ', Villa ' + t.join(' dan ') + ' terisi' : ', tersedia'));
+        if (past) b.disabled = true;
+        frag.appendChild(b);
+      }
+      g.appendChild(frag);
+    }
+
+    function pickDay(d) {
+      if (d < todayISO) return;
+      if (!start || (start && end)) {                       // mulai pilihan baru
+        if (isFull(d)) { note('Tanggal itu sudah penuh (ketiga villa terisi). Silakan pilih tanggal lain.', true); return; }
+        start = d; end = ''; picked = {}; note('Sekarang pilih tanggal check-out.');
+      } else if (d <= start) {                              // klik tanggal sebelum/sama dengan start -> jadikan start baru
+        if (isFull(d)) { note('Tanggal itu sudah penuh (ketiga villa terisi). Silakan pilih tanggal lain.', true); return; }
+        start = d; note('Sekarang pilih tanggal check-out.');
+      } else {
+        if (!freeVillas(start, d).length) { note('Tidak ada villa yang kosong untuk seluruh tanggal tersebut. Coba kurangi jumlah malam atau pilih tanggal lain.', true); return; }
+        end = d; picked = {}; note('');
+      }
+      renderCal(); renderPick();
+    }
+
+    function renderPick() {
+      const ok = !!(start && end), sum = $('bkSum');
+      $('bkVillaSec').style.display = ok ? '' : 'none';
+      $('bkOptSec').style.display = ok ? '' : 'none';
+      if (!ok) { sum.style.display = start ? 'block' : 'none'; if (start) sum.textContent = 'Check-in: ' + longDate(start) + ' \u2192 pilih tanggal check-out'; updateGo(); return; }
+      const nights = Math.round((parse(end) - parse(start)) / 864e5);
+      sum.style.display = 'block'; sum.textContent = 'Check-in ' + longDate(start) + '  \u2192  Check-out ' + longDate(end) + ' (' + nights + ' malam)';
+      const free = freeVillas(start, end), box = $('bkVillas'); box.innerHTML = '';
+      [1, 2, 3].forEach(v => {
+        const can = free.indexOf(v) >= 0, l = document.createElement('label'); l.className = 'bk-villa' + (can ? '' : ' off');
+        const c = document.createElement('input'); c.type = 'checkbox'; c.disabled = !can; c.checked = !!picked[v];
+        c.addEventListener('change', () => { picked[v] = c.checked; updateGo(); });
+        const dot = document.createElement('i'); dot.className = 'b' + v;
+        l.appendChild(c); l.appendChild(dot); l.appendChild(document.createTextNode('Villa ' + v));
+        if (!can) { const e = document.createElement('em'); e.textContent = 'terisi'; l.appendChild(e); }
+        box.appendChild(l);
+      });
+      updateGo();
+    }
+
+    function updateGo() {
+      const go = $('bkGo'), vs = [1, 2, 3].filter(v => picked[v]);
+      if (!(start && end && vs.length)) { go.className = 'btn-book bk-go disabled'; go.setAttribute('aria-disabled', 'true'); go.removeAttribute('href'); return; }
+      const nights = Math.round((parse(end) - parse(start)) / 864e5), name = $('bkName').value.trim();
+      let msg = 'Halo Mrs. Nova, saya ingin booking Villa Malika.\n\n' +
+        'Villa: ' + vs.map(v => 'Villa ' + v).join(', ') + '\n' +
+        'Check-in: ' + longDate(start) + '\n' +
+        'Check-out: ' + longDate(end) + ' (' + nights + ' malam)';
+      if (name) msg += '\nNama: ' + name;
+      if (src) msg += '\nInfo Villa Malika dari: ' + src;
+      msg += '\n\nMohon info ketersediaan dan prosedurnya. Terima kasih!';
+      go.className = 'btn-book bk-go'; go.setAttribute('aria-disabled', 'false');
+      go.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+    }
+
+    async function load() {
+      try {
+        const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'availability' }) });
+        const j = await r.json(); if (!j.ok) throw 0;
+        buildBooked(j.bookings || []); loadFailed = false;
+      } catch (e) {
+        if (!loadFailed && !Object.keys(booked).length) note('Ketersediaan belum bisa dimuat. Anda tetap bisa memilih tanggal; admin akan mengonfirmasi lewat WhatsApp.', true);
+        loadFailed = true; return;
+      }
+      if (start && end && !freeVillas(start, end).length) { start = ''; end = ''; picked = {}; note('Ketersediaan baru saja berubah, silakan pilih tanggal lagi.', true); }
+      else if (start && end) { [1, 2, 3].forEach(v => { if (freeVillas(start, end).indexOf(v) < 0) delete picked[v]; }); }
+      renderCal(); renderPick();
+    }
+
+    $('bkGrid').addEventListener('click', e => { const b = e.target.closest('.bk-day[data-d]'); if (b && !b.disabled) pickDay(b.dataset.d); });
+    $('bkPrev').addEventListener('click', () => { if (vi > minIdx) { vi--; renderCal(); } });
+    $('bkNext').addEventListener('click', () => { if (vi < maxIdx) { vi++; renderCal(); } });
+    $('bkName').addEventListener('input', updateGo);
+    $('bkSrc').addEventListener('click', e => {
+      const c = e.target.closest('.bk-chip'); if (!c) return;
+      const on = c.classList.contains('on'); document.querySelectorAll('#bkSrc .bk-chip').forEach(x => x.classList.remove('on'));
+      src = on ? '' : c.dataset.v; if (!on) c.classList.add('on'); updateGo();
+    });
+    $('bkGo').addEventListener('click', e => { if ($('bkGo').getAttribute('aria-disabled') === 'true') e.preventDefault(); });
+
+    renderCal(); load();
+    setInterval(() => { if (!document.hidden) load(); }, 60000);          // update hampir live
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); });
+  })();
+  </script>
 
   <!-- Tombol Portal Admin -->
   <div style="text-align: center; margin: 20px 0 100px;">
